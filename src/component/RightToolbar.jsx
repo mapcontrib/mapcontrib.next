@@ -19,15 +19,15 @@ const StyledToolbar = styled(Toolbar)`
 const Title = (props) => (
     <BlueTheme>
         <StyledToolbar opened position="top-right">
-            <RedTheme>
-                <Toolbar.Item icon="pencil" />
-            </RedTheme>
             <BlueTheme>
                 <Toolbar.Item icon="user" />
             </BlueTheme>
             <GreenTheme>
                 <Toolbar.Item icon="share-alt" />
             </GreenTheme>
+            <RedTheme>
+                <Toolbar.Item icon="pencil" />
+            </RedTheme>
             <OrangeTheme>
                 <Toolbar.Item icon="sliders" />
             </OrangeTheme>

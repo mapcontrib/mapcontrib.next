@@ -1,9 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {
       DefaultTheme,
       Toolbar,
 } from 'osm-ui-react';
+import {
+    increaseZoom,
+    decreaseZoom,
+} from '../action/map';
 
 
 const StyledToolbar = styled(Toolbar)`
@@ -13,21 +18,35 @@ const StyledToolbar = styled(Toolbar)`
 `;
 
 
-const Title = (props) => (
-    <DefaultTheme>
-        <StyledToolbar opened position="top-left">
-            <Toolbar.Group>
-                <Toolbar.Item icon="plus" />
-                <Toolbar.Item icon="minus" />
-                <Toolbar.Item inactive>14</Toolbar.Item>
-            </Toolbar.Group>
+class Title extends React.PureComponent {
+    _handleIncreaseZoom() {
+        this.props.dispatch(increaseZoom());
+    }
 
-            <Toolbar.Item icon="location-arrow" />
-            <Toolbar.Item icon="search" />
-            <Toolbar.Item icon="map-o" />
-        </StyledToolbar>
-    </DefaultTheme>
-);
+    _handleDecreaseZoom() {
+        this.props.dispatch(decreaseZoom());
+    }
+
+    render() {
+        const { zoom } = this.props;
+
+        return (
+            <DefaultTheme>
+                <StyledToolbar opened position="top-left">
+                    <Toolbar.Group>
+                        <Toolbar.Item icon="plus" onClick={() => this._handleIncreaseZoom()} />
+                        <Toolbar.Item icon="minus" onClick={() => this._handleDecreaseZoom()} />
+                        <Toolbar.Item inactive>{zoom}</Toolbar.Item>
+                    </Toolbar.Group>
+
+                    <Toolbar.Item icon="location-arrow" />
+                    <Toolbar.Item icon="search" />
+                    <Toolbar.Item icon="map-o" />
+                </StyledToolbar>
+            </DefaultTheme>
+        );
+    }
+}
 
 
 Title.propTypes = {
@@ -36,4 +55,8 @@ Title.propTypes = {
 Title.defaultProps = {
 };
 
-export default Title;
+const mapStateToProps = (state, props) => ({
+    zoom: state.map.zoom,
+});
+
+export default connect(mapStateToProps)(Title);

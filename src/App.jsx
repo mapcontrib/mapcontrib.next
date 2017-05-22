@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
     DefaultTheme,
@@ -15,13 +15,13 @@ const StyledCanvas = styled(AppCanvas)`
 `;
 
 
-class App extends Component {
+class App extends React.Component {
     render() {
         return (
             <div>
                 <DefaultTheme>
                     <StyledCanvas>
-                        <Map center={[ 51.505, -0.09 ]} zoom={13} />
+                        <Map />
                         <Title title="MapContrib" />
                         <LeftToolbar />
                         <RightToolbar />
