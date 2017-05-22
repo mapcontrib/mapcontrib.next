@@ -33,7 +33,6 @@ const Title = (props) => (
 Title.propTypes = {
 };
 
-
 Title.defaultProps = {
 };
 

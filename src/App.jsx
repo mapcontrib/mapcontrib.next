@@ -4,6 +4,7 @@ import {
     DefaultTheme,
     AppCanvas,
 } from 'osm-ui-react';
+import Map from './component/Map';
 import Title from './component/Title';
 import LeftToolbar from './component/LeftToolbar';
 import RightToolbar from './component/RightToolbar';
@@ -20,6 +21,7 @@ class App extends Component {
             <div>
                 <DefaultTheme>
                     <StyledCanvas>
+                        <Map center={[ 51.505, -0.09 ]} zoom={13} />
                         <Title title="MapContrib" />
                         <LeftToolbar />
                         <RightToolbar />
