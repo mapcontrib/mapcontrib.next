@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {
@@ -31,6 +32,8 @@ class Map extends React.PureComponent {
         const {
             center,
             zoom,
+            minZoom,
+            maxZoom,
             ...props,
         } = this.props;
 
@@ -38,6 +41,8 @@ class Map extends React.PureComponent {
             <StyledMap
                 center={[ 51.505, -0.09 ]}
                 zoom={zoom}
+                minZoom={minZoom}
+                maxZoom={maxZoom}
                 zoomControl={false}
                 onZoomend={e => this._handleZoomend(e)}
                 {...props}
@@ -53,6 +58,9 @@ class Map extends React.PureComponent {
 
 
 Map.propTypes = {
+    zoom: PropTypes.number.isRequired,
+    minZoom: PropTypes.number.isRequired,
+    maxZoom: PropTypes.number.isRequired,
 };
 
 Map.defaultProps = {
@@ -60,6 +68,8 @@ Map.defaultProps = {
 
 const mapStateToProps = (state, props) => ({
     zoom: state.map.zoom,
+    minZoom: state.map.minZoom,
+    maxZoom: state.map.maxZoom,
 });
 
 export default connect(mapStateToProps)(Map);
