@@ -17,12 +17,14 @@ class Theme extends React.Component {
     }
 
     render() {
+        const { match, history } = this.props;
+
         return (
             <div>
                 <Map />
                 <Title title="MapContrib" />
-                <LeftToolbar />
-                <RightToolbar />
+                <LeftToolbar match={match} history={history} />
+                <RightToolbar match={match} history={history} />
             </div>
         );
     }

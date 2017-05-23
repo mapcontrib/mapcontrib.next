@@ -1,17 +1,19 @@
 import React from 'react';
-import {
-    Column,
-} from 'osm-ui-react';
+import DisplayColumnComponent from '../component/DisplayColumn';
 
 
 class DisplayColumn extends React.Component {
     render() {
         return (
-            <Column opened>
-                ouech
-            </Column>
+            <DisplayColumnComponent />
         );
     }
 }
+
+DisplayColumn.propTypes = {
+};
+
+DisplayColumn.defaultProps = {
+};
 
 export default DisplayColumn;

@@ -5,6 +5,10 @@ import { DefaultTheme, AppCanvas } from 'osm-ui-react';
 
 import Theme from './container/Theme';
 import DisplayColumn from './container/DisplayColumn';
+import UserColumn from './container/UserColumn';
+import ShareColumn from './container/ShareColumn';
+import EditionColumn from './container/EditionColumn';
+import SettingsColumn from './container/SettingsColumn';
 
 
 const StyledCanvas = styled(AppCanvas)`
@@ -23,6 +27,10 @@ class App extends React.Component {
                         </Switch>
 
                         <Route path="/t/:fragment/:title?/display" component={DisplayColumn} />
+                        <Route path="/t/:fragment/:title?/user" component={UserColumn} />
+                        <Route path="/t/:fragment/:title?/share" component={ShareColumn} />
+                        <Route path="/t/:fragment/:title?/edition" component={EditionColumn} />
+                        <Route path="/t/:fragment/:title?/settings" component={SettingsColumn} />
                     </StyledCanvas>
                 </DefaultTheme>
             </Router>

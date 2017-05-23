@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
@@ -19,13 +20,14 @@ class LeftToolbar extends React.PureComponent {
     }
 
     render() {
-        const { zoom } = this.props;
+        const { match, history, zoom } = this.props;
 
         return (
             <Toolbar
                 zoom={zoom}
-                onIncreaseZoom={() => this._handleIncreaseZoom()}
-                onDecreaseZoom={() => this._handleDecreaseZoom()}
+                onClickIncreaseZoom={() => this._handleIncreaseZoom()}
+                onClickDecreaseZoom={() => this._handleDecreaseZoom()}
+                onClickDisplay={() => history.replace(`${match.url}/display`)}
             />
         );
     }
@@ -33,6 +35,8 @@ class LeftToolbar extends React.PureComponent {
 
 
 LeftToolbar.propTypes = {
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
 };
 
 LeftToolbar.defaultProps = {

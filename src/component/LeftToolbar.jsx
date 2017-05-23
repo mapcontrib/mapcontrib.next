@@ -17,21 +17,22 @@ const StyledToolbar = styled(Toolbar)`
 
 const LeftToolbar = ({
     zoom,
-    onIncreaseZoom,
-    onDecreaseZoom,
+    onClickIncreaseZoom,
+    onClickDecreaseZoom,
+    onClickDisplay,
     ...props
 }) => (
     <DefaultTheme>
         <StyledToolbar opened position="top-left">
             <Toolbar.Group>
-                <Toolbar.Item icon="plus" onClick={() => onIncreaseZoom()} />
-                <Toolbar.Item icon="minus" onClick={() => onDecreaseZoom()} />
+                <Toolbar.Item icon="plus" onClick={() => onClickIncreaseZoom()} />
+                <Toolbar.Item icon="minus" onClick={() => onClickDecreaseZoom()} />
                 <Toolbar.Item inactive>{zoom}</Toolbar.Item>
             </Toolbar.Group>
 
             <Toolbar.Item icon="location-arrow" />
             <Toolbar.Item icon="search" />
-            <Toolbar.Item icon="map-o" />
+            <Toolbar.Item icon="map-o" onClick={() => onClickDisplay()} />
         </StyledToolbar>
     </DefaultTheme>
 );
@@ -39,8 +40,9 @@ const LeftToolbar = ({
 
 LeftToolbar.propTypes = {
     zoom: PropTypes.number.isRequired,
-    onIncreaseZoom: PropTypes.func.isRequired,
-    onDecreaseZoom: PropTypes.func.isRequired,
+    onClickIncreaseZoom: PropTypes.func.isRequired,
+    onClickDecreaseZoom: PropTypes.func.isRequired,
+    onClickDisplay: PropTypes.func.isRequired,
 };
 
 LeftToolbar.defaultProps = {
