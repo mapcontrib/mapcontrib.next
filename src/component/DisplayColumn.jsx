@@ -6,7 +6,12 @@ import {
 
 const DisplayColumn = props => (
     <Column opened title="Display">
-        <p>Lorem ipsum...</p>
+        <Column.Nav>
+            <ul>
+                <li><a href="">Data layers</a></li>
+                <li><a href="">Map background</a></li>
+            </ul>
+        </Column.Nav>
     </Column>
 );
 
