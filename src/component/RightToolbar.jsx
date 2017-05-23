@@ -16,7 +16,7 @@ const StyledToolbar = styled(Toolbar)`
 `;
 
 
-const Title = (props) => (
+const RightToolbar = props => (
     <BlueTheme>
         <StyledToolbar opened position="top-right">
             <BlueTheme>
@@ -36,10 +36,10 @@ const Title = (props) => (
 );
 
 
-Title.propTypes = {
+RightToolbar.propTypes = {
 };
 
-Title.defaultProps = {
+RightToolbar.defaultProps = {
 };
 
-export default Title;
+export default RightToolbar;

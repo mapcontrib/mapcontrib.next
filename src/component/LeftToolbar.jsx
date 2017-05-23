@@ -1,14 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
       DefaultTheme,
       Toolbar,
 } from 'osm-ui-react';
-import {
-    increaseZoom,
-    decreaseZoom,
-} from '../action/map';
+
 
 
 const StyledToolbar = styled(Toolbar)`
@@ -18,45 +15,35 @@ const StyledToolbar = styled(Toolbar)`
 `;
 
 
-class Title extends React.PureComponent {
-    _handleIncreaseZoom() {
-        this.props.dispatch(increaseZoom());
-    }
+const LeftToolbar = ({
+    zoom,
+    onIncreaseZoom,
+    onDecreaseZoom,
+    ...props
+}) => (
+    <DefaultTheme>
+        <StyledToolbar opened position="top-left">
+            <Toolbar.Group>
+                <Toolbar.Item icon="plus" onClick={() => onIncreaseZoom()} />
+                <Toolbar.Item icon="minus" onClick={() => onDecreaseZoom()} />
+                <Toolbar.Item inactive>{zoom}</Toolbar.Item>
+            </Toolbar.Group>
 
-    _handleDecreaseZoom() {
-        this.props.dispatch(decreaseZoom());
-    }
-
-    render() {
-        const { zoom } = this.props;
-
-        return (
-            <DefaultTheme>
-                <StyledToolbar opened position="top-left">
-                    <Toolbar.Group>
-                        <Toolbar.Item icon="plus" onClick={() => this._handleIncreaseZoom()} />
-                        <Toolbar.Item icon="minus" onClick={() => this._handleDecreaseZoom()} />
-                        <Toolbar.Item inactive>{zoom}</Toolbar.Item>
-                    </Toolbar.Group>
-
-                    <Toolbar.Item icon="location-arrow" />
-                    <Toolbar.Item icon="search" />
-                    <Toolbar.Item icon="map-o" />
-                </StyledToolbar>
-            </DefaultTheme>
-        );
-    }
-}
+            <Toolbar.Item icon="location-arrow" />
+            <Toolbar.Item icon="search" />
+            <Toolbar.Item icon="map-o" />
+        </StyledToolbar>
+    </DefaultTheme>
+);
 
 
-Title.propTypes = {
+LeftToolbar.propTypes = {
+    zoom: PropTypes.number.isRequired,
+    onIncreaseZoom: PropTypes.func.isRequired,
+    onDecreaseZoom: PropTypes.func.isRequired,
 };
 
-Title.defaultProps = {
+LeftToolbar.defaultProps = {
 };
 
-const mapStateToProps = (state, props) => ({
-    zoom: state.map.zoom,
-});
-
-export default connect(mapStateToProps)(Title);
+export default LeftToolbar;

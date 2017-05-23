@@ -1,13 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-    DefaultTheme,
-    AppCanvas,
-} from 'osm-ui-react';
-import Map from './component/Map';
-import Title from './component/Title';
-import LeftToolbar from './component/LeftToolbar';
-import RightToolbar from './component/RightToolbar';
+import { DefaultTheme, AppCanvas } from 'osm-ui-react';
+
+import Theme from './container/Theme';
+import DisplayColumn from './container/DisplayColumn';
 
 
 const StyledCanvas = styled(AppCanvas)`
@@ -18,16 +15,17 @@ const StyledCanvas = styled(AppCanvas)`
 class App extends React.Component {
     render() {
         return (
-            <div>
+            <Router>
                 <DefaultTheme>
                     <StyledCanvas>
-                        <Map />
-                        <Title title="MapContrib" />
-                        <LeftToolbar />
-                        <RightToolbar />
+                        <Switch>
+                            <Route path="/t/:fragment/:title?" component={Theme} />
+                        </Switch>
+
+                        <Route path="/t/:fragment/:title?/display" component={DisplayColumn} />
                     </StyledCanvas>
                 </DefaultTheme>
-            </div>
+            </Router>
         );
     }
 }
