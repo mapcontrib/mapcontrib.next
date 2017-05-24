@@ -12,7 +12,7 @@ import {
 
 const StyledToolbar = styled(Toolbar)`
     && {
-        top: 50px;
+        top: 40px;
     }
 `;
 
