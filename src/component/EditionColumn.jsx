@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     RedTheme,
     Column,
@@ -7,8 +8,13 @@ import {
 
 const EditColumn = props => (
     <RedTheme>
-        <Column opened position="right" title="Edition">
-            <p>Lorem ipsum...</p>
+        <Column opened position="right" title="Edition" {...props}>
+            <Column.Nav>
+                <ul>
+                    <li><Link to="">Add a missing point</Link></li>
+                    <li><Link to="">Add a temporary data layer</Link></li>
+                </ul>
+            </Column.Nav>
         </Column>
     </RedTheme>
 );

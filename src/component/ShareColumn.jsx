@@ -7,7 +7,7 @@ import {
 
 const ShareColumn = props => (
     <GreenTheme>
-        <Column opened position="right" title="Share">
+        <Column opened position="right" title="Share" {...props}>
             <p>Lorem ipsum...</p>
         </Column>
     </GreenTheme>

@@ -8,7 +8,7 @@ import {
 
 const Title = ({ title, ...props }) => (
     <RedTheme>
-        <Titlebar>{title}</Titlebar>
+        <Titlebar size="sm">{title}</Titlebar>
     </RedTheme>
 );
 

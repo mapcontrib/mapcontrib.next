@@ -17,14 +17,27 @@ class Theme extends React.Component {
     }
 
     render() {
-        const { match, history } = this.props;
+        const {
+            match,
+            history,
+            themeTitle,
+            themePath,
+        } = this.props;
 
         return (
             <div>
                 <Map />
-                <Title title="MapContrib" />
-                <LeftToolbar match={match} history={history} />
-                <RightToolbar match={match} history={history} />
+                <Title title={themeTitle} />
+                <LeftToolbar
+                    match={match}
+                    history={history}
+                    themePath={themePath}
+                />
+                <RightToolbar
+                    match={match}
+                    history={history}
+                    themePath={themePath}
+                />
             </div>
         );
     }
@@ -33,6 +46,7 @@ class Theme extends React.Component {
 
 const mapStateToProps = state => ({
     themeTitle: state.theme.title,
+    themePath: state.theme.path,
 });
 
 const mapDispatchToProps = dispatch => ({

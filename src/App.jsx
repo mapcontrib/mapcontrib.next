@@ -26,11 +26,11 @@ class App extends React.Component {
                             <Route path="/t/:fragment/:title?" component={Theme} />
                         </Switch>
 
-                        <Route path="/t/:fragment/:title?/display" component={DisplayColumn} />
-                        <Route path="/t/:fragment/:title?/user" component={UserColumn} />
-                        <Route path="/t/:fragment/:title?/share" component={ShareColumn} />
-                        <Route path="/t/:fragment/:title?/edition" component={EditionColumn} />
-                        <Route path="/t/:fragment/:title?/settings" component={SettingsColumn} />
+                        <Route exact path="/t/:fragment/:title?/display" component={DisplayColumn} />
+                        <Route exact path="/t/:fragment/:title?/user" component={UserColumn} />
+                        <Route exact path="/t/:fragment/:title?/share" component={ShareColumn} />
+                        <Route exact path="/t/:fragment/:title?/edition" component={EditionColumn} />
+                        <Route exact path="/t/:fragment/:title?/settings" component={SettingsColumn} />
                     </StyledCanvas>
                 </DefaultTheme>
             </Router>
