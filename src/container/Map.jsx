@@ -45,7 +45,6 @@ class Map extends React.PureComponent {
                             attribution={tileSource.attribution}
                             minZoom={tileSource.minZoom}
                             maxZoom={tileSource.maxZoom}
-                            test={console.log(tileSource)}
                         />
                     ))
                 }
