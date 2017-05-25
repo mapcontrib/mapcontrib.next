@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
-    increaseZoom,
-    decreaseZoom,
+    increaseMapZoom,
+    decreaseMapZoom,
 } from '../action/map';
 
 import Toolbar from '../component/LeftToolbar';
 
 
 class LeftToolbar extends React.PureComponent {
-    _handleIncreaseZoom() {
-        this.props.increaseZoom();
+    _handleIncreaseMapZoom() {
+        this.props.increaseMapZoom();
     }
 
-    _handleDecreaseZoom() {
-        this.props.decreaseZoom();
+    _handleDecreaseMapZoom() {
+        this.props.decreaseMapZoom();
     }
 
     render() {
@@ -25,8 +25,8 @@ class LeftToolbar extends React.PureComponent {
         return (
             <Toolbar
                 zoom={zoom}
-                onClickIncreaseZoom={() => this._handleIncreaseZoom()}
-                onClickDecreaseZoom={() => this._handleDecreaseZoom()}
+                onClickIncreaseZoom={() => this._handleIncreaseMapZoom()}
+                onClickDecreaseZoom={() => this._handleDecreaseMapZoom()}
                 onClickDisplay={() => history.replace(`${match.url}/display`)}
             />
         );
@@ -47,8 +47,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    increaseZoom: zoom => dispatch(increaseZoom(zoom)),
-    decreaseZoom: zoom => dispatch(decreaseZoom(zoom)),
+    increaseMapZoom: zoom => dispatch(increaseMapZoom(zoom)),
+    decreaseMapZoom: zoom => dispatch(decreaseMapZoom(zoom)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftToolbar);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { DefaultTheme, AppCanvas } from 'osm-ui-react';
 
@@ -10,6 +11,16 @@ import ShareColumn from './container/ShareColumn';
 import EditionColumn from './container/EditionColumn';
 import SettingsColumn from './container/SettingsColumn';
 
+import {
+    setMapTileConfigId,
+    setMapMinZoom,
+    setMapMaxZoom,
+} from './action/map'; // To remove
+import {
+    getMinZoomFromTileConfigId,
+    getMaxZoomFromTileConfigId,
+} from './helper/map'; // To remove
+
 
 const StyledCanvas = styled(AppCanvas)`
     background-color: #ccc;
@@ -17,6 +28,13 @@ const StyledCanvas = styled(AppCanvas)`
 
 
 class App extends React.Component {
+    componentWillMount() {
+        const tileConfigId = 'osmFr'; // To remove
+        this.props.setMapTileConfigId(tileConfigId); // To remove
+        this.props.setMapMinZoom(getMinZoomFromTileConfigId(tileConfigId)); // To remove
+        this.props.setMapMaxZoom(getMaxZoomFromTileConfigId(tileConfigId)); // To remove
+    }
+
     render() {
         return (
             <Router>
@@ -38,4 +56,13 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => ({
+});
+
+const mapDispatchToProps = dispatch => ({
+    setMapTileConfigId: configId => dispatch(setMapTileConfigId(configId)), // To remove
+    setMapMinZoom: zoom => dispatch(setMapMinZoom(zoom)), // To remove
+    setMapMaxZoom: zoom => dispatch(setMapMaxZoom(zoom)), // To remove
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

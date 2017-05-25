@@ -5,15 +5,17 @@ import {
     Map as LeafletMap,
 } from 'osm-ui-react';
 
-import { setZoom } from '../action/map';
+import { setMapZoom } from '../action/map';
 import MapComponent from '../component/Map';
+
+import { findTileSourcesFromConfigId } from '../helper/map';
 
 
 
 
 class Map extends React.PureComponent {
     _handleZoomend(e) {
-        this.props.setZoom(e.target._zoom);
+        this.props.setMapZoom(e.target._zoom);
     }
 
     render() {
@@ -22,6 +24,7 @@ class Map extends React.PureComponent {
             zoom,
             minZoom,
             maxZoom,
+            tileSources,
             ...props,
         } = this.props;
 
@@ -34,10 +37,18 @@ class Map extends React.PureComponent {
                 onZoomend={e => this._handleZoomend(e)}
                 {...props}
             >
-                <LeafletMap.TileLayer
-                    url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                />
+                {
+                    tileSources.map(tileSource => (
+                        <LeafletMap.TileLayer
+                            key={tileSource.id}
+                            url={tileSource.urlTemplate}
+                            attribution={tileSource.attribution}
+                            minZoom={tileSource.minZoom}
+                            maxZoom={tileSource.maxZoom}
+                            test={console.log(tileSource)}
+                        />
+                    ))
+                }
             </MapComponent>
         );
     }
@@ -48,6 +59,7 @@ Map.propTypes = {
     zoom: PropTypes.number.isRequired,
     minZoom: PropTypes.number.isRequired,
     maxZoom: PropTypes.number.isRequired,
+    tileSources: PropTypes.array.isRequired,
 };
 
 Map.defaultProps = {
@@ -57,10 +69,11 @@ const mapStateToProps = state => ({
     zoom: state.map.zoom,
     minZoom: state.map.minZoom,
     maxZoom: state.map.maxZoom,
+    tileSources: findTileSourcesFromConfigId(state.map.tileConfigId)
 });
 
 const mapDispatchToProps = dispatch => ({
-    setZoom: zoom => dispatch(setZoom(zoom)),
+    setMapZoom: zoom => dispatch(setMapZoom(zoom)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);
