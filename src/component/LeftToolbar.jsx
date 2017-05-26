@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-      DefaultTheme,
+      TurquoiseTheme,
       Toolbar,
 } from 'osm-ui-react';
 
@@ -22,7 +22,7 @@ const LeftToolbar = ({
     onClickDisplay,
     ...props
 }) => (
-    <DefaultTheme>
+    <TurquoiseTheme>
         <StyledToolbar opened position="top-left">
             <Toolbar.Group>
                 <Toolbar.Item icon="plus" onClick={() => onClickIncreaseZoom()} />
@@ -34,7 +34,7 @@ const LeftToolbar = ({
             <Toolbar.Item icon="search" />
             <Toolbar.Item icon="map-o" onClick={() => onClickDisplay()} />
         </StyledToolbar>
-    </DefaultTheme>
+    </TurquoiseTheme>
 );
 
 
