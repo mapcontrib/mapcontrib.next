@@ -7,6 +7,7 @@ import {
 
 import { setMapZoom } from '../action/map';
 import MapComponent from '../component/Map';
+import OverpassLayer from '../component/OverpassLayer';
 
 import { findTileSourcesFromConfigId } from '../helper/map';
 
@@ -48,6 +49,7 @@ class Map extends React.PureComponent {
                         />
                     ))
                 }
+                <OverpassLayer />
             </MapComponent>
         );
     }

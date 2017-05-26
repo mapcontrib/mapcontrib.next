@@ -5,6 +5,7 @@
   "dependencies": {
     "diacritic": "^0.0.2",
     "jquery": "^3.2.1",
+    "leaflet-overpass-layer": "^2.5.1",
     "osm-ui-react": "^0.2.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
