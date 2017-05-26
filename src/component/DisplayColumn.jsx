@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-    TurquoiseTheme,
+    WhiteTheme,
     Column,
 } from 'osm-ui-react';
 
 
 const DisplayColumn = props => (
-    <TurquoiseTheme>
+    <WhiteTheme>
         <Column opened title="Display" {...props}>
             <Column.Nav>
                 <ul>
@@ -16,7 +16,7 @@ const DisplayColumn = props => (
                 </ul>
             </Column.Nav>
         </Column>
-    </TurquoiseTheme>
+    </WhiteTheme>
 );
 
 DisplayColumn.propTypes = {
