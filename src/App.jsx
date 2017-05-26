@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { DefaultTheme, AppCanvas } from 'osm-ui-react';
+import { WhiteTheme, AppCanvas } from 'osm-ui-react';
 
 import Theme from './container/Theme';
 import DisplayColumn from './container/DisplayColumn';
@@ -38,7 +38,7 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <DefaultTheme>
+                <WhiteTheme>
                     <StyledCanvas>
                         <Switch>
                             <Route path="/t/:fragment/:title?" component={Theme} />
@@ -50,7 +50,7 @@ class App extends React.Component {
                         <Route exact path="/t/:fragment/:title?/edition" component={EditionColumn} />
                         <Route exact path="/t/:fragment/:title?/settings" component={SettingsColumn} />
                     </StyledCanvas>
-                </DefaultTheme>
+                </WhiteTheme>
             </Router>
         );
     }
