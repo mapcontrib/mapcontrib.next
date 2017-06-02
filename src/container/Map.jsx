@@ -49,7 +49,18 @@ class Map extends React.PureComponent {
                         />
                     ))
                 }
-                <OverpassLayer />
+                <OverpassLayer
+                    query={`
+                        (
+                            node["amenity"]({{bbox}});
+                            way["amenity"]({{bbox}});
+                            relation["amenity"]({{bbox}});
+                        );
+                        out body;
+                        >;
+                        out skel qt;
+                    `}
+                />
             </MapComponent>
         );
     }
