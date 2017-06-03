@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    Map as LeafletMap,
+    Map as OSMUIMap,
 } from 'osm-ui-react';
 
 import { setMapZoom } from '../action/map';
@@ -40,7 +40,7 @@ class Map extends React.PureComponent {
             >
                 {
                     tileSources.map(tileSource => (
-                        <LeafletMap.TileLayer
+                        <OSMUIMap.TileLayer
                             key={tileSource.id}
                             url={tileSource.urlTemplate}
                             attribution={tileSource.attribution}
