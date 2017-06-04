@@ -25,7 +25,7 @@ const RightToolbar = ({
     ...props,
 }) => (
     <BlueTheme>
-        <StyledToolbar opened position="top-right">
+        <StyledToolbar opened position="right-top">
             <BlueTheme>
                 <Toolbar.Item icon="user" onClick={() => onClickUser()} />
             </BlueTheme>

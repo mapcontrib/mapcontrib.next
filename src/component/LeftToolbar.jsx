@@ -23,7 +23,7 @@ const LeftToolbar = ({
     ...props
 }) => (
     <WhiteTheme>
-        <StyledToolbar opened position="top-left">
+        <StyledToolbar opened position="left-top">
             <Toolbar.Group>
                 <Toolbar.Item icon="plus" onClick={() => onClickIncreaseZoom()} />
                 <Toolbar.Item icon="minus" onClick={() => onClickDecreaseZoom()} />
