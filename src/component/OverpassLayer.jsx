@@ -36,7 +36,7 @@ export default class OverpassLayer extends Map.LayerGroup {
             <Map.LayerGroup>
                 <Map.Marker
                     position={[ 51.505, -0.09 ]}
-                    shape="shape2"
+                    shape="pointerClassic"
                     theme="turquoise"
                     icon="check"
                 />
