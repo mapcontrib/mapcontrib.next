@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DisplayColumnComponent from '../component/DisplayColumn';
+import MapBackgroundsColumnComponent from '../component/MapBackgroundsColumn';
 
 
-class DisplayColumn extends React.Component {
+class MapBackgroundsColumn extends React.Component {
     render() {
         const { history, themePath } = this.props;
 
         return (
-            <DisplayColumnComponent
+            <MapBackgroundsColumnComponent
                 onClickClose={() => {history.replace(themePath)}}
             />
         );
@@ -16,14 +16,14 @@ class DisplayColumn extends React.Component {
 }
 
 
-DisplayColumn.propTypes = {
+MapBackgroundsColumn.propTypes = {
 };
 
-DisplayColumn.defaultProps = {
+MapBackgroundsColumn.defaultProps = {
 };
 
 const mapStateToProps = state => ({
     themePath: state.theme.path,
 });
 
-export default connect(mapStateToProps)(DisplayColumn);
+export default connect(mapStateToProps)(MapBackgroundsColumn);

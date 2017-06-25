@@ -27,7 +27,8 @@ class LeftToolbar extends React.PureComponent {
                 zoom={zoom}
                 onClickIncreaseZoom={() => this._handleIncreaseMapZoom()}
                 onClickDecreaseZoom={() => this._handleDecreaseMapZoom()}
-                onClickDisplay={() => history.replace(`${match.url}/display`)}
+                onClickDataLayers={() => history.replace(`${match.url}/data-layers`)}
+                onClickMapBackgrounds={() => history.replace(`${match.url}/map-backgrounds`)}
             />
         );
     }
