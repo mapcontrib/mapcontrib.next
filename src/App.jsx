@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { WhiteTheme, AppCanvas } from 'osm-ui-react';
+import { WhiteTheme, Section } from 'osm-ui-react';
 
 import Theme from './container/Theme';
 import DisplayColumn from './container/DisplayColumn';
@@ -22,7 +22,7 @@ import {
 } from './helper/map'; // To remove
 
 
-const StyledCanvas = styled(AppCanvas)`
+const StyledCanvas = styled(Section)`
     background-color: #ccc;
 `;
 
@@ -39,7 +39,7 @@ class App extends React.Component {
         return (
             <Router>
                 <WhiteTheme>
-                    <StyledCanvas>
+                    <StyledCanvas appCanvas>
                         <Switch>
                             <Route path="/t/:fragment/:title?" component={Theme} />
                         </Switch>
