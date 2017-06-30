@@ -2,28 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DataLayersColumnComponent from '../component/DataLayersColumn';
 
-
 class DataLayersColumn extends React.Component {
-    render() {
-        const { history, themePath } = this.props;
+  render() {
+    const { history, themePath } = this.props;
 
-        return (
-            <DataLayersColumnComponent
-                onClickClose={() => {history.replace(themePath)}}
-            />
-        );
-    }
+    return (
+      <DataLayersColumnComponent
+        onClickClose={() => {
+          history.replace(themePath);
+        }}
+      />
+    );
+  }
 }
 
+DataLayersColumn.propTypes = {};
 
-DataLayersColumn.propTypes = {
-};
-
-DataLayersColumn.defaultProps = {
-};
+DataLayersColumn.defaultProps = {};
 
 const mapStateToProps = state => ({
-    themePath: state.theme.path,
+  themePath: state.theme.path
 });
 
 export default connect(mapStateToProps)(DataLayersColumn);

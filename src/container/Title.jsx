@@ -3,17 +3,12 @@ import PropTypes from 'prop-types';
 
 import TitleComponent from '../component/Title';
 
-
-const Title = ({ title, ...props }) => (
-    <TitleComponent title={title} />
-);
-
+const Title = ({ title, ...props }) => <TitleComponent title={title} />;
 
 Title.propTypes = {
-    title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
-Title.defaultProps = {
-};
+Title.defaultProps = {};
 
 export default Title;

@@ -1,22 +1,15 @@
 import React from 'react';
-import {
-    GreenTheme,
-    Column,
-} from 'osm-ui-react';
+import { GreenTheme, Column } from 'osm-ui-react';
 
+const ShareColumn = props =>
+  <GreenTheme>
+    <Column opened position="right" title="Share" {...props}>
+      <p>Lorem ipsum...</p>
+    </Column>
+  </GreenTheme>;
 
-const ShareColumn = props => (
-    <GreenTheme>
-        <Column opened position="right" title="Share" {...props}>
-            <p>Lorem ipsum...</p>
-        </Column>
-    </GreenTheme>
-);
+ShareColumn.propTypes = {};
 
-ShareColumn.propTypes = {
-};
-
-ShareColumn.defaultProps = {
-};
+ShareColumn.defaultProps = {};
 
 export default ShareColumn;

@@ -2,28 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CustomTagsSettingsColumnComponent from '../component/CustomTagsSettingsColumn';
 
-
 class CustomTagsSettingsColumn extends React.Component {
-    render() {
-        const { history, themePath } = this.props;
+  render() {
+    const { history, themePath } = this.props;
 
-        return (
-            <CustomTagsSettingsColumnComponent
-                onClickClose={() => {history.replace(themePath)}}
-            />
-        );
-    }
+    return (
+      <CustomTagsSettingsColumnComponent
+        onClickClose={() => {
+          history.replace(themePath);
+        }}
+      />
+    );
+  }
 }
 
+CustomTagsSettingsColumn.propTypes = {};
 
-CustomTagsSettingsColumn.propTypes = {
-};
-
-CustomTagsSettingsColumn.defaultProps = {
-};
+CustomTagsSettingsColumn.defaultProps = {};
 
 const mapStateToProps = state => ({
-    themePath: state.theme.path,
+  themePath: state.theme.path
 });
 
 export default connect(mapStateToProps)(CustomTagsSettingsColumn);
