@@ -23,11 +23,6 @@ const SettingsColumn = props => (
             <Column.Nav>
                 <ul>
                     <li><Link to="">General settings</Link></li>
-                    <li><Link to="">Data layers</Link></li>
-                    <li><Link to="">Map backgrounds</Link></li>
-                    <li><Link to="">Custom tags</Link></li>
-                    <li><Link to="">Presets</Link></li>
-                    <li><Link to="">Translations</Link></li>
                     <li><Link to="">Cache archive</Link></li>
                 </ul>
             </Column.Nav>
