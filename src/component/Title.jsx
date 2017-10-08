@@ -1,23 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    RedTheme,
-    Titlebar,
-} from 'osm-ui-react';
+import { RedTheme, Titlebar } from 'osm-ui-react';
 
-
-const Title = ({ title, ...props }) => (
-    <RedTheme>
-        <Titlebar size="sm">{title}</Titlebar>
-    </RedTheme>
-);
-
+const Title = ({ title, ...props }) =>
+  <RedTheme>
+    <Titlebar size="sm">
+      {title}
+    </Titlebar>
+  </RedTheme>;
 
 Title.propTypes = {
-    title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
-Title.defaultProps = {
-};
+Title.defaultProps = {};
 
 export default Title;

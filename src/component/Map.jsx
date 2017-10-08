@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-    Map as LeafletMap,
-} from 'osm-ui-react';
-
+import { Map as LeafletMap } from 'osm-ui-react';
 
 const StyledMap = styled(LeafletMap)`
     position: absolute;
@@ -15,16 +12,10 @@ const StyledMap = styled(LeafletMap)`
     height: 100%;
 `;
 
+const Map = props => <StyledMap zoomControl={false} {...props} />;
 
-const Map = props => (
-    <StyledMap zoomControl={false} {...props} />
-);
+Map.propTypes = {};
 
-
-Map.propTypes = {
-};
-
-Map.defaultProps = {
-};
+Map.defaultProps = {};
 
 export default Map;

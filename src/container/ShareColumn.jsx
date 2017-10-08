@@ -2,27 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ShareColumnComponent from '../component/ShareColumn';
 
-
 class ShareColumn extends React.Component {
-    render() {
-        const { history, themePath } = this.props;
+  render() {
+    const { history, themePath } = this.props;
 
-        return (
-            <ShareColumnComponent
-                onClickClose={() => {history.replace(themePath)}}
-            />
-        );
-    }
+    return (
+      <ShareColumnComponent
+        onClickClose={() => {
+          history.replace(themePath);
+        }}
+      />
+    );
+  }
 }
 
-ShareColumn.propTypes = {
-};
+ShareColumn.propTypes = {};
 
-ShareColumn.defaultProps = {
-};
+ShareColumn.defaultProps = {};
 
 const mapStateToProps = state => ({
-    themePath: state.theme.path,
+  themePath: state.theme.path
 });
 
 export default connect(mapStateToProps)(ShareColumn);

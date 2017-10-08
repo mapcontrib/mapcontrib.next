@@ -1,39 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-    OrangeTheme,
-    Column,
-    Button,
-} from 'osm-ui-react';
+import { OrangeTheme, Column, Button } from 'osm-ui-react';
 
+const SettingsColumn = props =>
+  <OrangeTheme>
+    <Column
+      opened
+      position="right"
+      title="Settings"
+      footer={
+        <Column.Footer>
+          <Button context="danger" block>
+            Delete that theme
+          </Button>
+        </Column.Footer>
+      }
+      {...props}
+    >
+      <Column.Nav>
+        <ul>
+          <li>
+            <Link to="">General settings</Link>
+          </li>
+          <li>
+            <Link to="">Cache archive</Link>
+          </li>
+        </ul>
+      </Column.Nav>
+    </Column>
+  </OrangeTheme>;
 
-const SettingsColumn = props => (
-    <OrangeTheme>
-        <Column
-            opened
-            position="right"
-            title="Settings"
-            footer={(
-                <Column.Footer>
-                    <Button context="danger" block>Delete that theme</Button>
-                </Column.Footer>
-            )}
-            {...props}
-        >
-            <Column.Nav>
-                <ul>
-                    <li><Link to="">General settings</Link></li>
-                    <li><Link to="">Cache archive</Link></li>
-                </ul>
-            </Column.Nav>
-        </Column>
-    </OrangeTheme>
-);
+SettingsColumn.propTypes = {};
 
-SettingsColumn.propTypes = {
-};
-
-SettingsColumn.defaultProps = {
-};
+SettingsColumn.defaultProps = {};
 
 export default SettingsColumn;
