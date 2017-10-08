@@ -1,10 +1,11 @@
 import React from 'react';
 import { OrangeTheme, Column } from 'osm-ui-react';
 
-const DataLayersSettingsColumn = props =>
+const DataLayersSettingsColumn = props => (
   <OrangeTheme>
     <Column opened position="right" title="Data layers" {...props} />
-  </OrangeTheme>;
+  </OrangeTheme>
+);
 
 DataLayersSettingsColumn.propTypes = {};
 

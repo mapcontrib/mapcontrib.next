@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Toolbar from '../component/RightToolbar';
 
-const RightToolbar = ({ match, history }) =>
+const RightToolbar = ({ match, history }) => (
   <Toolbar
     onClickUser={() => history.push(`${match.url}/user`)}
     onClickShare={() => history.push(`${match.url}/share`)}
@@ -16,7 +16,8 @@ const RightToolbar = ({ match, history }) =>
     onClickPresets={() => history.push(`${match.url}/settings/presets`)}
     onClickTranslations={() =>
       history.push(`${match.url}/settings/translations`)}
-  />;
+  />
+);
 
 RightToolbar.propTypes = {
   match: PropTypes.object.isRequired,

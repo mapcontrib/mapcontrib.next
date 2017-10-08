@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { OrangeTheme, Column, Button } from 'osm-ui-react';
 
-const SettingsColumn = props =>
+const SettingsColumn = props => (
   <OrangeTheme>
     <Column
       opened
@@ -28,7 +28,8 @@ const SettingsColumn = props =>
         </ul>
       </Column.Nav>
     </Column>
-  </OrangeTheme>;
+  </OrangeTheme>
+);
 
 SettingsColumn.propTypes = {};
 

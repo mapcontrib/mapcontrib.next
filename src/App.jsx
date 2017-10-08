@@ -24,7 +24,7 @@ import {
 } from './helper/map'; // To remove
 
 const StyledCanvas = styled(Section)`
-    background-color: #ccc;
+  background-color: #ccc;
 `;
 
 class App extends React.Component {

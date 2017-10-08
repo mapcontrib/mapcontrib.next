@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RedTheme, Titlebar } from 'osm-ui-react';
 
-const Title = ({ title, ...props }) =>
+const Title = ({ title, ...props }) => (
   <RedTheme>
-    <Titlebar size="sm">
-      {title}
-    </Titlebar>
-  </RedTheme>;
+    <Titlebar size="sm">{title}</Titlebar>
+  </RedTheme>
+);
 
 Title.propTypes = {
   title: PropTypes.string.isRequired

@@ -33,7 +33,7 @@ class Map extends React.PureComponent {
         onZoomend={e => this._handleZoomend(e)}
         {...props}
       >
-        {tileSources.map(tileSource =>
+        {tileSources.map(tileSource => (
           <OSMUIMap.TileLayer
             key={tileSource.id}
             url={tileSource.urlTemplate}
@@ -41,7 +41,7 @@ class Map extends React.PureComponent {
             minZoom={tileSource.minZoom}
             maxZoom={tileSource.maxZoom}
           />
-        )}
+        ))}
         <OverpassLayer
           query={`
                         (

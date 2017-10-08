@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { WhiteTheme, Toolbar } from 'osm-ui-react';
 
 const StyledToolbar = styled(Toolbar)`
-    && {
-        top: 40px;
-    }
+  && {
+    top: 40px;
+  }
 `;
 
 const LeftToolbar = ({
@@ -16,15 +16,13 @@ const LeftToolbar = ({
   onClickDataLayers,
   onClickMapBackgrounds,
   ...props
-}) =>
+}) => (
   <WhiteTheme>
     <StyledToolbar opened position="left-top" {...props}>
       <Toolbar.Group>
         <Toolbar.Item icon="plus" onClick={() => onClickIncreaseZoom()} />
         <Toolbar.Item icon="minus" onClick={() => onClickDecreaseZoom()} />
-        <Toolbar.Item inactive>
-          {zoom}
-        </Toolbar.Item>
+        <Toolbar.Item inactive>{zoom}</Toolbar.Item>
       </Toolbar.Group>
 
       <Toolbar.Group>
@@ -37,7 +35,8 @@ const LeftToolbar = ({
         <Toolbar.Item icon="map-o" onClick={() => onClickMapBackgrounds()} />
       </Toolbar.Group>
     </StyledToolbar>
-  </WhiteTheme>;
+  </WhiteTheme>
+);
 
 LeftToolbar.propTypes = {
   zoom: PropTypes.number.isRequired,

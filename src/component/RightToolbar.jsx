@@ -10,9 +10,9 @@ import {
 } from 'osm-ui-react';
 
 const StyledToolbar = styled(Toolbar)`
-    && {
-        top: 40px;
-    }
+  && {
+    top: 40px;
+  }
 `;
 
 class RightToolbar extends React.PureComponent {

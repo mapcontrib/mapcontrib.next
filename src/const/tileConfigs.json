@@ -1,78 +1,78 @@
 [
-    {
-        "id": "osm",
-        "tileSources": ["osm"]
-    },
-    {
-        "id": "mapboxStreetsSatellite",
-        "tileSources": ["mapboxStreetsSatellite"]
-    },
-    {
-        "id": "watercolor",
-        "tileSources": ["watercolor"]
-    },
-    {
-        "id": "osmMonochrome",
-        "tileSources": ["osmMonochrome"]
-    },
-    {
-        "id": "osmOutdoors",
-        "tileSources": ["osmOutdoors"]
-    },
-    {
-        "id": "osmRoads",
-        "tileSources": ["osmRoads"]
-    },
-    {
-        "id": "landscape",
-        "tileSources": ["landscape"]
-    },
-    {
-        "id": "toner",
-        "tileSources": ["toner"]
-    },
-    {
-        "id": "transport",
-        "tileSources": ["transport"]
-    },
-    {
-        "id": "hot",
-        "tileSources": ["hot"]
-    },
-    {
-        "id": "openCycleMap",
-        "tileSources": ["openCycleMap"]
-    },
-    {
-        "id": "hikeBikeMap",
-        "tileSources": ["hikeBikeMap"]
-    },
-    {
-        "id": "hydda",
-        "tileSources": ["hydda"]
-    },
-    {
-        "id": "openTopoMap",
-        "tileSources": ["openTopoMap"]
-    },
-    {
-        "id": "openRiverboatMap",
-        "tileSources": ["openRiverboatMap"]
-    },
-    {
-        "id": "osmFr",
-        "tileSources": ["osmFr"]
-    },
-    {
-        "id": "osmFrBano",
-        "tileSources": ["osmFr", "bano"]
-    },
-    {
-        "id": "cadastre",
-        "tileSources": ["cadastre"]
-    },
-    {
-        "id": "osmDe",
-        "tileSources": ["osmDe"]
-    }
+  {
+    "id": "osm",
+    "tileSources": ["osm"]
+  },
+  {
+    "id": "mapboxStreetsSatellite",
+    "tileSources": ["mapboxStreetsSatellite"]
+  },
+  {
+    "id": "watercolor",
+    "tileSources": ["watercolor"]
+  },
+  {
+    "id": "osmMonochrome",
+    "tileSources": ["osmMonochrome"]
+  },
+  {
+    "id": "osmOutdoors",
+    "tileSources": ["osmOutdoors"]
+  },
+  {
+    "id": "osmRoads",
+    "tileSources": ["osmRoads"]
+  },
+  {
+    "id": "landscape",
+    "tileSources": ["landscape"]
+  },
+  {
+    "id": "toner",
+    "tileSources": ["toner"]
+  },
+  {
+    "id": "transport",
+    "tileSources": ["transport"]
+  },
+  {
+    "id": "hot",
+    "tileSources": ["hot"]
+  },
+  {
+    "id": "openCycleMap",
+    "tileSources": ["openCycleMap"]
+  },
+  {
+    "id": "hikeBikeMap",
+    "tileSources": ["hikeBikeMap"]
+  },
+  {
+    "id": "hydda",
+    "tileSources": ["hydda"]
+  },
+  {
+    "id": "openTopoMap",
+    "tileSources": ["openTopoMap"]
+  },
+  {
+    "id": "openRiverboatMap",
+    "tileSources": ["openRiverboatMap"]
+  },
+  {
+    "id": "osmFr",
+    "tileSources": ["osmFr"]
+  },
+  {
+    "id": "osmFrBano",
+    "tileSources": ["osmFr", "bano"]
+  },
+  {
+    "id": "cadastre",
+    "tileSources": ["cadastre"]
+  },
+  {
+    "id": "osmDe",
+    "tileSources": ["osmDe"]
+  }
 ]

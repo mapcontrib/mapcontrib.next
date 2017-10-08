@@ -1,10 +1,11 @@
 import React from 'react';
 import { WhiteTheme, Column } from 'osm-ui-react';
 
-const MapBackgroundColumn = props =>
+const MapBackgroundColumn = props => (
   <WhiteTheme>
     <Column opened title="Map backgrounds" {...props} />
-  </WhiteTheme>;
+  </WhiteTheme>
+);
 
 MapBackgroundColumn.propTypes = {};
 

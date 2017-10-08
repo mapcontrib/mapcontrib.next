@@ -1,10 +1,11 @@
 import React from 'react';
 import { WhiteTheme, Column } from 'osm-ui-react';
 
-const DataLayersColumn = props =>
+const DataLayersColumn = props => (
   <WhiteTheme>
     <Column opened title="Data layers" {...props} />
-  </WhiteTheme>;
+  </WhiteTheme>
+);
 
 DataLayersColumn.propTypes = {};
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BlueTheme, Column } from 'osm-ui-react';
 
-const UserColumn = props =>
+const UserColumn = props => (
   <BlueTheme>
     <Column opened position="right" title="User" {...props}>
       <Column.Nav>
@@ -50,7 +50,8 @@ const UserColumn = props =>
         </ul>
       </Column.Nav>
     </Column>
-  </BlueTheme>;
+  </BlueTheme>
+);
 
 UserColumn.propTypes = {};
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { RedTheme, Column } from 'osm-ui-react';
 
-const EditColumn = props =>
+const EditColumn = props => (
   <RedTheme>
     <Column opened position="right" title="Edition" {...props}>
       <Column.Nav>
@@ -16,7 +16,8 @@ const EditColumn = props =>
         </ul>
       </Column.Nav>
     </Column>
-  </RedTheme>;
+  </RedTheme>
+);
 
 EditColumn.propTypes = {};
 
