@@ -1,23 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { OrangeTheme, Column, Button } from 'osm-ui-react';
+import { OrangeTheme, Sidebar, Button } from 'osm-ui-react';
 
-const SettingsColumn = props => (
+const SettingsSidebar = props => (
   <OrangeTheme>
-    <Column
+    <Sidebar
       opened
       position="right"
       title="Settings"
       footer={
-        <Column.Footer>
+        <Sidebar.Footer>
           <Button context="danger" block>
             Delete that theme
           </Button>
-        </Column.Footer>
+        </Sidebar.Footer>
       }
       {...props}
     >
-      <Column.Nav>
+      <Sidebar.Nav>
         <ul>
           <li>
             <Link to="">General settings</Link>
@@ -26,13 +26,13 @@ const SettingsColumn = props => (
             <Link to="">Cache archive</Link>
           </li>
         </ul>
-      </Column.Nav>
-    </Column>
+      </Sidebar.Nav>
+    </Sidebar>
   </OrangeTheme>
 );
 
-SettingsColumn.propTypes = {};
+SettingsSidebar.propTypes = {};
 
-SettingsColumn.defaultProps = {};
+SettingsSidebar.defaultProps = {};
 
-export default SettingsColumn;
+export default SettingsSidebar;

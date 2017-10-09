@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ShareColumnComponent from '../component/ShareColumn';
+import EditionSidebarComponent from '../component/EditionSidebar';
 
-class ShareColumn extends React.Component {
+class EditionSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <ShareColumnComponent
+      <EditionSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class ShareColumn extends React.Component {
   }
 }
 
-ShareColumn.propTypes = {};
+EditionSidebar.propTypes = {};
 
-ShareColumn.defaultProps = {};
+EditionSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(ShareColumn);
+export default connect(mapStateToProps)(EditionSidebar);

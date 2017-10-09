@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import UserColumnComponent from '../component/UserColumn';
+import UserSidebarComponent from '../component/UserSidebar';
 
-class UserColumn extends React.Component {
+class UserSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <UserColumnComponent
+      <UserSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class UserColumn extends React.Component {
   }
 }
 
-UserColumn.propTypes = {};
+UserSidebar.propTypes = {};
 
-UserColumn.defaultProps = {};
+UserSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(UserColumn);
+export default connect(mapStateToProps)(UserSidebar);

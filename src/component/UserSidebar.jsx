@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BlueTheme, Column } from 'osm-ui-react';
+import { BlueTheme, Sidebar } from 'osm-ui-react';
 
-const UserColumn = props => (
+const UserSidebar = props => (
   <BlueTheme>
-    <Column opened position="right" title="User" {...props}>
-      <Column.Nav>
+    <Sidebar opened position="right" title="User" {...props}>
+      <Sidebar.Nav>
         <ul>
           <li>
             <Link to="">Home page</Link>
@@ -48,13 +48,13 @@ const UserColumn = props => (
             <Link to="">About MapContrib</Link>
           </li>
         </ul>
-      </Column.Nav>
-    </Column>
+      </Sidebar.Nav>
+    </Sidebar>
   </BlueTheme>
 );
 
-UserColumn.propTypes = {};
+UserSidebar.propTypes = {};
 
-UserColumn.defaultProps = {};
+UserSidebar.defaultProps = {};
 
-export default UserColumn;
+export default UserSidebar;

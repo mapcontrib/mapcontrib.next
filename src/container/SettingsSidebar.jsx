@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PresetsSettingsColumnComponent from '../component/PresetsSettingsColumn';
+import SettingsSidebarComponent from '../component/SettingsSidebar';
 
-class PresetsSettingsColumn extends React.Component {
+class SettingsSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <PresetsSettingsColumnComponent
+      <SettingsSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class PresetsSettingsColumn extends React.Component {
   }
 }
 
-PresetsSettingsColumn.propTypes = {};
+SettingsSidebar.propTypes = {};
 
-PresetsSettingsColumn.defaultProps = {};
+SettingsSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(PresetsSettingsColumn);
+export default connect(mapStateToProps)(SettingsSidebar);

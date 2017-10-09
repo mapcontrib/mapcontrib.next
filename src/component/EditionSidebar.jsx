@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RedTheme, Column } from 'osm-ui-react';
+import { RedTheme, Sidebar } from 'osm-ui-react';
 
-const EditColumn = props => (
+const EditSidebar = props => (
   <RedTheme>
-    <Column opened position="right" title="Edition" {...props}>
-      <Column.Nav>
+    <Sidebar opened position="right" title="Edition" {...props}>
+      <Sidebar.Nav>
         <ul>
           <li>
             <Link to="">Add a missing point</Link>
@@ -14,13 +14,13 @@ const EditColumn = props => (
             <Link to="">Add a temporary data layer</Link>
           </li>
         </ul>
-      </Column.Nav>
-    </Column>
+      </Sidebar.Nav>
+    </Sidebar>
   </RedTheme>
 );
 
-EditColumn.propTypes = {};
+EditSidebar.propTypes = {};
 
-EditColumn.defaultProps = {};
+EditSidebar.defaultProps = {};
 
-export default EditColumn;
+export default EditSidebar;

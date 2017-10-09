@@ -5,17 +5,17 @@ import styled from 'styled-components';
 import { WhiteTheme, Section } from 'osm-ui-react';
 
 import Theme from './container/Theme';
-import DataLayersColumn from './container/DataLayersColumn';
-import MapBackgroundsColumn from './container/MapBackgroundsColumn';
-import UserColumn from './container/UserColumn';
-import ShareColumn from './container/ShareColumn';
-import EditionColumn from './container/EditionColumn';
-import SettingsColumn from './container/SettingsColumn';
-import DataLayersSettingsColumn from './container/DataLayersSettingsColumn';
-import MapBackgroundsSettingsColumn from './container/MapBackgroundsSettingsColumn';
-import CustomTagsSettingsColumn from './container/CustomTagsSettingsColumn';
-import PresetsSettingsColumn from './container/PresetsSettingsColumn';
-import TranslationsSettingsColumn from './container/TranslationsSettingsColumn';
+import DataLayersSidebar from './container/DataLayersSidebar';
+import MapBackgroundsSidebar from './container/MapBackgroundsSidebar';
+import UserSidebar from './container/UserSidebar';
+import ShareSidebar from './container/ShareSidebar';
+import EditionSidebar from './container/EditionSidebar';
+import SettingsSidebar from './container/SettingsSidebar';
+import DataLayersSettingsSidebar from './container/DataLayersSettingsSidebar';
+import MapBackgroundsSettingsSidebar from './container/MapBackgroundsSettingsSidebar';
+import CustomTagsSettingsSidebar from './container/CustomTagsSettingsSidebar';
+import PresetsSettingsSidebar from './container/PresetsSettingsSidebar';
+import TranslationsSettingsSidebar from './container/TranslationsSettingsSidebar';
 
 import { setMapTileConfigId, setMapMinZoom, setMapMaxZoom } from './action/map'; // To remove
 import {
@@ -47,57 +47,57 @@ class App extends React.Component {
             <Route
               exact
               path="/t/:fragment/:title?/data-layers"
-              component={DataLayersColumn}
+              component={DataLayersSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/map-backgrounds"
-              component={MapBackgroundsColumn}
+              component={MapBackgroundsSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/user"
-              component={UserColumn}
+              component={UserSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/share"
-              component={ShareColumn}
+              component={ShareSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/edition"
-              component={EditionColumn}
+              component={EditionSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/settings"
-              component={SettingsColumn}
+              component={SettingsSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/settings/data-layers"
-              component={DataLayersSettingsColumn}
+              component={DataLayersSettingsSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/settings/map-backgrounds"
-              component={MapBackgroundsSettingsColumn}
+              component={MapBackgroundsSettingsSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/settings/custom-tags"
-              component={CustomTagsSettingsColumn}
+              component={CustomTagsSettingsSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/settings/presets"
-              component={PresetsSettingsColumn}
+              component={PresetsSettingsSidebar}
             />
             <Route
               exact
               path="/t/:fragment/:title?/settings/translations"
-              component={TranslationsSettingsColumn}
+              component={TranslationsSettingsSidebar}
             />
           </StyledCanvas>
         </WhiteTheme>
