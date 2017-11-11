@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'"
   },
   "prettier": {
     "semi": true,
