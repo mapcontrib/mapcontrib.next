@@ -4,4 +4,5 @@ import 'expose-loader?$!jquery';
 import 'expose-loader?L!leaflet';
 /* eslint-enable */
 
+import './global';
 import './index.jsx';

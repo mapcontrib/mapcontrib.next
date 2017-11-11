@@ -1,27 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { WhiteTheme, Section } from 'osm-ui-react';
 
-import Theme from './container/Theme';
-import DataLayersSidebar from './container/DataLayersSidebar';
-import MapBackgroundsSidebar from './container/MapBackgroundsSidebar';
-import UserSidebar from './container/UserSidebar';
-import ShareSidebar from './container/ShareSidebar';
-import EditionSidebar from './container/EditionSidebar';
-import SettingsSidebar from './container/SettingsSidebar';
-import DataLayersSettingsSidebar from './container/DataLayersSettingsSidebar';
-import MapBackgroundsSettingsSidebar from './container/MapBackgroundsSettingsSidebar';
-import CustomTagsSettingsSidebar from './container/CustomTagsSettingsSidebar';
-import PresetsSettingsSidebar from './container/PresetsSettingsSidebar';
-import TranslationsSettingsSidebar from './container/TranslationsSettingsSidebar';
+import Theme from '../container/Theme';
+import DataLayersSidebar from '../container/DataLayersSidebar';
+import MapBackgroundsSidebar from '../container/MapBackgroundsSidebar';
+import UserSidebar from '../container/UserSidebar';
+import ShareSidebar from '../container/ShareSidebar';
+import EditionSidebar from '../container/EditionSidebar';
+import SettingsSidebar from '../container/SettingsSidebar';
+import DataLayersSettingsSidebar from '../container/DataLayersSettingsSidebar';
+import MapBackgroundsSettingsSidebar from '../container/MapBackgroundsSettingsSidebar';
+import CustomTagsSettingsSidebar from '../container/CustomTagsSettingsSidebar';
+import PresetsSettingsSidebar from '../container/PresetsSettingsSidebar';
+import TranslationsSettingsSidebar from '../container/TranslationsSettingsSidebar';
 
-import { setMapTileConfigId, setMapMinZoom, setMapMaxZoom } from './action/map'; // To remove
 import {
   getMinZoomFromTileConfigId,
   getMaxZoomFromTileConfigId
-} from './helper/map'; // To remove
+} from '../helper/map'; // To remove
 
 const StyledCanvas = styled(Section)`
   background-color: #ccc;
@@ -106,12 +105,16 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+App.propTypes = {
+  setMapTileConfigId: PropTypes.func.isRequired,
+  setMapMinZoom: PropTypes.func.isRequired,
+  setMapMaxZoom: PropTypes.func.isRequired
+};
 
-const mapDispatchToProps = dispatch => ({
-  setMapTileConfigId: configId => dispatch(setMapTileConfigId(configId)), // To remove
-  setMapMinZoom: zoom => dispatch(setMapMinZoom(zoom)), // To remove
-  setMapMaxZoom: zoom => dispatch(setMapMaxZoom(zoom)) // To remove
-});
+App.defaultProps = {
+  setMapTileConfigId: () => {},
+  setMapMinZoom: () => {},
+  setMapMaxZoom: () => {}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
