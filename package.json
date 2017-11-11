@@ -30,6 +30,10 @@
     "eject": "react-scripts eject",
     "precommit": "lint-staged"
   },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true
+  },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
       "prettier --single-quote --write",
