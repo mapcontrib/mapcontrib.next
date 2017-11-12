@@ -8,9 +8,7 @@
     "husky": "^0.14.1",
     "jquery": "^3.2.1",
     "leaflet-overpass-layer": "^2.7.0",
-    "lint-staged": "^4.0.0",
     "osm-ui-react": "^0.2.0",
-    "prettier": "^1.5.2",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-redux": "^5.0.5",
@@ -18,10 +16,12 @@
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^2.2.1",
     "redux": "^3.6.0",
-    "styled-components": "^2.2.1"
+    "styled-components": "^2.2.3"
   },
   "devDependencies": {
     "eslint-config-prettier": "^2.7.0",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.8.2",
     "react-scripts": "^1.0.17"
   },
   "scripts": {
