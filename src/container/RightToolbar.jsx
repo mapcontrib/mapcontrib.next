@@ -11,11 +11,13 @@ const RightToolbar = ({ match, history }) => (
     onClickSettings={() => history.push(`${match.url}/settings`)}
     onClickDataLayers={() => history.push(`${match.url}/settings/data-layers`)}
     onClickMapBackgrounds={() =>
-      history.push(`${match.url}/settings/map-backgrounds`)}
+      history.push(`${match.url}/settings/map-backgrounds`)
+    }
     onClickCustomTags={() => history.push(`${match.url}/settings/custom-tags`)}
     onClickPresets={() => history.push(`${match.url}/settings/presets`)}
     onClickTranslations={() =>
-      history.push(`${match.url}/settings/translations`)}
+      history.push(`${match.url}/settings/translations`)
+    }
   />
 );
 
