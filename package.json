@@ -11,8 +11,8 @@
     "lint-staged": "^4.0.0",
     "osm-ui-react": "^0.2.0",
     "prettier": "^1.5.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^2.7.0",
-    "react-scripts": "^1.0.14"
+    "react-scripts": "^1.0.17"
   },
   "scripts": {
     "start": "react-scripts start",
