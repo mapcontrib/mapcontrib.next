@@ -28,9 +28,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test-ci": "npm test -- --ci",
+    "test-coverage": "npm test-ci -- --coverage",
+    "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'",
+    "lint": "eslint 'src/**/*.{js,jsx}'",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged",
-    "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'"
+    "precommit": "lint-staged"
+  },
+  "jest": {
+    "collectCoverageFrom" : [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/"
+    ]
   },
   "prettier": {
     "semi": true,
@@ -41,8 +50,12 @@
       "prettier --single-quote --write",
       "git add"
     ],
-    "src/**/*.{js,jsx,json}": [
+    "src/**/*.{js,jsx}": [
       "eslint",
+      "git add"
+    ],
+    "src/**/*.{js,jsx}": [
+      "jest --ci",
       "git add"
     ]
   }
