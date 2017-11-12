@@ -1,7 +1,7 @@
-[![GitHub release](https://img.shields.io/github/release/mapcontrib/mapcontrib.next.svg)](https://github.com/mapcontrib/mapcontrib.next/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/release/mapcontrib/mapcontrib.next.svg)](https://github.com/mapcontrib/mapcontrib.next/releases)
 [![Build Status](https://api.travis-ci.org/mapcontrib/mapcontrib.next.svg?branch=develop)](http://travis-ci.org/mapcontrib/mapcontrib.next)
-
+[![Coverage Status](https://coveralls.io/repos/github/mapcontrib/mapcontrib.next/badge.svg?branch=develop)](https://coveralls.io/github/mapcontrib/mapcontrib.next?branch=develop)
 
 # MapContrib Next
 
