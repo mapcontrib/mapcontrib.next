@@ -7,7 +7,7 @@
     "expose-loader": "^0.7.3",
     "husky": "^0.14.1",
     "jquery": "^3.2.1",
-    "leaflet-overpass-layer": "^2.8.1",
+    "leaflet-overpass-layer": "^2.7.0",
     "osm-ui-react": "^0.3.2",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
@@ -36,7 +36,7 @@
     "precommit": "lint-staged"
   },
   "jest": {
-    "collectCoverageFrom": [
+    "collectCoverageFrom" : [
       "src/**/*.{js,jsx}",
       "!<rootDir>/node_modules/"
     ]
@@ -48,6 +48,10 @@
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
       "prettier --single-quote --write",
+      "git add"
+    ],
+    "src/**/*.{js,jsx}": [
+      "eslint",
       "git add"
     ],
     "src/**/*.{js,jsx}": [
