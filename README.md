@@ -5,7 +5,7 @@
 
 # MapContrib Next
 
-It is a complete rewrite of the MapContrib project using [React](https://reactjs.org), [Redux](http://redux.js.org) and the [OSM UI project](https://github.com/mapcontrib/mapcontrib.next).
+It is a complete rewrite of the MapContrib project using [React](https://reactjs.org), [Redux](http://redux.js.org) and the [OSM UI project](https://github.com/osm-ui).
 
 The main reasons for that are to improve the development experience, to make the interfaces available to the community (via OSM UI) and to make a better MapContrib for all of us.
 
