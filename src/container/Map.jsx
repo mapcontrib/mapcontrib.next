@@ -43,16 +43,17 @@ class Map extends React.PureComponent {
           />
         ))}
         <OverpassLayer
+          minZoom={14}
           query={`
-                        (
-                            node["amenity"]({{bbox}});
-                            way["amenity"]({{bbox}});
-                            relation["amenity"]({{bbox}});
-                        );
-                        out body;
-                        >;
-                        out skel qt;
-                    `}
+              (
+                  node["amenity"="recycling"]({{bbox}});
+                  way["amenity"="recycling"]({{bbox}});
+                  relation["amenity"="recycling"]({{bbox}});
+              );
+              out body;
+              >;
+              out skel qt;
+          `}
         />
       </MapComponent>
     );

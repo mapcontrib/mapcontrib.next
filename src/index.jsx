@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './container/App';
 import registerServiceWorker from './registerServiceWorker';
 import 'osm-ui-react/dist/index.css';
+import './index.css';
 import store from './store';
 
 ReactDOM.render(

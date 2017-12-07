@@ -1,5 +1,5 @@
 const defaultState = {
-  zoom: 13,
+  zoom: 15,
   minZoom: 0,
   maxZoom: 18,
   tileConfigId: 'osm'
