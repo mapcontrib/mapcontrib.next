@@ -35,7 +35,7 @@
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
     "test-ci": "cross-env CI=true npm test",
-    "test-coverage": "npm run test-ci -- --coverage",
+    "test-coverage": "npm run test -- --coverage",
     "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "eject": "react-scripts eject",
