@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CustomTagsSettingsSidebarComponent from '../component/CustomTagsSettingsSidebar';
+import CustomTagsSettingsSidebarComponent from 'components/CustomTagsSettingsSidebar';
 
 class CustomTagsSettingsSidebar extends React.Component {
   render() {

@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setFragment } from '../action/theme';
+import { setFragment } from 'actions/theme';
 
-import Map from '../container/Map';
-import Title from '../container/Title';
-import LeftToolbar from '../container/LeftToolbar';
-import RightToolbar from '../container/RightToolbar';
+import Map from 'containers/Map';
+import Title from 'containers/Title';
+import LeftToolbar from 'containers/LeftToolbar';
+import RightToolbar from 'containers/RightToolbar';
 
 class Theme extends React.Component {
   componentWillMount() {

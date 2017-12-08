@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import MapBackgroundsSidebarComponent from '../component/MapBackgroundsSidebar';
+import EditionSidebarComponent from 'components/EditionSidebar';
 
-class MapBackgroundsSidebar extends React.Component {
+class EditionSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <MapBackgroundsSidebarComponent
+      <EditionSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class MapBackgroundsSidebar extends React.Component {
   }
 }
 
-MapBackgroundsSidebar.propTypes = {};
+EditionSidebar.propTypes = {};
 
-MapBackgroundsSidebar.defaultProps = {};
+EditionSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(MapBackgroundsSidebar);
+export default connect(mapStateToProps)(EditionSidebar);

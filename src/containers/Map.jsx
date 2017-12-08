@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map as OSMUIMap } from 'osm-ui-react';
 
-import { setMapZoom } from '../action/map';
-import MapComponent from '../component/Map';
-import OverpassLayer from '../component/OverpassLayer';
+import { setMapZoom } from 'actions/map';
+import MapComponent from 'components/Map';
+import OverpassLayer from 'components/OverpassLayer';
 
-import { findTileSourcesFromConfigId } from '../helper/map';
+import { findTileSourcesFromConfigId } from 'helpers/map';
 
 class Map extends React.PureComponent {
   _handleZoomend(e) {

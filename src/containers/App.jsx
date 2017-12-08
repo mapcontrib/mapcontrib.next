@@ -1,11 +1,7 @@
 import { connect } from 'react-redux';
 
-import App from '../component/App';
-import {
-  setMapTileConfigId,
-  setMapMinZoom,
-  setMapMaxZoom
-} from '../action/map'; // To remove
+import App from 'components/App';
+import { setMapTileConfigId, setMapMinZoom, setMapMaxZoom } from 'actions/map'; // To remove
 
 const mapStateToProps = state => ({});
 

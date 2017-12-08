@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ShareSidebarComponent from '../component/ShareSidebar';
+import SettingsSidebarComponent from 'components/SettingsSidebar';
 
-class ShareSidebar extends React.Component {
+class SettingsSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <ShareSidebarComponent
+      <SettingsSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class ShareSidebar extends React.Component {
   }
 }
 
-ShareSidebar.propTypes = {};
+SettingsSidebar.propTypes = {};
 
-ShareSidebar.defaultProps = {};
+SettingsSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(ShareSidebar);
+export default connect(mapStateToProps)(SettingsSidebar);

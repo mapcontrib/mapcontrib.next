@@ -2,6 +2,9 @@
   "name": "mapcontrib.next",
   "version": "2.0.0",
   "private": true,
+  "moduleRoots": [
+    "./src"
+  ],
   "dependencies": {
     "diacritic": "^0.0.2",
     "expose-loader": "^0.7.3",
@@ -19,16 +22,19 @@
     "styled-components": "^2.2.3"
   },
   "devDependencies": {
+    "cross-env": "^5.1.1",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "eslint-config-prettier": "^2.7.0",
     "lint-staged": "^5.0.0",
     "prettier": "^1.8.2",
     "react-scripts": "^1.0.17"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "test-ci": "npm test -- --ci",
+    "start": "cross-env NODE_PATH=src react-scripts start",
+    "build": "cross-env NODE_PATH=src react-scripts build",
+    "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
+    "test-ci": "cross-env CI=true npm test",
     "test-coverage": "npm run test-ci -- --coverage",
     "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
@@ -36,7 +42,7 @@
     "precommit": "lint-staged"
   },
   "jest": {
-    "collectCoverageFrom" : [
+    "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!<rootDir>/node_modules/"
     ]
@@ -51,12 +57,7 @@
       "git add"
     ],
     "src/**/*.{js,jsx}": [
-      "eslint",
-      "git add"
-    ],
-    "src/**/*.{js,jsx}": [
-      "jest --ci",
-      "git add"
+      "npm run test-ci"
     ]
   }
 }

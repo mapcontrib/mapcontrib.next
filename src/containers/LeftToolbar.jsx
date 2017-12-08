@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { increaseMapZoom, decreaseMapZoom } from '../action/map';
+import { increaseMapZoom, decreaseMapZoom } from 'actions/map';
 
-import Toolbar from '../component/LeftToolbar';
+import Toolbar from 'components/LeftToolbar';
 
 class LeftToolbar extends React.PureComponent {
   _handleIncreaseMapZoom() {

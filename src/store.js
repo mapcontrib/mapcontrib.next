@@ -1,8 +1,8 @@
 import { createStore, combineReducers } from 'redux';
-import map from './reducer/map';
-import theme from './reducer/theme';
-import layers from './reducer/layers';
-import tileConfigs from './reducer/tileConfigs';
+import map from 'reducers/map';
+import theme from 'reducers/theme';
+import layers from 'reducers/layers';
+import tileConfigs from 'reducers/tileConfigs';
 
 const store = createStore(
   combineReducers({

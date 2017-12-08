@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import TranslationsSettingsSidebarComponent from '../component/TranslationsSettingsSidebar';
+import TranslationsSettingsSidebarComponent from 'components/TranslationsSettingsSidebar';
 
 class TranslationsSettingsSidebar extends React.Component {
   render() {

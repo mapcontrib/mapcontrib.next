@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PresetsSettingsSidebarComponent from '../component/PresetsSettingsSidebar';
+import PresetsSettingsSidebarComponent from 'components/PresetsSettingsSidebar';
 
 class PresetsSettingsSidebar extends React.Component {
   render() {

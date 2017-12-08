@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import EditionSidebarComponent from '../component/EditionSidebar';
+import UserSidebarComponent from 'components/UserSidebar';
 
-class EditionSidebar extends React.Component {
+class UserSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <EditionSidebarComponent
+      <UserSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class EditionSidebar extends React.Component {
   }
 }
 
-EditionSidebar.propTypes = {};
+UserSidebar.propTypes = {};
 
-EditionSidebar.defaultProps = {};
+UserSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(EditionSidebar);
+export default connect(mapStateToProps)(UserSidebar);

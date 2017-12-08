@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DataLayersSettingsSidebarComponent from '../component/DataLayersSettingsSidebar';
+import DataLayersSettingsSidebarComponent from 'components/DataLayersSettingsSidebar';
 
 class DataLayersSettingsSidebar extends React.Component {
   render() {

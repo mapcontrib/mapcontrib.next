@@ -1,5 +1,5 @@
-import tileSourcesReference from '../const/tileSources';
-import tileConfigsReference from '../const/tileConfigs';
+import tileSourcesReference from 'const/tileSources';
+import tileConfigsReference from 'const/tileConfigs';
 
 export const findTileSourcesFromConfigId = configId => {
   const tileConfig = tileConfigsReference.filter(

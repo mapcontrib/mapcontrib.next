@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import MapBackgroundsSettingsSidebarComponent from '../component/MapBackgroundsSettingsSidebar';
+import MapBackgroundsSettingsSidebarComponent from 'components/MapBackgroundsSettingsSidebar';
 
 class MapBackgroundsSettingsSidebar extends React.Component {
   render() {

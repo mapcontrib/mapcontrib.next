@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Toolbar from '../component/RightToolbar';
+import Toolbar from 'components/RightToolbar';
 
 const RightToolbar = ({ match, history }) => (
   <Toolbar

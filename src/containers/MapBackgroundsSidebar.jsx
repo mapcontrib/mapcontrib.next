@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DataLayersSidebarComponent from '../component/DataLayersSidebar';
+import MapBackgroundsSidebarComponent from 'components/MapBackgroundsSidebar';
 
-class DataLayersSidebar extends React.Component {
+class MapBackgroundsSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <DataLayersSidebarComponent
+      <MapBackgroundsSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class DataLayersSidebar extends React.Component {
   }
 }
 
-DataLayersSidebar.propTypes = {};
+MapBackgroundsSidebar.propTypes = {};
 
-DataLayersSidebar.defaultProps = {};
+MapBackgroundsSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(DataLayersSidebar);
+export default connect(mapStateToProps)(MapBackgroundsSidebar);

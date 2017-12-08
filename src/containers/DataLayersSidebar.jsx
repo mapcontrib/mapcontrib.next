@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SettingsSidebarComponent from '../component/SettingsSidebar';
+import DataLayersSidebarComponent from 'components/DataLayersSidebar';
 
-class SettingsSidebar extends React.Component {
+class DataLayersSidebar extends React.Component {
   render() {
     const { history, themePath } = this.props;
 
     return (
-      <SettingsSidebarComponent
+      <DataLayersSidebarComponent
         onClickClose={() => {
           history.replace(themePath);
         }}
@@ -16,12 +16,12 @@ class SettingsSidebar extends React.Component {
   }
 }
 
-SettingsSidebar.propTypes = {};
+DataLayersSidebar.propTypes = {};
 
-SettingsSidebar.defaultProps = {};
+DataLayersSidebar.defaultProps = {};
 
 const mapStateToProps = state => ({
   themePath: state.theme.path
 });
 
-export default connect(mapStateToProps)(SettingsSidebar);
+export default connect(mapStateToProps)(DataLayersSidebar);

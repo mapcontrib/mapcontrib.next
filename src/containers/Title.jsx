@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TitleComponent from '../component/Title';
+import TitleComponent from 'components/Title';
 
 const Title = ({ title, ...props }) => <TitleComponent title={title} />;
 

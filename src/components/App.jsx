@@ -4,23 +4,23 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { WhiteTheme, Section } from 'osm-ui-react';
 
-import Theme from '../container/Theme';
-import DataLayersSidebar from '../container/DataLayersSidebar';
-import MapBackgroundsSidebar from '../container/MapBackgroundsSidebar';
-import UserSidebar from '../container/UserSidebar';
-import ShareSidebar from '../container/ShareSidebar';
-import EditionSidebar from '../container/EditionSidebar';
-import SettingsSidebar from '../container/SettingsSidebar';
-import DataLayersSettingsSidebar from '../container/DataLayersSettingsSidebar';
-import MapBackgroundsSettingsSidebar from '../container/MapBackgroundsSettingsSidebar';
-import CustomTagsSettingsSidebar from '../container/CustomTagsSettingsSidebar';
-import PresetsSettingsSidebar from '../container/PresetsSettingsSidebar';
-import TranslationsSettingsSidebar from '../container/TranslationsSettingsSidebar';
+import Theme from 'containers/Theme';
+import DataLayersSidebar from 'containers/DataLayersSidebar';
+import MapBackgroundsSidebar from 'containers/MapBackgroundsSidebar';
+import UserSidebar from 'containers/UserSidebar';
+import ShareSidebar from 'containers/ShareSidebar';
+import EditionSidebar from 'containers/EditionSidebar';
+import SettingsSidebar from 'containers/SettingsSidebar';
+import DataLayersSettingsSidebar from 'containers/DataLayersSettingsSidebar';
+import MapBackgroundsSettingsSidebar from 'containers/MapBackgroundsSettingsSidebar';
+import CustomTagsSettingsSidebar from 'containers/CustomTagsSettingsSidebar';
+import PresetsSettingsSidebar from 'containers/PresetsSettingsSidebar';
+import TranslationsSettingsSidebar from 'containers/TranslationsSettingsSidebar';
 
 import {
   getMinZoomFromTileConfigId,
   getMaxZoomFromTileConfigId
-} from '../helper/map'; // To remove
+} from 'helpers/map'; // To remove
 
 const StyledCanvas = styled(Section)`
   background-color: #ccc;

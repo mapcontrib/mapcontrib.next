@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'osm-ui-react';
 import LeafletOverpassLayer from 'leaflet-overpass-layer';
-import { computeId } from '../helper/osm';
+import { computeId } from 'helpers/osm';
 
 export default class OverpassLayer extends Map.LayerGroup {
   constructor(props, context) {
