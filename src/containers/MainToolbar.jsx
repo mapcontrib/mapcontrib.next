@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import { increaseMapZoom, decreaseMapZoom } from 'actions/map';
 
-import Toolbar from 'components/LeftToolbar';
+import Toolbar from 'components/MainToolbar';
 
-class LeftToolbar extends React.PureComponent {
+class MainToolbar extends React.PureComponent {
   _handleIncreaseMapZoom() {
     this.props.increaseMapZoom();
   }
@@ -23,21 +23,18 @@ class LeftToolbar extends React.PureComponent {
         zoom={zoom}
         onClickIncreaseZoom={() => this._handleIncreaseMapZoom()}
         onClickDecreaseZoom={() => this._handleDecreaseMapZoom()}
-        onClickDataLayers={() => history.replace(`${match.url}/data-layers`)}
-        onClickMapBackgrounds={() =>
-          history.replace(`${match.url}/map-backgrounds`)
-        }
+        onClickMainMenu={() => history.replace(`${match.url}/menu`)}
       />
     );
   }
 }
 
-LeftToolbar.propTypes = {
+MainToolbar.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
 
-LeftToolbar.defaultProps = {};
+MainToolbar.defaultProps = {};
 
 const mapStateToProps = state => ({
   zoom: state.map.zoom
@@ -48,4 +45,4 @@ const mapDispatchToProps = dispatch => ({
   decreaseMapZoom: zoom => dispatch(decreaseMapZoom(zoom))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeftToolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(MainToolbar);

@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 
 import { setFragment } from 'actions/theme';
 
-import Map from 'containers/Map';
-import Title from 'containers/Title';
-import LeftToolbar from 'containers/LeftToolbar';
-import RightToolbar from 'containers/RightToolbar';
+import ThemeComponent from 'components/Theme';
 
 class Theme extends React.Component {
   componentWillMount() {
@@ -16,21 +13,15 @@ class Theme extends React.Component {
   }
 
   render() {
-    const { match, history, themeTitle, themePath } = this.props;
+    const { match, history, themePath } = this.props;
 
     return (
-      <div>
-        <Map />
-        <Title title={themeTitle} />
-        <LeftToolbar match={match} history={history} themePath={themePath} />
-        <RightToolbar match={match} history={history} themePath={themePath} />
-      </div>
+      <ThemeComponent match={match} history={history} themePath={themePath} />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  themeTitle: state.theme.title,
   themePath: state.theme.path
 });
 

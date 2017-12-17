@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Map as LeafletMap } from 'osm-ui-react';
+import { Map as OSMUIMap } from 'osm-ui-react';
 
-const StyledMap = styled(LeafletMap)`
+const StyledMap = styled(OSMUIMap)`
   position: absolute;
   top: 0;
   right: 0;
@@ -12,10 +13,20 @@ const StyledMap = styled(LeafletMap)`
   height: 100%;
 `;
 
-const Map = props => <StyledMap zoomControl={false} {...props} />;
+const Map = ({ children, ...props }) => (
+  <StyledMap zoomControl={false} attributionControl={false} {...props}>
+    <OSMUIMap.AttributionControl position="bottomleft" />
+    <OSMUIMap.ScaleControl position="bottomleft" />
+    {children}
+  </StyledMap>
+);
 
-Map.propTypes = {};
+Map.propTypes = {
+  children: PropTypes.node
+};
 
-Map.defaultProps = {};
+Map.defaultProps = {
+  children: ''
+};
 
 export default Map;

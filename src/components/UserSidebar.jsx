@@ -31,23 +31,6 @@ const UserSidebar = props => (
             <Link to="">Log out</Link>
           </li>
         </ul>
-        <ul>
-          <li>
-            <Link to="">Report a bug</Link>
-          </li>
-          <li>
-            <Link to="">Contact the team</Link>
-          </li>
-          <li>
-            <Link to="">Project's blog</Link>
-          </li>
-          <li>
-            <Link to="">Wiki</Link>
-          </li>
-          <li>
-            <Link to="">About MapContrib</Link>
-          </li>
-        </ul>
       </Sidebar.Nav>
     </Sidebar>
   </BlueTheme>

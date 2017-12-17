@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Toolbar from 'components/RightToolbar';
+import Toolbar from 'components/EditionToolbar';
 
-const RightToolbar = ({ match, history }) => (
+const EditionToolbar = ({ match, history }) => (
   <Toolbar
-    onClickUser={() => history.push(`${match.url}/user`)}
-    onClickShare={() => history.push(`${match.url}/share`)}
     onClickEdition={() => history.push(`${match.url}/edition`)}
     onClickSettings={() => history.push(`${match.url}/settings`)}
     onClickDataLayers={() => history.push(`${match.url}/settings/data-layers`)}
@@ -21,11 +19,11 @@ const RightToolbar = ({ match, history }) => (
   />
 );
 
-RightToolbar.propTypes = {
+EditionToolbar.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
 
-RightToolbar.defaultProps = {};
+EditionToolbar.defaultProps = {};
 
-export default RightToolbar;
+export default EditionToolbar;

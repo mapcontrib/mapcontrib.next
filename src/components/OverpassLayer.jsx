@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Map } from 'osm-ui-react';
+import { Map as OSMUIMap } from 'osm-ui-react';
 import LeafletOverpassLayer from 'leaflet-overpass-layer';
 import { computeId } from 'helpers/osm';
 
-export default class OverpassLayer extends Map.LayerGroup {
+export default class OverpassLayer extends OSMUIMap.LayerGroup {
   constructor(props, context) {
     super(props, context);
 
@@ -55,21 +55,21 @@ export default class OverpassLayer extends Map.LayerGroup {
 
   render() {
     return (
-      <Map.LayerGroup>
+      <OSMUIMap.LayerGroup>
         {this.state.elements.map(
           element =>
             element.lat &&
             element.lon && (
-              <Map.Marker
+              <OSMUIMap.Marker
                 key={computeId(element.type, element.id)}
                 position={[element.lat, element.lon]}
                 shape="pointerClassic"
-                theme="turquoise"
-                icon="recycle"
+                theme="purple"
+                icon="asterisk"
               />
             )
         )}
-      </Map.LayerGroup>
+      </OSMUIMap.LayerGroup>
     );
   }
 }

@@ -5,17 +5,11 @@ import styled from 'styled-components';
 import { WhiteTheme, Section } from 'osm-ui-react';
 
 import Theme from 'containers/Theme';
-import DataLayersSidebar from 'containers/DataLayersSidebar';
-import MapBackgroundsSidebar from 'containers/MapBackgroundsSidebar';
+import MainSidebar from 'containers/MainSidebar';
 import UserSidebar from 'containers/UserSidebar';
 import ShareSidebar from 'containers/ShareSidebar';
 import EditionSidebar from 'containers/EditionSidebar';
 import SettingsSidebar from 'containers/SettingsSidebar';
-import DataLayersSettingsSidebar from 'containers/DataLayersSettingsSidebar';
-import MapBackgroundsSettingsSidebar from 'containers/MapBackgroundsSettingsSidebar';
-import CustomTagsSettingsSidebar from 'containers/CustomTagsSettingsSidebar';
-import PresetsSettingsSidebar from 'containers/PresetsSettingsSidebar';
-import TranslationsSettingsSidebar from 'containers/TranslationsSettingsSidebar';
 
 import {
   getMinZoomFromTileConfigId,
@@ -45,13 +39,8 @@ class App extends React.Component {
 
             <Route
               exact
-              path="/t/:fragment/:title?/data-layers"
-              component={DataLayersSidebar}
-            />
-            <Route
-              exact
-              path="/t/:fragment/:title?/map-backgrounds"
-              component={MapBackgroundsSidebar}
+              path="/t/:fragment/:title?/menu"
+              component={MainSidebar}
             />
             <Route
               exact
@@ -72,31 +61,6 @@ class App extends React.Component {
               exact
               path="/t/:fragment/:title?/settings"
               component={SettingsSidebar}
-            />
-            <Route
-              exact
-              path="/t/:fragment/:title?/settings/data-layers"
-              component={DataLayersSettingsSidebar}
-            />
-            <Route
-              exact
-              path="/t/:fragment/:title?/settings/map-backgrounds"
-              component={MapBackgroundsSettingsSidebar}
-            />
-            <Route
-              exact
-              path="/t/:fragment/:title?/settings/custom-tags"
-              component={CustomTagsSettingsSidebar}
-            />
-            <Route
-              exact
-              path="/t/:fragment/:title?/settings/presets"
-              component={PresetsSettingsSidebar}
-            />
-            <Route
-              exact
-              path="/t/:fragment/:title?/settings/translations"
-              component={TranslationsSettingsSidebar}
             />
           </StyledCanvas>
         </WhiteTheme>
