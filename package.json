@@ -57,7 +57,7 @@
       "git add"
     ],
     "src/**/*.{js,jsx}": [
-      "npm run test-ci"
+      "npm run test-ci -- --findRelatedTests"
     ]
   }
 }
