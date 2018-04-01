@@ -1,15 +1,26 @@
-const layers = (state = [], action) => {
+import { Map } from 'immutable';
+
+const initialState = new Map();
+
+const layers = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_LAYER':
-      const index = action.index || state.length;
+      return state.set(
+        action.id,
+        new Map({
+          id: action.id,
+          type: action.layerType,
+          leafletLayer: action.leafletLayer,
+          points: action.points || []
+        })
+      );
 
-      return [
-        ...state.slice(0, index),
-        action.layer,
-        ...state.slice(index, state.length)
-      ];
+    case 'LAYER_ADD_POINTS':
+      return state.setIn([action.id, 'points'], action.points);
+
     case 'REMOVE_LAYER':
-      return state.filter(layer => layer.id !== action.layer.id);
+      return state.delete(action.id);
+
     default:
       return state;
   }

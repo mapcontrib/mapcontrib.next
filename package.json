@@ -65,12 +65,7 @@
       "git add"
     ],
     "src/**/*.{js,jsx}": [
-<<<<<<< HEAD
       "npm run test-ci -- --findRelatedTests"
-=======
-      "jest --ci",
-      "git add"
->>>>>>> updated package.json & package-lock.json
     ]
   }
 }
