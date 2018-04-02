@@ -1,5 +1,4 @@
 const initialState = {
-  items: [],
   categories: []
 };
 
@@ -20,18 +19,6 @@ function formatCategories(categories) {
 
 const osmose = (state = initialState, action) => {
   switch (action.type) {
-    case 'OSMOSE_ADD_ITEM':
-      return {
-        ...state,
-        items: [action.item, ...state.items]
-      };
-
-    case 'OSMOSE_REMOVE_ITEM':
-      return {
-        ...state,
-        items: state.items.filter(item => item.id !== action.item.id)
-      };
-
     case 'OSMOSE_ADD_CATEGORIES':
       return {
         ...state,

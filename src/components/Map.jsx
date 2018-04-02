@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { osmose } from '../helpers/requests';
 import { Map as OsmUIMap } from 'osm-ui-react';
 
 const StyledMap = styled(OsmUIMap)`
@@ -53,7 +54,9 @@ class LayerManager extends OsmUIMap.LayerGroup {
         theme={'red'}
         shape="pointerClassic"
         icon="times"
-        onClick={() => console.log('POINT', point)}
+        onClick={() => {
+          if (layer.type === 'osmose') this.props.openOsmose(point.error_id);
+        }}
         key={i}
       />
     ));
@@ -91,6 +94,8 @@ class MapComponent extends React.PureComponent {
       maxZoom,
       tileSources,
       layers,
+      path,
+      openOsmose,
       ...props
     } = this.props;
 
@@ -116,7 +121,10 @@ class MapComponent extends React.PureComponent {
         ))}
         <OsmUIMap.AttributionControl position="bottomleft" />
         <OsmUIMap.ScaleControl position="bottomleft" />
-        <LayerManager layers={Object.values(layers.toJS())} />
+        <LayerManager
+          layers={Object.values(layers.toJS())}
+          openOsmose={openOsmose}
+        />
       </StyledMap>
     );
   }

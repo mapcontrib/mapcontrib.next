@@ -11,7 +11,7 @@ import ShareSidebar from '../containers/ShareSidebar';
 import EditionSidebar from '../containers/EditionSidebar';
 import SettingsSidebar from '../containers/SettingsSidebar';
 import OsmoseLayerSidebar from '../containers/OsmoseLayerSidebar';
-
+import OsmoseSidebar from '../containers/OsmoseSidebar';
 import DataLayersSidebar from '../components/DataLayersSidebar';
 
 import {
@@ -73,6 +73,11 @@ class App extends React.Component {
               exact
               path="/t/:fragment/:title?/osmose-layer"
               component={OsmoseLayerSidebar}
+            />
+            <Route
+              exact
+              path="/t/:fragment/:title?/osmose/:id"
+              component={OsmoseSidebar}
             />
           </StyledCanvas>
         </WhiteTheme>

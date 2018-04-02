@@ -74,21 +74,25 @@ function NameOptionRenderer({
 }
 
 class OsmoseLayerSidebar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      selectedItems: []
+      selectedItems: Array.from(props.layers.keys())
     };
   }
 
   componentDidMount() {
-    this.props.fetchOsmoseCategories();
+    if (this.props.categories.length === 0)
+      this.props.fetchOsmoseCategories();
   }
 
   render() {
     const { selectedItems } = this.state;
     const { categories, layers, addLayer, removeLayer } = this.props;
+
+    if (!categories)
+      return null;
 
     return (
       <RedTheme>
@@ -112,10 +116,7 @@ class OsmoseLayerSidebar extends React.Component {
                       id: item.id,
                       leafletLayer: nectarivore.createOsmose(
                         item.id,
-                        points => {
-                          console.log('updating', item.id);
-                          this.props.addPointsToLayer(item.id, points);
-                        }
+                        points => this.props.addPointsToLayer(item.id, points)
                       ),
                       type: 'osmose'
                     });
@@ -145,11 +146,10 @@ class OsmoseLayerSidebar extends React.Component {
 }
 
 OsmoseLayerSidebar.propTypes = {
-  categories: PropTypes.array
+  categories: PropTypes.array.isRequired
 };
 
 OsmoseLayerSidebar.defaultProps = {
-  categories: []
 };
 
 export default OsmoseLayerSidebar;
