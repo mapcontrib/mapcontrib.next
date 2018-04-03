@@ -115,9 +115,7 @@ class OsmoseLayerSidebar extends React.Component {
 
   render() {
     const { selectedItems } = this.state;
-    const { categories } = this.props;
-
-    if (!categories) return null;
+    const { categories, history, themePath } = this.props;
 
     return (
       <RedTheme>
@@ -126,6 +124,7 @@ class OsmoseLayerSidebar extends React.Component {
             opened
             position="right"
             title="Add Osmose layer"
+            onClickClose={() => history.replace(themePath)}
             {...this.props}
           >
             <Form.Select
@@ -149,9 +148,14 @@ class OsmoseLayerSidebar extends React.Component {
 }
 
 OsmoseLayerSidebar.propTypes = {
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
+  layers: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  themePath: PropTypes.string.isRequired
 };
 
 OsmoseLayerSidebar.defaultProps = {};
+
+OsmoseLayerSidebar.displayName = 'OsmoseLayerSidebar';
 
 export default OsmoseLayerSidebar;

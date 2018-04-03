@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Map from 'containers/Map';
 import MainToolbar from 'containers/MainToolbar';
-import UserToolbar from 'containers/UserToolbar';
-import EditionToolbar from 'containers/EditionToolbar';
+import UserToolbar from 'components/UserToolbar';
+import EditionToolbar from 'components/EditionToolbar';
 
 const TopBorder = styled.div`
   position: fixed;
@@ -18,18 +19,37 @@ const TopBorder = styled.div`
   box-shadow: 0 3px 4px -3px rgba(0, 0, 0, 0.2), 0 0 2px -1px rgba(0, 0, 0, 0.2);
 `;
 
-const Theme = ({ match, history, themePath, ...props }) => (
-  <div {...props}>
-    <Map match={match} history={history} themePath={themePath} />
-    <MainToolbar match={match} history={history} themePath={themePath} />
-    <UserToolbar match={match} history={history} themePath={themePath} />
-    <EditionToolbar match={match} history={history} themePath={themePath} />
-    <TopBorder />
-  </div>
-);
+class Theme extends React.Component {
+  componentWillMount() {
+    const { fragment } = this.props.match.params;
 
-Theme.propTypes = {};
+    this.props.setFragment(fragment);
+  }
+
+  render() {
+    const { history, match, themePath } = this.props;
+
+    return (
+      <div>
+        <Map match={match} history={history} themePath={themePath} />
+        <MainToolbar match={match} history={history} themePath={themePath} />
+        <UserToolbar match={match} history={history} themePath={themePath} />
+        <EditionToolbar match={match} history={history} themePath={themePath} />
+        <TopBorder />
+      </div>
+    );
+  }
+}
+
+Theme.propTypes = {
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  themePath: PropTypes.string.isRequired,
+  setFragment: PropTypes.func.isRequired
+};
 
 Theme.defaultProps = {};
+
+Theme.displayName = 'Theme';
 
 export default Theme;

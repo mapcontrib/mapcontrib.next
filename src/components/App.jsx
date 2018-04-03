@@ -4,14 +4,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { WhiteTheme, Section } from 'osm-ui-react';
 
-import Theme from 'containers/Theme';
-import MainSidebar from 'containers/MainSidebar';
-import UserSidebar from 'containers/UserSidebar';
-import ShareSidebar from 'containers/ShareSidebar';
-import EditionSidebar from 'containers/EditionSidebar';
-import SettingsSidebar from 'containers/SettingsSidebar';
 import OsmoseLayerSidebar from 'containers/OsmoseLayerSidebar';
-import OsmoseSidebar from 'containers/OsmoseSidebar';
+
+import Theme from 'components/Theme';
+import MainSidebar from 'components/MainSidebar';
+import UserSidebar from 'components/UserSidebar';
+import ShareSidebar from 'components/ShareSidebar';
+import EditionSidebar from 'components/EditionSidebar';
+import SettingsSidebar from 'components/SettingsSidebar';
+import OsmoseSidebar from 'components/OsmoseSidebar';
 import DataLayersSidebar from 'components/DataLayersSidebar';
 
 import {
@@ -32,52 +33,81 @@ class App extends React.Component {
   }
 
   render() {
+    const { themePath, themeTitle, setFragment } = this.props;
+
     return (
       <Router>
         <WhiteTheme>
           <StyledCanvas appCanvas>
             <Switch>
-              <Route path="/t/:fragment/:title?" component={Theme} />
+              <Route
+                path="/t/:fragment/:title?"
+                render={props => (
+                  <Theme
+                    themePath={themePath}
+                    setFragment={setFragment}
+                    {...props}
+                  />
+                )}
+              />
             </Switch>
             <Route
               exact
               path="/t/:fragment/:title?/menu"
-              component={MainSidebar}
+              render={props => (
+                <MainSidebar
+                  themePath={themePath}
+                  themeTitle={themeTitle}
+                  {...props}
+                />
+              )}
             />
             <Route
               exact
               path="/t/:fragment/:title?/user"
-              component={UserSidebar}
+              render={props => <UserSidebar themePath={themePath} {...props} />}
             />
             <Route
               exact
               path="/t/:fragment/:title?/share"
-              component={ShareSidebar}
+              render={props => (
+                <ShareSidebar themePath={themePath} {...props} />
+              )}
             />
             <Route
               exact
               path="/t/:fragment/:title?/edition"
-              component={EditionSidebar}
+              render={props => (
+                <EditionSidebar themePath={themePath} {...props} />
+              )}
             />
             <Route
               exact
               path="/t/:fragment/:title?/settings"
-              component={SettingsSidebar}
+              render={props => (
+                <SettingsSidebar themePath={themePath} {...props} />
+              )}
             />
             <Route
               exact
               path="/t/:fragment/:title?/temp-data-layers"
-              component={DataLayersSidebar}
+              render={props => (
+                <DataLayersSidebar themePath={themePath} {...props} />
+              )}
             />
             <Route
               exact
               path="/t/:fragment/:title?/osmose-layer"
-              component={OsmoseLayerSidebar}
+              render={props => (
+                <OsmoseLayerSidebar themePath={themePath} {...props} />
+              )}
             />
             <Route
               exact
               path="/t/:fragment/:title?/osmose/:id"
-              component={OsmoseSidebar}
+              render={props => (
+                <OsmoseSidebar themePath={themePath} {...props} />
+              )}
             />
           </StyledCanvas>
         </WhiteTheme>
@@ -89,13 +119,12 @@ class App extends React.Component {
 App.propTypes = {
   setMapTileConfigId: PropTypes.func.isRequired,
   setMapMinZoom: PropTypes.func.isRequired,
-  setMapMaxZoom: PropTypes.func.isRequired
+  setMapMaxZoom: PropTypes.func.isRequired,
+  setFragment: PropTypes.func.isRequired
 };
 
-App.defaultProps = {
-  setMapTileConfigId: () => {},
-  setMapMinZoom: () => {},
-  setMapMaxZoom: () => {}
-};
+App.defaultProps = {};
+
+App.displayName = 'App';
 
 export default App;

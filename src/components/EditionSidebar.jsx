@@ -1,10 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { RedTheme, Sidebar } from 'osm-ui-react';
 
-const EditSidebar = props => (
+const EditSidebar = ({ history, themePath, ...props }) => (
   <RedTheme>
-    <Sidebar opened position="right" title="Edition" {...props}>
+    <Sidebar
+      opened
+      position="right"
+      title="Edition"
+      onClickClose={() => history.replace(themePath)}
+      {...props}
+    >
       <Sidebar.Nav>
         <ul>
           <li>
@@ -19,8 +26,13 @@ const EditSidebar = props => (
   </RedTheme>
 );
 
-EditSidebar.propTypes = {};
+EditSidebar.propTypes = {
+  history: PropTypes.object.isRequired,
+  themePath: PropTypes.string.isRequired
+};
 
 EditSidebar.defaultProps = {};
+
+EditSidebar.displayName = 'EditSidebar';
 
 export default EditSidebar;
