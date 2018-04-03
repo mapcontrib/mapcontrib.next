@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { osmose } from '../helpers/requests';
 import { Map as OsmUIMap } from 'osm-ui-react';
 
 const StyledMap = styled(OsmUIMap)`

@@ -11,7 +11,7 @@ const EditSidebar = props => (
             <Link to="">Add a missing point</Link>
           </li>
           <li>
-            <Link to="data-layers">Add a temporary data layer</Link>
+            <Link to="temp-data-layers">Add a temporary data layer</Link>
           </li>
         </ul>
       </Sidebar.Nav>

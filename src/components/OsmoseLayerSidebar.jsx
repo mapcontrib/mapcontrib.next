@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styled from 'styled-components';
-import { RedTheme, Sidebar, Form, Button } from 'osm-ui-react';
-import { nectarivore } from '../helpers/requests';
+import { RedTheme, Sidebar, Form } from 'osm-ui-react';
+import { nectarivore } from 'helpers/requests';
 
 const StyledDiv = styled.div`
   .nameOption {
@@ -80,19 +80,44 @@ class OsmoseLayerSidebar extends React.Component {
     this.state = {
       selectedItems: Array.from(props.layers.keys())
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.categories.length === 0)
-      this.props.fetchOsmoseCategories();
+    if (this.props.categories.length === 0) this.props.fetchOsmoseCategories();
+  }
+
+  handleChange(selectedItems) {
+    const { layers, addLayer, addPointsToLayer, removeLayer } = this.props;
+
+    selectedItems.forEach(item => {
+      if (!layers.has(item.id))
+        addLayer({
+          id: item.id,
+          leafletLayer: nectarivore.createOsmose(item.id, points =>
+            addPointsToLayer(item.id, points)
+          ),
+          type: 'osmose'
+        });
+    });
+
+    const selectedIds = selectedItems.map(item => item.id);
+
+    Array.from(layers.keys()).forEach(key => {
+      if (!selectedIds.includes(key)) removeLayer(key);
+    });
+
+    this.setState({
+      selectedItems: selectedItems.map(item => item.id)
+    });
   }
 
   render() {
     const { selectedItems } = this.state;
-    const { categories, layers, addLayer, removeLayer } = this.props;
+    const { categories } = this.props;
 
-    if (!categories)
-      return null;
+    if (!categories) return null;
 
     return (
       <RedTheme>
@@ -109,29 +134,7 @@ class OsmoseLayerSidebar extends React.Component {
               searchable
               labelKey="name"
               valueKey="id"
-              onChange={selectedItems => {
-                selectedItems.forEach(item => {
-                  if (!layers.has(item.id))
-                    addLayer({
-                      id: item.id,
-                      leafletLayer: nectarivore.createOsmose(
-                        item.id,
-                        points => this.props.addPointsToLayer(item.id, points)
-                      ),
-                      type: 'osmose'
-                    });
-                });
-
-                const selectedIds = selectedItems.map(item => item.id);
-
-                Array.from(layers.keys()).forEach(key => {
-                  if (!selectedIds.includes(key)) removeLayer(key);
-                });
-
-                this.setState({
-                  selectedItems: selectedItems.map(item => item.id)
-                });
-              }}
+              onChange={this.handleChange}
               options={categories}
               optionRenderer={NameOptionRenderer}
               value={selectedItems}
@@ -149,7 +152,6 @@ OsmoseLayerSidebar.propTypes = {
   categories: PropTypes.array.isRequired
 };
 
-OsmoseLayerSidebar.defaultProps = {
-};
+OsmoseLayerSidebar.defaultProps = {};
 
 export default OsmoseLayerSidebar;

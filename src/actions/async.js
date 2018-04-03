@@ -1,5 +1,5 @@
-import { osmose } from '../helpers/requests';
-import { addCategories } from '../actions/osmose';
+import { osmose } from 'helpers/requests';
+import { addCategories } from 'actions/osmose';
 
 export const fetchOsmoseCategories = () => {
   return dispatch =>

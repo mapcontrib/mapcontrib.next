@@ -1,6 +1,7 @@
-import { OSMOSE_URL } from '../const/urls';
 import Nectarivore from 'leaflet-nectarivore';
 import OsmoseRequest from 'osmose-request';
+
+import { OSMOSE_URL } from 'const/servicesConfig.json';
 
 const nectarivoreOsmoseOptions = {
   minZoom: 14,

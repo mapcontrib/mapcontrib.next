@@ -1,7 +1,7 @@
 import React from 'react';
 import { WhiteTheme, Sidebar, Osmose } from 'osm-ui-react';
 
-import { osmose } from '../helpers/requests';
+import { osmose } from 'helpers/requests';
 
 class OsmoseSidebar extends React.Component {
   constructor() {

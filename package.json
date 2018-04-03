@@ -65,6 +65,7 @@
       "git add"
     ],
     "src/**/*.{js,jsx}": [
+      "eslint",
       "npm run test-ci -- --findRelatedTests"
     ]
   }

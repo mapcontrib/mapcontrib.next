@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import MapComponent from '../components/Map';
-import { setMapZoom } from '../actions/map';
-import { findTileSourcesFromConfigId } from '../helpers/map';
+import MapComponent from 'components/Map';
+import { setMapZoom } from 'actions/map';
+import { findTileSourcesFromConfigId } from 'helpers/map';
 
 const mapStateToProps = (state, { match, history }) => ({
   zoom: state.map.zoom,
