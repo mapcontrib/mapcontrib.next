@@ -1,9 +1,9 @@
 import diacritic from 'diacritic';
 
 const defaultState = {
-  fragment: null,
+  fragment: '',
   title: 'MapContrib',
-  path: null
+  path: ''
 };
 
 const buildPath = (fragment, title) => {

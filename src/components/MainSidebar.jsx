@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { WhiteTheme, Sidebar } from 'osm-ui-react';
 
-const MainSidebar = ({ themeTitle, ...props }) => (
+const MainSidebar = ({ history, themePath, themeTitle, ...props }) => (
   <WhiteTheme>
-    <Sidebar opened position="left" {...props}>
+    <Sidebar
+      opened
+      position="left"
+      onClickClose={() => history.replace(themePath)}
+      {...props}
+    >
       <Sidebar.Title>{themeTitle}</Sidebar.Title>
       <Sidebar.Nav>
         <ul>
@@ -47,9 +52,13 @@ const MainSidebar = ({ themeTitle, ...props }) => (
 );
 
 MainSidebar.propTypes = {
+  history: PropTypes.object.isRequired,
+  themePath: PropTypes.string.isRequired,
   themeTitle: PropTypes.string.isRequired
 };
 
 MainSidebar.defaultProps = {};
+
+MainSidebar.displayName = 'MainSidebar';
 
 export default MainSidebar;

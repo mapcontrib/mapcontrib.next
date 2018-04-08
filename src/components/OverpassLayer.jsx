@@ -80,3 +80,5 @@ OverpassLayer.propTypes = {
 };
 
 OverpassLayer.defaultProps = {};
+
+OverpassLayer.displayName = 'OverpassLayer';

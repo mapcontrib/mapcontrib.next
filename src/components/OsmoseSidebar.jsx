@@ -1,5 +1,6 @@
 import React from 'react';
-import { WhiteTheme, Sidebar, Osmose } from 'osm-ui-react';
+import PropTypes from 'prop-types';
+import { WhiteTheme, Sidebar, Osmose, Loader } from 'osm-ui-react';
 
 import { osmose } from 'helpers/requests';
 
@@ -13,18 +14,26 @@ class OsmoseSidebar extends React.Component {
   }
 
   componentDidMount() {
-    osmose.fetchError(this.props.id).then(error => this.setState({ error }));
+    osmose
+      .fetchError(this.props.match.params.id)
+      .then(error => this.setState({ error }));
   }
 
   componentWillReceiveProps(nextProps) {
-    osmose.fetchError(nextProps.id).then(error => this.setState({ error }));
+    osmose
+      .fetchError(nextProps.match.params.id)
+      .then(error => this.setState({ error }));
   }
 
   render() {
     const { error } = this.state;
     const { history, themePath } = this.props;
 
-    const osmoseComponent = error && <Osmose data={error} />;
+    const child = error ? (
+      <Osmose data={error} />
+    ) : (
+      <Loader centered spinnerSize={60} strokeSize={4} />
+    );
 
     return (
       <WhiteTheme>
@@ -37,14 +46,17 @@ class OsmoseSidebar extends React.Component {
           }}
           {...this.props}
         >
-          {osmoseComponent}
+          {child}
         </Sidebar>
       </WhiteTheme>
     );
   }
 }
 
-OsmoseSidebar.propTypes = {};
+OsmoseSidebar.propTypes = {
+  history: PropTypes.object.isRequired,
+  themePath: PropTypes.string.isRequired
+};
 
 OsmoseSidebar.defaultProps = {};
 

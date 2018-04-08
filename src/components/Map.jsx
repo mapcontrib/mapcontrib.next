@@ -121,7 +121,7 @@ class MapComponent extends React.PureComponent {
         <OsmUIMap.AttributionControl position="bottomleft" />
         <OsmUIMap.ScaleControl position="bottomleft" />
         <LayerManager
-          layers={Object.values(layers.toJS())}
+          layers={layers && Object.values(layers.toJS())}
           openOsmose={openOsmose}
         />
       </StyledMap>
@@ -140,5 +140,7 @@ MapComponent.propTypes = {
 MapComponent.defaultProps = {
   layers: null
 };
+
+MapComponent.displayName = 'Map';
 
 export default MapComponent;

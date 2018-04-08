@@ -20,4 +20,6 @@ DataLayersSidebar.propTypes = {};
 
 DataLayersSidebar.defaultProps = {};
 
+DataLayersSidebar.displayName = 'DataLayersSidebar';
+
 export default DataLayersSidebar;
