@@ -20,7 +20,7 @@ const TopBorder = styled.div`
 
 const Theme = ({ match, history, themePath, ...props }) => (
   <div {...props}>
-    <Map />
+    <Map match={match} history={history} themePath={themePath} />
     <MainToolbar match={match} history={history} themePath={themePath} />
     <UserToolbar match={match} history={history} themePath={themePath} />
     <EditionToolbar match={match} history={history} themePath={themePath} />

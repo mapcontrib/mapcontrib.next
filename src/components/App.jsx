@@ -10,6 +10,9 @@ import UserSidebar from 'containers/UserSidebar';
 import ShareSidebar from 'containers/ShareSidebar';
 import EditionSidebar from 'containers/EditionSidebar';
 import SettingsSidebar from 'containers/SettingsSidebar';
+import OsmoseLayerSidebar from 'containers/OsmoseLayerSidebar';
+import OsmoseSidebar from 'containers/OsmoseSidebar';
+import DataLayersSidebar from 'components/DataLayersSidebar';
 
 import {
   getMinZoomFromTileConfigId,
@@ -36,7 +39,6 @@ class App extends React.Component {
             <Switch>
               <Route path="/t/:fragment/:title?" component={Theme} />
             </Switch>
-
             <Route
               exact
               path="/t/:fragment/:title?/menu"
@@ -61,6 +63,21 @@ class App extends React.Component {
               exact
               path="/t/:fragment/:title?/settings"
               component={SettingsSidebar}
+            />
+            <Route
+              exact
+              path="/t/:fragment/:title?/temp-data-layers"
+              component={DataLayersSidebar}
+            />
+            <Route
+              exact
+              path="/t/:fragment/:title?/osmose-layer"
+              component={OsmoseLayerSidebar}
+            />
+            <Route
+              exact
+              path="/t/:fragment/:title?/osmose/:id"
+              component={OsmoseSidebar}
             />
           </StyledCanvas>
         </WhiteTheme>

@@ -6,12 +6,16 @@
     "./src"
   ],
   "dependencies": {
+    "classnames": "^2.2.5",
     "diacritic": "^0.0.2",
     "expose-loader": "^0.7.5",
     "husky": "^0.14.1",
+    "immutable": "^3.8.2",
     "jquery": "^3.2.1",
+    "leaflet-nectarivore": "^0.1.6",
     "leaflet-overpass-layer": "^2.7.0",
     "osm-ui-react": "^0.4.3",
+    "osmose-request": "^1.3.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-redux": "^5.0.7",
@@ -19,6 +23,7 @@
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^2.3.0",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "styled-components": "^3.1.6"
   },
   "devDependencies": {
@@ -60,6 +65,7 @@
       "git add"
     ],
     "src/**/*.{js,jsx}": [
+      "eslint",
       "npm run test-ci -- --findRelatedTests"
     ]
   }
