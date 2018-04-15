@@ -1,44 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WhiteTheme, Sidebar, Osmose, Loader } from 'osm-ui-react';
+import { WhiteTheme, Sidebar, Osmose } from 'osm-ui-react';
 
 import { osmose } from 'helpers/requests';
 
 class OsmoseSidebar extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      error: null
-    };
-  }
-
-  componentDidMount() {
-    osmose
-      .fetchError(this.props.match.params.id)
-      .then(error => this.setState({ error }));
-  }
+  state = {
+    error: null
+  };
 
   componentWillReceiveProps(nextProps) {
-    osmose
-      .fetchError(nextProps.match.params.id)
-      .then(error => this.setState({ error }));
+    if (nextProps.match !== null) {
+      osmose
+        .fetchError(nextProps.match.params.id)
+        .then(error => this.setState({ error }));
+    }
   }
 
   render() {
     const { error } = this.state;
-    const { history, themePath } = this.props;
-
-    const child = error ? (
-      <Osmose data={error} />
-    ) : (
-      <Loader centered spinnerSize={60} strokeSize={4} />
-    );
+    const { history, match, themePath } = this.props;
 
     return (
       <WhiteTheme>
         <Sidebar
-          opened
+          opened={!!match}
+          loading={error ? false : true}
           position="right"
           title="Osmose"
           onClickClose={() => {
@@ -46,7 +33,7 @@ class OsmoseSidebar extends React.Component {
           }}
           {...this.props}
         >
-          {child}
+          {error ? <Osmose data={error} handleSuggestion={() => {}} /> : ''}
         </Sidebar>
       </WhiteTheme>
     );

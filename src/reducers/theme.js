@@ -1,4 +1,5 @@
 import diacritic from 'diacritic';
+import { SET_FRAGMENT, SET_TITLE } from 'actions/theme';
 
 const defaultState = {
   fragment: '',
@@ -11,15 +12,15 @@ const buildPath = (fragment, title) => {
   return `/t/${fragment}/${cleanTitle}`;
 };
 
-const theme = (state = defaultState, action) => {
+export default function theme(state = defaultState, action = { type: null }) {
   switch (action.type) {
-    case 'SET_FRAGMENT':
+    case SET_FRAGMENT:
       return {
         ...state,
         fragment: action.fragment,
         path: buildPath(action.fragment, state.title)
       };
-    case 'SET_TITLE':
+    case SET_TITLE:
       return {
         ...state,
         title: action.title,
@@ -28,6 +29,4 @@ const theme = (state = defaultState, action) => {
     default:
       return state;
   }
-};
-
-export default theme;
+}

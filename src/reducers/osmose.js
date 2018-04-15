@@ -1,33 +1,25 @@
+import capitalize from 'lodash/capitalize';
+import { OSMOSE_ADD_CATEGORIES } from 'actions/osmose';
+
 const initialState = {
   categories: []
 };
 
-// TODO write test
-function formatCategories(categories) {
-  return categories.reduce(
-    (acc, category) =>
-      [
-        {
-          name: category.name,
-          type: 'header'
-        },
-        ...category.items
-      ].concat(acc),
-    []
-  );
-}
-
-const osmose = (state = initialState, action) => {
+export default function osmose(state = initialState, action = { type: null }) {
   switch (action.type) {
-    case 'OSMOSE_ADD_CATEGORIES':
+    case OSMOSE_ADD_CATEGORIES:
       return {
         ...state,
-        categories: formatCategories(action.categories)
+        categories: action.categories.map(category => ({
+          ...category,
+          items: category.items.map(item => ({
+            ...item,
+            name: capitalize(item.name)
+          }))
+        }))
       };
 
     default:
       return state;
   }
-};
-
-export default osmose;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Map as OsmUIMap } from 'osm-ui-react';
+import { OSMOSE_SOURCE } from 'const/layerSource';
 
 const StyledMap = styled(OsmUIMap)`
   position: absolute;
@@ -27,7 +28,11 @@ class LayerManager extends OsmUIMap.LayerGroup {
   componentWillReceiveProps(nextProps) {
     // This logic will be removed when Nectarivore includes React component exports
     const { leafletLayers: current } = this.state;
-    const future = nextProps.layers.map(layer => layer.leafletLayer);
+    const future = Object.keys(nextProps.layers).reduce((future, index) => {
+      const sources = nextProps.layers[index].sources;
+      future.push(...Object.keys(sources).map(i => sources[i].leafletLayer));
+      return future;
+    }, []);
 
     current.forEach(layer => {
       if (!future.find(futLayer => layer.id === futLayer.id)) {
@@ -46,38 +51,48 @@ class LayerManager extends OsmUIMap.LayerGroup {
     });
   }
 
-  renderLayer(layer) {
-    const markers = layer.points.map((point, i) => (
-      <OsmUIMap.Marker
-        position={[parseFloat(point.lat), parseFloat(point.lon)]}
-        theme={'red'}
-        shape="pointerClassic"
-        icon="times"
-        onClick={() => {
-          if (layer.type === 'osmose') this.props.openOsmose(point.error_id);
-        }}
-        key={i}
-      />
-    ));
+  renderLayer(layerIndex) {
+    if (!this.props.layerSourceFeatures[layerIndex]) {
+      return null;
+    }
 
-    return <OsmUIMap.LayerGroup key={layer.id}>{markers}</OsmUIMap.LayerGroup>;
+    const source = this.props.layers[layerIndex].sources[layerIndex];
+    const markers = this.props.layerSourceFeatures[layerIndex].map(
+      (point, i) => (
+        <OsmUIMap.Marker
+          position={[parseFloat(point.lat), parseFloat(point.lon)]}
+          theme={'red'}
+          shape="pointerClassic"
+          icon="times"
+          onClick={() => {
+            if (source.type === OSMOSE_SOURCE)
+              this.props.openOsmose(point.error_id);
+          }}
+          key={i}
+        />
+      )
+    );
+
+    return <OsmUIMap.LayerGroup key={source.id}>{markers}</OsmUIMap.LayerGroup>;
   }
 
   render() {
     return (
       <OsmUIMap.LayerGroup>
-        {this.props.layers.map(this.renderLayer)}
+        {Object.keys(this.props.layers).map(this.renderLayer)}
       </OsmUIMap.LayerGroup>
     );
   }
 }
 
 LayerManager.propTypes = {
-  layers: PropTypes.array
+  layers: PropTypes.object,
+  layerSourceFeatures: PropTypes.object
 };
 
 LayerManager.defaultProps = {
-  layers: []
+  layers: {},
+  layerSourceFeatures: {}
 };
 
 class MapComponent extends React.PureComponent {
@@ -87,13 +102,12 @@ class MapComponent extends React.PureComponent {
 
   render() {
     const {
-      center,
       zoom,
       minZoom,
       maxZoom,
       tileSources,
       layers,
-      path,
+      layerSourceFeatures,
       openOsmose,
       ...props
     } = this.props;
@@ -121,7 +135,8 @@ class MapComponent extends React.PureComponent {
         <OsmUIMap.AttributionControl position="bottomleft" />
         <OsmUIMap.ScaleControl position="bottomleft" />
         <LayerManager
-          layers={layers && Object.values(layers.toJS())}
+          layers={layers}
+          layerSourceFeatures={layerSourceFeatures}
           openOsmose={openOsmose}
         />
       </StyledMap>
@@ -134,11 +149,13 @@ MapComponent.propTypes = {
   minZoom: PropTypes.number.isRequired,
   maxZoom: PropTypes.number.isRequired,
   tileSources: PropTypes.array.isRequired,
-  layers: PropTypes.object
+  layers: PropTypes.object,
+  layerSourceFeatures: PropTypes.object
 };
 
 MapComponent.defaultProps = {
-  layers: null
+  layers: null,
+  layerSourceFeatures: null
 };
 
 MapComponent.displayName = 'Map';

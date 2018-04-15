@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GreenTheme, Sidebar } from 'osm-ui-react';
 
-const ShareSidebar = ({ history, themePath, ...props }) => (
+const ShareSidebar = ({ history, match, themePath, ...props }) => (
   <GreenTheme>
     <Sidebar
-      opened
+      opened={!!match}
       position="right"
       title="Share"
       onClickClose={() => history.replace(themePath)}

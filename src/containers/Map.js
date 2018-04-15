@@ -9,7 +9,8 @@ const mapStateToProps = (state, { match, history }) => ({
   maxZoom: state.map.maxZoom,
   tileSources: findTileSourcesFromConfigId(state.map.tileConfigId),
   layers: state.layers,
-  openOsmose: id => history.push(`${match.url}/osmose/${id}`)
+  layerSourceFeatures: state.layerSourceFeatures,
+  openOsmose: id => history.push(`${match.url}/edition/osmose/${id}`)
 });
 
 const mapDispatchToProps = {

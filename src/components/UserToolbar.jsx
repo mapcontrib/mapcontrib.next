@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BlueTheme, GreenTheme, Toolbar } from 'osm-ui-react';
+import { BlueTheme, GreenTheme, OrangeTheme, Toolbar } from 'osm-ui-react';
 
 const UserToolbar = ({ history, match, ...props }) => (
   <BlueTheme>
@@ -17,6 +17,12 @@ const UserToolbar = ({ history, match, ...props }) => (
           onClick={() => history.push(`${match.url}/share`)}
         />
       </GreenTheme>
+      <OrangeTheme>
+        <Toolbar.Item
+          icon="sliders"
+          onClick={() => history.push(`${match.url}/settings`)}
+        />
+      </OrangeTheme>
     </Toolbar>
   </BlueTheme>
 );

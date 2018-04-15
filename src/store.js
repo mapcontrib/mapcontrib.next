@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import map from './reducers/map';
 import theme from './reducers/theme';
 import layers from './reducers/layers';
+import layerSourceFeatures from './reducers/layerSourceFeatures';
 import tileConfigs from './reducers/tileConfigs';
 import osmose from './reducers/osmose';
 
@@ -13,6 +14,7 @@ const store = createStore(
     map,
     theme,
     layers,
+    layerSourceFeatures,
     tileConfigs,
     osmose
   }),

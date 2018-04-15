@@ -1,29 +1,44 @@
-import { Map } from 'immutable';
+import { ADD_LAYER, ADD_SOURCE_TO_LAYER, REMOVE_LAYER } from 'actions/layers';
 
-const initialState = new Map();
+export const initialState = {};
 
-const layers = (state = initialState, action) => {
+export default function layers(state = initialState, action = { type: null }) {
   switch (action.type) {
-    case 'ADD_LAYER':
-      return state.set(
-        action.id,
-        new Map({
-          id: action.id,
-          type: action.layerType,
-          leafletLayer: action.leafletLayer,
-          points: action.points || []
-        })
-      );
+    case ADD_LAYER:
+      return {
+        ...state,
+        [action.layer.id]: action.layer
+      };
 
-    case 'LAYER_ADD_POINTS':
-      return state.setIn([action.id, 'points'], action.points);
+    case ADD_SOURCE_TO_LAYER:
+      if (!state[action.layerId]) {
+        throw new LayerNotFoundException(
+          `Layer not found (ID: ${action.layerId})`
+        );
+      }
 
-    case 'REMOVE_LAYER':
-      return state.delete(action.id);
+      const layer = { ...state[action.layerId] };
+
+      layer.sources = {
+        ...layer.sources,
+        [action.source.id]: action.source
+      };
+
+      return {
+        ...layers,
+        [action.layerId]: layer
+      };
+
+    case REMOVE_LAYER:
+      delete state[action.layerId];
+      return { ...state };
 
     default:
       return state;
   }
-};
+}
 
-export default layers;
+export function LayerNotFoundException(message) {
+  this.message = message;
+  this.name = 'LayerNotFoundException';
+}

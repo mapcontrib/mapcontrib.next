@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 import { fetchOsmoseCategories } from 'actions/async';
-import { addLayer, removeLayer, addPointsToLayer } from 'actions/layers';
-import OsmoseLayerSidebar from 'components/OsmoseLayerSidebar';
+import {
+  addLayer,
+  removeLayerById,
+  addSourceToLayerById
+} from 'actions/layers';
+import { addFeaturesToSourceById } from 'actions/layerSourceFeatures';
+import OsmoseLayerSidebar from 'components/edition/OsmoseLayerSidebar';
 
 const mapStateToProps = ({ layers, osmose }) => ({
   layers,
@@ -11,8 +16,9 @@ const mapStateToProps = ({ layers, osmose }) => ({
 const mapDispatchToProps = {
   fetchOsmoseCategories,
   addLayer,
-  removeLayer,
-  addPointsToLayer
+  removeLayerById,
+  addSourceToLayerById,
+  addFeaturesToSourceById
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OsmoseLayerSidebar);

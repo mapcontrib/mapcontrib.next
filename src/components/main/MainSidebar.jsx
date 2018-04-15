@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { WhiteTheme, Sidebar } from 'osm-ui-react';
 
-const MainSidebar = ({ history, themePath, themeTitle, ...props }) => (
+const MainSidebar = ({ history, match, themePath, themeTitle, ...props }) => (
   <WhiteTheme>
     <Sidebar
-      opened
+      opened={!!match}
       position="left"
       onClickClose={() => history.replace(themePath)}
       {...props}

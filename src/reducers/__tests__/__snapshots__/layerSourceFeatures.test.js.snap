@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layer source features reducer Should be able to add a feature to a layer source 1`] = `
+Object {
+  "UUID": Array [
+    Object {
+      "id": 123,
+      "type": "node",
+    },
+  ],
+}
+`;
+
+exports[`Layer source features reducer Should be able to add a feature to a layer source 2`] = `
+Object {
+  "UUID": Array [
+    Object {
+      "id": 123,
+      "type": "node",
+    },
+  ],
+  "UUID_2": Array [
+    Object {
+      "id": 456,
+      "type": "way",
+    },
+    Object {
+      "id": 789,
+      "type": "relation",
+    },
+  ],
+}
+`;

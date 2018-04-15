@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { RedTheme, Sidebar } from 'osm-ui-react';
 
-const EditSidebar = ({ history, themePath, ...props }) => (
+const EditSidebar = ({ history, match, themePath, ...props }) => (
   <RedTheme>
     <Sidebar
-      opened
+      opened={!!match}
       position="right"
       title="Edition"
       onClickClose={() => history.replace(themePath)}
@@ -14,11 +14,13 @@ const EditSidebar = ({ history, themePath, ...props }) => (
     >
       <Sidebar.Nav>
         <ul>
-          <li>
+          {/* <li>
             <Link to="">Add a missing point</Link>
-          </li>
+          </li> */}
           <li>
-            <Link to="temp-data-layers">Add a temporary data layer</Link>
+            <Link to={`${match && match.url}/temp-layers`}>
+              Add a temporary data layer
+            </Link>
           </li>
         </ul>
       </Sidebar.Nav>

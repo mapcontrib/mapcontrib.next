@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import App from 'components/App';
-import { setMapTileConfigId, setMapMinZoom, setMapMaxZoom } from 'actions/map'; // To remove
+import { setMapTileConfigId, setMapMinZoom, setMapMaxZoom } from 'actions/map'; // FIXME - To remove
 import { setFragment } from 'actions/theme';
 
 const mapStateToProps = state => ({
@@ -10,9 +10,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setMapTileConfigId: configId => dispatch(setMapTileConfigId(configId)), // To remove
-  setMapMinZoom: zoom => dispatch(setMapMinZoom(zoom)), // To remove
-  setMapMaxZoom: zoom => dispatch(setMapMaxZoom(zoom)), // To remove
+  setMapTileConfigId: configId => dispatch(setMapTileConfigId(configId)), // FIXME - To remove
+  setMapMinZoom: zoom => dispatch(setMapMinZoom(zoom)), // FIXME - To remove
+  setMapMaxZoom: zoom => dispatch(setMapMaxZoom(zoom)), // FIXME - To remove
   setFragment: fragment => dispatch(setFragment(fragment))
 });
 
