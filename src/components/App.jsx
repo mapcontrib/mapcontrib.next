@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 import styled from 'styled-components';
 import { WhiteTheme, Section } from 'osm-ui-react';
 
@@ -35,16 +40,22 @@ class App extends React.Component {
       <Router>
         <WhiteTheme>
           <StyledCanvas appCanvas>
-            <Route
-              path="/t/:fragment/:title?"
-              render={props => (
-                <Theme
-                  themePath={themePath}
-                  setFragment={setFragment}
-                  {...props}
-                />
-              )}
-            />
+            <Switch>
+              <Route
+                path="/t/:fragment/:title?"
+                render={props => (
+                  <Theme
+                    themePath={themePath}
+                    setFragment={setFragment}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                path="/"
+                render={props => <Redirect to="/t/cl7syt/MapContrib" />}
+              />
+            </Switch>
             <SettingsRoutes themePath={themePath} themeTitle={themeTitle} />
             <MainRoutes themePath={themePath} themeTitle={themeTitle} />
             <UserRoutes themePath={themePath} />
