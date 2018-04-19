@@ -13,8 +13,9 @@ const mapStateToProps = (state, { match, history }) => ({
   openOsmose: id => history.push(`${match.url}/edition/osmose/${id}`)
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = dispatch => ({
+  dispatch,
   setMapZoom
-};
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);

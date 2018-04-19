@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RedTheme, Sidebar, Form } from 'osm-ui-react';
-import { OSMOSE_SOURCE } from 'const/layerSource';
-import { nectarivore } from 'helpers/requests';
+import { updateOsmoseLayers } from 'helpers/map';
 
 class OsmoseLayerSidebar extends React.Component {
   constructor(props) {
     super(props);
 
+    // FIXME - To remove
+    const selectedItems = JSON.parse(
+      window.localStorage.getItem('osmoseSelectedItems') || '{}'
+    );
+
     this.state = {
-      selectedItems: Object.keys(props.layers)
+      selectedItems: selectedItems
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,44 +24,25 @@ class OsmoseLayerSidebar extends React.Component {
   }
 
   handleChange(categoryId, selectedItems) {
-    const {
-      layers,
-      addLayer,
-      addSourceToLayerById,
-      addFeaturesToSourceById,
-      removeLayerById
-    } = this.props;
     const nextSelectedItems = { ...this.state.selectedItems };
 
-    selectedItems.forEach(item => {
-      if (!layers[item.id]) {
-        addLayer({
-          id: item.id
-        });
-
-        addSourceToLayerById(item.id, {
-          id: item.id,
-          type: OSMOSE_SOURCE,
-          leafletLayer: nectarivore.createOsmose(item.id, features =>
-            addFeaturesToSourceById(item.id, features)
-          )
-        });
-      }
-    });
-
     nextSelectedItems[categoryId] = selectedItems.map(item => item.id);
-    const selectedIds = Object.keys(nextSelectedItems).reduce(
-      (acc, id) => [...acc, ...nextSelectedItems[id]],
-      []
-    );
-
-    Object.keys(layers).forEach(key => {
-      if (!selectedIds.includes(key)) removeLayerById(key);
-    });
 
     this.setState({
       selectedItems: nextSelectedItems
     });
+
+    updateOsmoseLayers(
+      this.props.layers,
+      nextSelectedItems,
+      this.props.dispatch
+    );
+
+    // FIXME - To remove
+    window.localStorage.setItem(
+      'osmoseSelectedItems',
+      JSON.stringify(nextSelectedItems)
+    );
   }
 
   render() {

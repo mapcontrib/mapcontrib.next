@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Map as OsmUIMap } from 'osm-ui-react';
 import { OSMOSE_SOURCE } from 'const/layerSource';
+import { updateOsmoseLayers } from 'helpers/map';
 
 const StyledMap = styled(OsmUIMap)`
   position: absolute;
@@ -96,6 +97,17 @@ LayerManager.defaultProps = {
 };
 
 class MapComponent extends React.PureComponent {
+  updateOsmoseLayers = () => {
+    // FIXME - To remove
+    const selectedItems = JSON.parse(
+      window.localStorage.getItem('osmoseSelectedItems') || '{}'
+    );
+
+    if (Object.keys(selectedItems).length > 0) {
+      updateOsmoseLayers(this.props.layers, selectedItems, this.props.dispatch);
+    }
+  };
+
   _handleZoomend(e) {
     this.props.setMapZoom(e.target._zoom);
   }
@@ -121,6 +133,7 @@ class MapComponent extends React.PureComponent {
         onZoomend={e => this._handleZoomend(e)}
         attributionControl={false}
         zoomControl={false}
+        whenReady={this.updateOsmoseLayers}
         {...props}
       >
         {tileSources.map(tileSource => (
