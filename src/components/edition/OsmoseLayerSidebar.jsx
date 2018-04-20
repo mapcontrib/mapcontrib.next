@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RedTheme, Sidebar, Form } from 'osm-ui-react';
-import { updateOsmoseLayers } from 'helpers/map';
 
 class OsmoseLayerSidebar extends React.Component {
   constructor(props) {
@@ -17,10 +16,37 @@ class OsmoseLayerSidebar extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.updateOsmoseLayers = this.updateOsmoseLayers.bind(this);
   }
 
   componentDidMount() {
     if (this.props.categories.length === 0) this.props.fetchOsmoseCategories();
+  }
+
+  updateOsmoseLayers() {
+    const { selectedItems } = this.state;
+    const { layers, addOsmoseLayer, removeLayerById } = this.props;
+
+    const existingLayerIds = Object.keys(layers).map(id => parseInt(id, 10));
+
+    const selectedIds = Object.keys(selectedItems).reduce(
+      (acc, id) => [...acc, ...selectedItems[id]],
+      []
+    );
+
+    selectedIds.forEach(id => {
+      if (!existingLayerIds.includes(id)) {
+        console.log('adding', id);
+        addOsmoseLayer(id);
+      }
+    });
+
+    existingLayerIds.forEach(id => {
+      if (!selectedIds.includes(id)) {
+        console.log('removing', id);
+        removeLayerById(id);
+      }
+    });
   }
 
   handleChange(categoryId, selectedItems) {
@@ -28,20 +54,19 @@ class OsmoseLayerSidebar extends React.Component {
 
     nextSelectedItems[categoryId] = selectedItems.map(item => item.id);
 
-    this.setState({
-      selectedItems: nextSelectedItems
-    });
+    this.setState(
+      {
+        selectedItems: nextSelectedItems
+      },
+      () => {
+        this.updateOsmoseLayers();
 
-    updateOsmoseLayers(
-      this.props.layers,
-      nextSelectedItems,
-      this.props.dispatch
-    );
-
-    // FIXME - To remove
-    window.localStorage.setItem(
-      'osmoseSelectedItems',
-      JSON.stringify(nextSelectedItems)
+        // FIXME - To remove
+        window.localStorage.setItem(
+          'osmoseSelectedItems',
+          JSON.stringify(nextSelectedItems)
+        );
+      }
     );
   }
 

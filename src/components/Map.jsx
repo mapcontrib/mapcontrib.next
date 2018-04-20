@@ -99,17 +99,29 @@ LayerManager.defaultProps = {
 class MapComponent extends React.PureComponent {
   updateOsmoseLayers = () => {
     // FIXME - To remove
+    const { addOsmoseLayer } = this.props;
+
     const selectedItems = JSON.parse(
       window.localStorage.getItem('osmoseSelectedItems') || '{}'
     );
 
     if (Object.keys(selectedItems).length > 0) {
-      updateOsmoseLayers(this.props.layers, selectedItems, this.props.dispatch);
+      const selectedIds = Object.keys(selectedItems).reduce(
+        (acc, id) => [...acc, ...selectedItems[id]],
+        []
+      );
+
+      selectedIds.forEach(addOsmoseLayer);
     }
   };
 
   _handleZoomend(e) {
     this.props.setMapZoom(e.target._zoom);
+  }
+
+  componentDidMount() {
+    this.props.setMapZoom(this.props.zoom + 1);
+    this.props.setMapZoom(this.props.zoom - 1);
   }
 
   render() {

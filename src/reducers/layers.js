@@ -5,10 +5,12 @@ export const initialState = {};
 export default function layers(state = initialState, action = { type: null }) {
   switch (action.type) {
     case ADD_LAYER:
-      return {
+      const newState = {
         ...state,
         [action.layer.id]: action.layer
       };
+
+      return newState;
 
     case ADD_SOURCE_TO_LAYER:
       if (!state[action.layerId]) {
@@ -25,7 +27,7 @@ export default function layers(state = initialState, action = { type: null }) {
       };
 
       return {
-        ...layers,
+        ...state,
         [action.layerId]: layer
       };
 

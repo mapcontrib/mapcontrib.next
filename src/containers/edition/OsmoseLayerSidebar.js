@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
+import { OSMOSE_SOURCE } from 'const/layerSource';
+import { nectarivore } from 'helpers/requests';
 import { fetchOsmoseCategories } from 'actions/async';
 import {
   addLayer,
@@ -21,4 +23,32 @@ const mapDispatchToProps = {
   addFeaturesToSourceById
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OsmoseLayerSidebar);
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const {
+    addLayer,
+    addSourceToLayerById,
+    addFeaturesToSourceById
+  } = dispatchProps;
+
+  return {
+    ...stateProps,
+    ...ownProps,
+    fetchOsmoseCategories: dispatchProps.fetchOsmoseCategories,
+    removeLayerById: dispatchProps.removeLayerById,
+    addOsmoseLayer: id => {
+      addLayer({ id: id });
+
+      addSourceToLayerById(id, {
+        id: id,
+        type: OSMOSE_SOURCE,
+        leafletLayer: nectarivore.createOsmose(id, features =>
+          addFeaturesToSourceById(id, features)
+        )
+      });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  OsmoseLayerSidebar
+);

@@ -1,13 +1,5 @@
-import { OSMOSE_SOURCE } from 'const/layerSource';
-import { nectarivore } from 'helpers/requests';
 import tileSourcesReference from 'const/tileSources';
 import tileConfigsReference from 'const/tileConfigs';
-import {
-  addLayer,
-  removeLayerById,
-  addSourceToLayerById
-} from 'actions/layers';
-import { addFeaturesToSourceById } from 'actions/layerSourceFeatures';
 
 export const findTileSourcesFromConfigId = configId => {
   const tileConfig = tileConfigsReference.filter(
@@ -32,35 +24,4 @@ export const getMaxZoomFromTileConfigId = configId => {
     (acc, val) => (acc.maxZoom <= val.maxZoom ? acc.maxZoom : val.maxZoom),
     0
   );
-};
-
-export const updateOsmoseLayers = (layers, selectedItems, dispatch) => {
-  const selectedIds = Object.keys(selectedItems).reduce(
-    (acc, id) => [...acc, ...selectedItems[id]],
-    []
-  );
-
-  selectedIds.forEach(id => {
-    if (!layers[id]) {
-      dispatch(
-        addLayer({
-          id: id
-        })
-      );
-
-      dispatch(
-        addSourceToLayerById(id, {
-          id: id,
-          type: OSMOSE_SOURCE,
-          leafletLayer: nectarivore.createOsmose(id, features =>
-            dispatch(addFeaturesToSourceById(id, features))
-          )
-        })
-      );
-    }
-  });
-
-  Object.keys(layers).forEach(key => {
-    if (!selectedIds.includes(key)) removeLayerById(key);
-  });
 };

@@ -8,15 +8,13 @@ export default function layerSourceFeatures(
 ) {
   switch (action.type) {
     case ADD_FEATURES_TO_SOURCE:
-      if (!state[action.sourceId]) {
-        state[action.sourceId] = [];
-      }
+      let sources = new Set(state[action.sourceId]);
 
-      state[action.sourceId].push(...action.features);
+      action.features.forEach(feature => sources.add(feature));
 
       return {
         ...state,
-        [action.sourceId]: [...state[action.sourceId]]
+        [action.sourceId]: Array.from(sources)
       };
 
     default:
