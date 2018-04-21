@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Map as OsmUIMap } from 'osm-ui-react';
 import { OSMOSE_SOURCE } from 'const/layerSource';
-import { updateOsmoseLayers } from 'helpers/map';
+// import { updateOsmoseLayers } from 'helpers/map';
 
 const StyledMap = styled(OsmUIMap)`
   position: absolute;

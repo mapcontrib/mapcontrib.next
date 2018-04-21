@@ -2,11 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { WhiteTheme, Sidebar, Osmose } from 'osm-ui-react';
 
+import EditorModal from './EditorModal';
 import { osmose } from 'helpers/requests';
 
 class OsmoseSidebar extends React.Component {
   state = {
-    error: null
+    error: null,
+    original: null,
+    fix: null
+  };
+
+  displayEditor = (fix, original) =>
+    this.setState({
+      original,
+      fix
+    });
+
+  closeEditor = () =>
+    this.setState({
+      original: null,
+      fix: null
+    });
+
+  submitCorrection = fix => {
+    const errorId = this.state.error.error_id;
+    const elemId = this.state.error.elems_id;
+
+    // 1) request changeset
+    console.log('Requesting change for Node:', elemId);
+    // 2) send Change
+    console.log('Sending fix for Node:', elemId, fix);
+    // 3) request changeset
+    console.log('Closing error:', errorId);
+
+    this.closeEditor();
   };
 
   componentWillReceiveProps(nextProps) {
@@ -18,8 +47,10 @@ class OsmoseSidebar extends React.Component {
   }
 
   render() {
-    const { error } = this.state;
+    const { error, original, fix } = this.state;
     const { history, match, themePath } = this.props;
+
+    console.log('ERROR', error);
 
     return (
       <WhiteTheme>
@@ -33,8 +64,20 @@ class OsmoseSidebar extends React.Component {
           }}
           {...this.props}
         >
-          {error ? <Osmose data={error} handleSuggestion={() => {}} /> : ''}
+          {error ? (
+            <Osmose data={error} handleSuggestion={this.displayEditor} />
+          ) : (
+            ''
+          )}
         </Sidebar>
+        {fix && (
+          <EditorModal
+            fixed={fix}
+            original={original}
+            submit={this.submitCorrection}
+            close={this.closeEditor}
+          />
+        )}
       </WhiteTheme>
     );
   }
