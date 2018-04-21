@@ -14,6 +14,8 @@
     "leaflet-nectarivore": "^0.1.6",
     "leaflet-overpass-layer": "^2.7.0",
     "lodash": "^4.17.5",
+    "osm-auth": "^1.0.2",
+    "osm-request": "^0.1.1",
     "osm-ui-react": "^0.6.0",
     "osmose-request": "^1.3.0",
     "react": "^16.3.0",
