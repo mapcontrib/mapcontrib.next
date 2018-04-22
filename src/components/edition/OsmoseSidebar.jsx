@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { WhiteTheme, Sidebar, Osmose } from 'osm-ui-react';
 
 import EditorModal from './EditorModal';
-import { osmose } from 'helpers/requests';
+import { osmose, osm } from 'helpers/requests';
 
 class OsmoseSidebar extends React.Component {
   state = {
@@ -26,16 +26,26 @@ class OsmoseSidebar extends React.Component {
 
   submitCorrection = fix => {
     const errorId = this.state.error.error_id;
-    const elemId = this.state.error.elems_id;
+    const original = this.state.error.elems[0];
+    const elemId = `${original.type}/${original.id}`;
 
-    // 1) request changeset
-    console.log('Requesting change for Node:', elemId);
-    // 2) send Change
-    console.log('Sending fix for Node:', elemId, fix);
-    // 3) request changeset
-    console.log('Closing error:', errorId);
+    const changesetIdP = osm.createChangeset('ourson', 'This is a test');
+    const elemP = osm.fetchElement(elemId);
 
-    this.closeEditor();
+    Promise.all([changesetIdP, elemP], ([changesetId, element]) => {
+      element = osm.setProperties(element, fix);
+
+      return osm.isChangesetStillOpen(changesetId)
+      .then(isOpen => {
+        if (isOpen)
+          osm.sendElement(element, changesetId);
+      });
+    })
+    .then(() => {
+      osmose.closeError(errorId);
+      this.closeEditor();
+    })
+    .catch(err => console.log('Error in sending Element', err));
   };
 
   componentWillReceiveProps(nextProps) {

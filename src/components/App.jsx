@@ -16,10 +16,6 @@ import UserRoutes from 'components/user/UserRoutes';
 import ShareRoutes from 'components/share/ShareRoutes';
 import EditionRoutes from 'components/edition/EditionRoutes';
 
-import auth from 'osm-auth';
-
-import authConfig from '../authConfig.json';
-
 import {
   getMinZoomFromTileConfigId,
   getMaxZoomFromTileConfigId
@@ -35,19 +31,6 @@ class App extends React.Component {
     this.props.setMapTileConfigId(tileConfigId); // FIXME - To remove
     this.props.setMapMinZoom(getMinZoomFromTileConfigId(tileConfigId)); // FIXME - To remove
     this.props.setMapMaxZoom(getMaxZoomFromTileConfigId(tileConfigId)); // FIXME - To remove
-  }
-
-  componentDidMount() {
-    var a = auth({
-      oauth_secret: authConfig.oauth_secret,
-      oauth_consumer_key: authConfig.oauth_consumer_key,
-      auto: true,
-      landing: '../../../land.html'
-    });
-
-    console.log('authenticated', a.authenticated());
-
-    a.authenticate(() => console.log('is authenticated', a.authenticated()));
   }
 
   render() {

@@ -1,3 +1,7 @@
 {
-  "OSMOSE_URL": "https://opendata.osmose.openstreetmap.fr/fr/api/0.2"
+  "OSMOSE_URL": "https://opendata.osmose.openstreetmap.fr/fr/api/0.2",
+  "OSM_PROD_URL": "https://api.openstreetmap.org/api/0.6",
+  "OSM_DEV_URL": "https://api06.dev.openstreetmap.org/api/0.6",
+  "oauth_secret": "aaQcLOJFno7EGM0hC8nXaE85zOY4UP9uxklqpo7O",
+  "oauth_consumer_key": "WiLOF1hp5Aloyldyd4VLN2ZjBvqoyUNO3n2mDCpL"
 }
