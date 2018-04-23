@@ -33,23 +33,22 @@ class OsmoseSidebar extends React.Component {
     const elemP = osm.fetchElement(elemId);
 
     Promise.all([changesetIdP, elemP])
-    .then(([id, element]) => {
-      element = osm.setProperties(element, fix);
+      .then(([id, element]) => {
+        element = osm.setProperties(element, fix);
 
-      return osm.isChangesetStillOpen(id)
-      .then(id => {
-        console.log('This should send edited Element to OSM', element);
-         /* Uncomment this to send */
-        // return osm.sendElement(element, id);
-      });
-    })
-    .then(() => {
-      console.log('All is good, closing');
-      /* Uncomment this to send */
-      // osmose.closeError(errorId);
-      this.closeEditor();
-    })
-    .catch(err => console.log('Error in sending Element', err));
+        return osm.isChangesetStillOpen(id).then(id => {
+          console.log('This should send edited Element to OSM', element);
+          /* Uncomment this to send */
+          // return osm.sendElement(element, id);
+        });
+      })
+      .then(() => {
+        console.log('This should close Osmose error', errorId);
+        /* Uncomment this to send */
+        // osmose.closeError(errorId);
+        this.closeEditor();
+      })
+      .catch(err => console.log('Error in sending Element', err));
   };
 
   componentWillReceiveProps(nextProps) {
