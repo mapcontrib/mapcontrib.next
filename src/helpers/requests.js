@@ -3,6 +3,8 @@ import auth from 'osm-auth';
 import OsmoseRequest from 'osmose-request';
 import OsmRequest from 'osm-request';
 
+import { getTokensFromLocalStorage } from './osm';
+
 import {
   OSMOSE_URL,
   OSM_PROD_URL,
@@ -32,7 +34,6 @@ export const osmose = new OsmoseRequest({
 
 export let osm;
 
-
 var a = auth({
   oauth_secret: oauth_secret,
   oauth_consumer_key: oauth_consumer_key,
@@ -42,12 +43,12 @@ var a = auth({
 
 console.log('is authenticated', a.authenticated());
 
-const authP = new Promise((resolve, reject) => {
+new Promise((resolve, reject) => {
   if (!a.authenticated()) {
     console.log('Authentication...');
 
     a.authenticate(() => {
-      console.log('is authenticated', a.authenticated());
+      console.log('Is authenticated', a.authenticated());
 
       if (a.authenticated())
         resolve();
@@ -58,13 +59,17 @@ const authP = new Promise((resolve, reject) => {
   else resolve();
 })
 .then(() => {
-  console.log('Authentication is complete', localStorage);
+  const {
+    apiToken,
+    apiTokenSecret
+  } = getTokensFromLocalStorage();
+
   osm = new OsmRequest({
     endpoint: OSM_PROD_URL,
     oauthConsumerKey: oauth_consumer_key,
     oauthSecret: oauth_secret,
-    oauthUserToken: localStorage['api.openstreetmap.org/api/0.6oauth_token'],
-    oauthUserTokenSecret: localStorage['api.openstreetmap.org/api/0.6oauth_token_secret']
+    oauthUserToken: apiToken,
+    oauthUserTokenSecret: apiTokenSecret
   });
 })
 .catch(err => console.error(err));
