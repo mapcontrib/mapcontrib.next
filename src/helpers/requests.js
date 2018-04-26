@@ -38,7 +38,7 @@ var a = auth({
   oauth_secret: oauth_secret,
   oauth_consumer_key: oauth_consumer_key,
   auto: true,
-  landing: '../../land.html'
+  landing: '/land.html'
 });
 
 console.log('is authenticated', a.authenticated());
