@@ -44,8 +44,8 @@
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
-    "test-ci": "cross-env CI=true npm test",
-    "test-coverage": "npm run test -- --coverage",
+    "test-ci": "npm test -- --ci --coverage",
+    "test-watch": "npm run test -- --coverage --watch",
     "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "eject": "react-scripts eject",
@@ -55,6 +55,10 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!<rootDir>/node_modules/"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov"
     ]
   },
   "prettier": {
