@@ -60,22 +60,27 @@ class LayerManager extends OsmUIMap.LayerGroup {
     const source = this.props.layers[layerIndex].sources[layerIndex];
     const markers = this.props.layerSourceFeatures[layerIndex].map(
       (point, i) => {
-        const wasSubmitted = this.props.submittedErrors.includes(parseInt(point.error_id));
+        const wasSubmitted = this.props.submittedErrors.includes(
+          parseInt(point.error_id, 10)
+        );
 
-        return (<OsmUIMap.Marker
-          position={[parseFloat(point.lat), parseFloat(point.lon)]}
-          theme={wasSubmitted ? 'green' : 'red'}
-          shape="pointerClassic"
-          icon="times"
-          onClick={wasSubmitted
-            ? null
-            : () => {
-              if (source.type === OSMOSE_SOURCE)
-                this.props.openOsmose(point.error_id);
+        return (
+          <OsmUIMap.Marker
+            position={[parseFloat(point.lat), parseFloat(point.lon)]}
+            theme={wasSubmitted ? 'green' : 'red'}
+            shape="pointerClassic"
+            icon="times"
+            onClick={
+              wasSubmitted
+                ? null
+                : () => {
+                    if (source.type === OSMOSE_SOURCE)
+                      this.props.openOsmose(point.error_id);
+                  }
             }
-          }
-          key={i}
-        />);
+            key={i}
+          />
+        );
       }
     );
 
