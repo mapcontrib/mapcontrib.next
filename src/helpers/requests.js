@@ -50,26 +50,20 @@ new Promise((resolve, reject) => {
     a.authenticate(() => {
       console.log('Is authenticated', a.authenticated());
 
-      if (a.authenticated())
-        resolve();
-      else
-        reject('Could not authenticate user');
+      if (a.authenticated()) resolve();
+      else reject('Could not authenticate user');
     });
-  }
-  else resolve();
+  } else resolve();
 })
-.then(() => {
-  const {
-    apiToken,
-    apiTokenSecret
-  } = getTokensFromLocalStorage();
+  .then(() => {
+    const { apiToken, apiTokenSecret } = getTokensFromLocalStorage();
 
-  osm = new OsmRequest({
-    endpoint: OSM_PROD_URL,
-    oauthConsumerKey: oauth_consumer_key,
-    oauthSecret: oauth_secret,
-    oauthUserToken: apiToken,
-    oauthUserTokenSecret: apiTokenSecret
-  });
-})
-.catch(err => console.error(err));
+    osm = new OsmRequest({
+      endpoint: OSM_PROD_URL,
+      oauthConsumerKey: oauth_consumer_key,
+      oauthSecret: oauth_secret,
+      oauthUserToken: apiToken,
+      oauthUserTokenSecret: apiTokenSecret
+    });
+  })
+  .catch(err => console.error(err));

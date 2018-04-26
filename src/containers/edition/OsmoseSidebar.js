@@ -6,6 +6,4 @@ const mapDispatchToProps = {
   addSubmitted
 };
 
-export default connect(null, mapDispatchToProps)(
-  OsmoseSidebar
-);
+export default connect(null, mapDispatchToProps)(OsmoseSidebar);

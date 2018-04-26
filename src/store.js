@@ -43,7 +43,8 @@ const store = createStore(
     tileConfigs,
     osmose
   }),
-  { osmose: {
+  {
+    osmose: {
       categories: initialOsmoseCategories.categories,
       submitted: initialOsmoseSubmitted
     }
