@@ -174,6 +174,9 @@ MapComponent.propTypes = {
   minZoom: PropTypes.number.isRequired,
   maxZoom: PropTypes.number.isRequired,
   tileSources: PropTypes.array.isRequired,
+  openOsmose: PropTypes.func.isRequired,
+  setMapZoom: PropTypes.func.isRequired,
+  addOsmoseLayer: PropTypes.func.isRequired,
   layers: PropTypes.object,
   layerSourceFeatures: PropTypes.object
 };
