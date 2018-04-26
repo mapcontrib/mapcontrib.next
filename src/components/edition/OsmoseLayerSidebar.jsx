@@ -115,7 +115,10 @@ OsmoseLayerSidebar.propTypes = {
   categories: PropTypes.array.isRequired,
   layers: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  themePath: PropTypes.string.isRequired
+  themePath: PropTypes.string.isRequired,
+  fetchOsmoseCategories: PropTypes.func.isRequired,
+  removeLayerById: PropTypes.func.isRequired,
+  addOsmoseLayer: PropTypes.func.isRequired
 };
 
 OsmoseLayerSidebar.defaultProps = {};

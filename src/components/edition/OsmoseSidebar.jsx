@@ -29,7 +29,7 @@ class OsmoseSidebar extends React.Component {
     const original = this.state.error.elems[0];
     const elemId = `${original.type}/${original.id}`;
 
-    const changesetIdP = osm.createChangeset('ourson', 'This is a test');
+    const changesetIdP = osm.createChangeset('romain', 'This is a test 1');
     const elemP = osm.fetchElement(elemId);
 
     Promise.all([changesetIdP, elemP])
@@ -47,6 +47,8 @@ class OsmoseSidebar extends React.Component {
         /* Uncomment this to send */
         // osmose.closeError(errorId);
         this.closeEditor();
+        this.props.addSubmitted(errorId);
+        this.props.history.replace(this.props.themePath);
       })
       .catch(err => console.log('Error in sending Element', err));
   };
@@ -98,7 +100,8 @@ class OsmoseSidebar extends React.Component {
 
 OsmoseSidebar.propTypes = {
   history: PropTypes.object.isRequired,
-  themePath: PropTypes.string.isRequired
+  themePath: PropTypes.string.isRequired,
+  addSubmitted: PropTypes.func.isRequired
 };
 
 OsmoseSidebar.defaultProps = {};

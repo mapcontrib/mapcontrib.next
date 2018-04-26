@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 
 import EditionSidebar from 'components/edition/EditionSidebar';
 import DataLayersSidebar from 'components/edition/DataLayersSidebar';
-import OsmoseSidebar from 'components/edition/OsmoseSidebar';
+import OsmoseSidebar from 'containers/edition/OsmoseSidebar';
 import OsmoseLayerSidebar from 'containers/edition/OsmoseLayerSidebar';
 
 const EditionRoutes = ({ themePath }) => (

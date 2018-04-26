@@ -14,6 +14,7 @@ const mapStateToProps = (state, { match, history }) => ({
   tileSources: findTileSourcesFromConfigId(state.map.tileConfigId),
   layers: state.layers,
   layerSourceFeatures: state.layerSourceFeatures,
+  submittedErrors: state.osmose.submitted,
   openOsmose: id => history.push(`${match.url}/edition/osmose/${id}`)
 });
 

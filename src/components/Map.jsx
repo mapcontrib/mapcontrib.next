@@ -59,19 +59,24 @@ class LayerManager extends OsmUIMap.LayerGroup {
 
     const source = this.props.layers[layerIndex].sources[layerIndex];
     const markers = this.props.layerSourceFeatures[layerIndex].map(
-      (point, i) => (
-        <OsmUIMap.Marker
+      (point, i) => {
+        const wasSubmitted = this.props.submittedErrors.includes(parseInt(point.error_id));
+
+        return (<OsmUIMap.Marker
           position={[parseFloat(point.lat), parseFloat(point.lon)]}
-          theme={'red'}
+          theme={wasSubmitted ? 'green' : 'red'}
           shape="pointerClassic"
           icon="times"
-          onClick={() => {
-            if (source.type === OSMOSE_SOURCE)
-              this.props.openOsmose(point.error_id);
-          }}
+          onClick={wasSubmitted
+            ? null
+            : () => {
+              if (source.type === OSMOSE_SOURCE)
+                this.props.openOsmose(point.error_id);
+            }
+          }
           key={i}
-        />
-      )
+        />);
+      }
     );
 
     return <OsmUIMap.LayerGroup key={source.id}>{markers}</OsmUIMap.LayerGroup>;
@@ -88,12 +93,14 @@ class LayerManager extends OsmUIMap.LayerGroup {
 
 LayerManager.propTypes = {
   layers: PropTypes.object,
-  layerSourceFeatures: PropTypes.object
+  layerSourceFeatures: PropTypes.object,
+  submittedErrors: PropTypes.array
 };
 
 LayerManager.defaultProps = {
   layers: {},
-  layerSourceFeatures: {}
+  layerSourceFeatures: {},
+  submittedErrors: []
 };
 
 class MapComponent extends React.PureComponent {
@@ -131,6 +138,7 @@ class MapComponent extends React.PureComponent {
       maxZoom,
       tileSources,
       layers,
+      submittedErrors,
       layerSourceFeatures,
       openOsmose,
       ...props
@@ -163,6 +171,7 @@ class MapComponent extends React.PureComponent {
           layers={layers}
           layerSourceFeatures={layerSourceFeatures}
           openOsmose={openOsmose}
+          submittedErrors={submittedErrors}
         />
       </StyledMap>
     );
@@ -178,7 +187,8 @@ MapComponent.propTypes = {
   setMapZoom: PropTypes.func.isRequired,
   addOsmoseLayer: PropTypes.func.isRequired,
   layers: PropTypes.object,
-  layerSourceFeatures: PropTypes.object
+  layerSourceFeatures: PropTypes.object,
+  submittedErrors: PropTypes.array
 };
 
 MapComponent.defaultProps = {

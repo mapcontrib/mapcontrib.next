@@ -12,7 +12,7 @@ import { OSMOSE_ADD_CATEGORIES } from './actions/osmose';
 const persistOsmoseCategories = store => next => action => {
   if (action.type === OSMOSE_ADD_CATEGORIES) {
     window.localStorage.setItem(
-      'osmoseStore',
+      'osmoseCategories',
       JSON.stringify({
         categories: action.categories
       })
@@ -22,9 +22,15 @@ const persistOsmoseCategories = store => next => action => {
   return next(action);
 };
 
-const initialOsmoseStore = JSON.parse(
-  window.localStorage.getItem('osmoseStore') || '{ "categories": [] }'
+const initialOsmoseCategories = JSON.parse(
+  window.localStorage.getItem('osmoseCategories') || '{ "categories": [] }'
 );
+
+const initialOsmoseSubmitted = JSON.parse(
+  window.localStorage.getItem('osmoseSubmitted') || '[]'
+);
+
+console.log('Submitted', initialOsmoseSubmitted);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -37,7 +43,11 @@ const store = createStore(
     tileConfigs,
     osmose
   }),
-  { osmose: initialOsmoseStore },
+  { osmose: {
+      categories: initialOsmoseCategories.categories,
+      submitted: initialOsmoseSubmitted
+    }
+  },
   composeEnhancers(applyMiddleware(thunk, persistOsmoseCategories))
 );
 
