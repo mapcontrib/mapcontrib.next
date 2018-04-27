@@ -29,23 +29,22 @@ class OsmoseSidebar extends React.Component {
     const original = this.state.error.elems[0];
     const elemId = `${original.type}/${original.id}`;
 
-    const changesetIdP = osm.createChangeset('romain', 'This is a test 1');
-    const elemP = osm.fetchElement(elemId);
+    const changesetIdP = osm.request.createChangeset(
+      'romain',
+      'This is a test 1'
+    );
+    const elemP = osm.request.fetchElement(elemId);
 
     Promise.all([changesetIdP, elemP])
       .then(([id, element]) => {
-        element = osm.setProperties(element, fix);
+        element = osm.request.setProperties(element, fix);
 
-        return osm.isChangesetStillOpen(id).then(id => {
-          console.log('This should send edited Element to OSM', element);
-          /* Uncomment this to send */
-          // return osm.sendElement(element, id);
-        });
+        return osm.request
+          .isChangesetStillOpen(id)
+          .then(id => osm.request.sendElement(element, id));
       })
       .then(() => {
-        console.log('This should close Osmose error', errorId);
-        /* Uncomment this to send */
-        // osmose.closeError(errorId);
+        osmose.closeError(errorId);
         this.closeEditor();
         this.props.addSubmitted(errorId);
         this.props.history.replace(this.props.themePath);
