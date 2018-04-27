@@ -1,6 +1,6 @@
 {
   "name": "mapcontrib.next",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-alpha.0",
   "private": true,
   "moduleRoots": [
     "./src"
