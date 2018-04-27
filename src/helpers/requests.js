@@ -6,15 +6,15 @@ import OsmRequest from 'osm-request';
 import { getTokensFromLocalStorage } from './osm';
 
 import {
-  OSMOSE_URL,
+  OSMOSE_PROD_URL,
   OSM_PROD_URL,
-  oauth_secret,
-  oauth_consumer_key
+  OAUTH_SECRET,
+  OAUTH_CONSUMER_KEY
 } from 'const/servicesConfig.json';
 
 const nectarivoreOsmoseOptions = {
   minZoom: 14,
-  endpoint: OSMOSE_URL,
+  endpoint: OSMOSE_PROD_URL,
   language: 'fr',
   status: 'open'
 };
@@ -29,14 +29,14 @@ export const nectarivore = {
 };
 
 export const osmose = new OsmoseRequest({
-  endpoint: OSMOSE_URL
+  endpoint: OSMOSE_PROD_URL
 });
 
-export let osm;
+export const osm = { request: null };
 
 var a = auth({
-  oauth_secret: oauth_secret,
-  oauth_consumer_key: oauth_consumer_key,
+  oauth_secret: OAUTH_SECRET,
+  oauth_consumer_key: OAUTH_CONSUMER_KEY,
   auto: true,
   landing: '/land.html'
 });
@@ -58,10 +58,10 @@ new Promise((resolve, reject) => {
   .then(() => {
     const { apiToken, apiTokenSecret } = getTokensFromLocalStorage();
 
-    osm = new OsmRequest({
+    osm.request = new OsmRequest({
       endpoint: OSM_PROD_URL,
-      oauthConsumerKey: oauth_consumer_key,
-      oauthSecret: oauth_secret,
+      oauthConsumerKey: OAUTH_CONSUMER_KEY,
+      oauthSecret: OAUTH_SECRET,
       oauthUserToken: apiToken,
       oauthUserTokenSecret: apiTokenSecret
     });
