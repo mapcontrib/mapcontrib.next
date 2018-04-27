@@ -23,7 +23,6 @@ $ npm run test-watch
 ```
 $ git checkout develop
 $ npm version prerelease -m "release: %s"
-$ npm publish
 $ git checkout master
 $ git merge develop
 $ git push origin master

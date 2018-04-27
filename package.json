@@ -49,7 +49,9 @@
     "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "preversion": "npm run test-ci && npm run build",
+    "postversion": "git push && git push --tags"
   },
   "jest": {
     "collectCoverageFrom": [
