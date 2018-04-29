@@ -4,6 +4,7 @@ import { WhiteTheme, Sidebar, Osmose } from 'osm-ui-react';
 
 import EditorModal from './EditorModal';
 import { osmose, osm } from 'helpers/requests';
+import { buildChangesetCreatedBy, buildChangesetComment } from 'helpers/osm';
 
 class OsmoseSidebar extends React.Component {
   state = {
@@ -30,8 +31,8 @@ class OsmoseSidebar extends React.Component {
     const elemId = `${original.type}/${original.id}`;
 
     const changesetIdP = osm.request.createChangeset(
-      'romain',
-      'This is a test 1'
+      buildChangesetCreatedBy(),
+      buildChangesetComment(this.props.themePath)
     );
     const elemP = osm.request.fetchElement(elemId);
 
