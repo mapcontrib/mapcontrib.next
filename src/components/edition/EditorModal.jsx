@@ -39,7 +39,7 @@ EditorModal.propTypes = {
 };
 
 EditorModal.defaultProps = {
-  original: null
+  original: {}
 };
 
 export default EditorModal;
