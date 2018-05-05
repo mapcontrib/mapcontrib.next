@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { OSMOSE_SOURCE } from 'const/layerSource';
+import { sourceTypes } from 'const/layers';
 import { nectarivore } from 'helpers/requests';
 import { fetchOsmoseCategories } from 'actions/async';
 import {
@@ -40,7 +40,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
       addSourceToLayerById(id, {
         id: id,
-        type: OSMOSE_SOURCE,
+        type: sourceTypes.OSMOSE,
         leafletLayer: nectarivore.createOsmose(id, features =>
           addFeaturesToSourceById(id, features)
         )

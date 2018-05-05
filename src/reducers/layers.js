@@ -1,6 +1,13 @@
-import { ADD_LAYER, ADD_SOURCE_TO_LAYER, REMOVE_LAYER } from 'actions/layers';
+import {
+  ADD_LAYER,
+  ADD_SOURCE_TO_LAYER,
+  EDIT_LAYER,
+  REMOVE_LAYER
+} from 'actions/layers';
 
 export const initialState = {};
+
+const blackList = ['id', 'type', 'sources'];
 
 export default function layers(state = initialState, action = { type: null }) {
   switch (action.type) {
@@ -13,26 +20,50 @@ export default function layers(state = initialState, action = { type: null }) {
       return newState;
 
     case ADD_SOURCE_TO_LAYER:
-      if (!state[action.layerId]) {
-        throw new LayerNotFoundException(
-          `Layer not found (ID: ${action.layerId})`
+      if (!state[action.id]) {
+        throw new LayerException(`Layer not found (ID: ${action.id})`);
+      }
+
+      const layer = { ...state[action.id] };
+      const source = action.source;
+
+      if (layer.type && layer.type !== source.type) {
+        throw new LayerException(
+          `Source type ${source.type} does not match layer type: ${layer.type})`
         );
       }
 
-      const layer = { ...state[action.layerId] };
+      if (!layer.type) layer.type = source.type;
 
-      layer.sources = {
-        ...layer.sources,
-        [action.source.id]: action.source
+      layer.sources.push(source.id);
+
+      return {
+        ...state,
+        [action.id]: layer
+      };
+
+    case EDIT_LAYER:
+      const keys = Object.keys(action.data);
+
+      blackList.forEach(item => {
+        if (keys.includes(item))
+          throw new LayerException(
+            `Attempt to modifify blacklisted layer key (key: ${item})`
+          );
+      });
+
+      const editedLayer = {
+        ...state[action.id],
+        ...action.data
       };
 
       return {
         ...state,
-        [action.layerId]: layer
+        [action.id]: editedLayer
       };
 
     case REMOVE_LAYER:
-      delete state[action.layerId];
+      delete state[action.id];
       return { ...state };
 
     default:
@@ -40,7 +71,7 @@ export default function layers(state = initialState, action = { type: null }) {
   }
 }
 
-export function LayerNotFoundException(message) {
+export function LayerException(message) {
   this.message = message;
-  this.name = 'LayerNotFoundException';
+  this.name = 'LayerException';
 }

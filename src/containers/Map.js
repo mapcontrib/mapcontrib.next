@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MapComponent from 'components/Map';
-import { OSMOSE_SOURCE } from 'const/layerSource';
+import { sourceTypes } from 'const/layers';
 import { nectarivore } from 'helpers/requests';
 import { setMapZoom } from 'actions/map';
 import { addLayer, addSourceToLayerById } from 'actions/layers';
@@ -40,7 +40,7 @@ const mergeProps = (stateProps, dispatchProps) => {
 
       addSourceToLayerById(id, {
         id: id,
-        type: OSMOSE_SOURCE,
+        type: sourceTypes.OSMOSE,
         leafletLayer: nectarivore.createOsmose(id, features =>
           addFeaturesToSourceById(id, features)
         )

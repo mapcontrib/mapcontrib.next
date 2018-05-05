@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Map as OsmUIMap } from 'osm-ui-react';
-import { OSMOSE_SOURCE } from 'const/layerSource';
+import { sourceTypes } from 'const/layers';
 // import { updateOsmoseLayers } from 'helpers/map';
 
 const StyledMap = styled(OsmUIMap)`
@@ -74,7 +74,7 @@ class LayerManager extends OsmUIMap.LayerGroup {
               wasSubmitted
                 ? null
                 : () => {
-                    if (source.type === OSMOSE_SOURCE)
+                    if (source.type === sourceTypes.OSMOSE)
                       this.props.openOsmose(point.error_id);
                   }
             }

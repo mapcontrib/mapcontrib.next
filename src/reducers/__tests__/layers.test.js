@@ -1,22 +1,23 @@
 import {
   initialState,
   default as reducer,
-  LayerNotFoundException
+  LayerException
 } from 'reducers/layers';
 import {
   addLayer,
   addSourceToLayerById,
-  removeLayerById
+  removeLayerById,
+  editLayerById
 } from 'actions/layers';
-import { OVERPASS_SOURCE } from 'const/layerSource';
-import { CONTENT_DISPLAY_SIDEBAR } from 'const/contentDisplay';
+import { sourceTypes } from 'const/layers';
 
 const defaultLayerAttributes = {
   id: 'id',
   name: 'name',
   description: 'description',
-  visible: true,
-  leafletLayer: 'leafletLayer'
+  isVisible: true,
+  representationType: 'marker',
+  sources: []
 };
 
 const overpassLayer = {
@@ -30,14 +31,17 @@ const osmoseLayer = {
 };
 
 const overpassSource = {
-  id: 'id',
-  type: OVERPASS_SOURCE,
-  name: 'name',
-  description: 'description',
-  visible: true,
-  contentDisplay: CONTENT_DISPLAY_SIDEBAR,
-  content: 'content',
-  leafletLayer: 'leafletLayer'
+  id: 'UUID_OVERPASS_SOURCE',
+  type: sourceTypes.OVERPASS,
+  origin: 'origin',
+  features: []
+};
+
+const osmoseSource = {
+  id: 'UUID_OSMOSE_SOURCE',
+  type: sourceTypes.OSMOSE,
+  origin: 'origin',
+  features: []
 };
 
 describe('Layers reducer', () => {
@@ -53,14 +57,13 @@ describe('Layers reducer', () => {
     const state2 = reducer(state, addLayer(osmoseLayer));
 
     expect(state2).toMatchSnapshot();
+    expect(Object.keys(state2).length).toBe(2);
     expect(state2).not.toBe(state);
   });
 
   it('Should be able to remove a layer', () => {
     const state = reducer(initialState, addLayer(overpassLayer));
     const state2 = reducer(state, addLayer(osmoseLayer));
-
-    expect(Object.keys(state2).length).toBe(2);
 
     const state3 = reducer(state2, removeLayerById(overpassLayer.id));
 
@@ -77,6 +80,28 @@ describe('Layers reducer', () => {
     );
 
     expect(state2).toMatchSnapshot();
+    expect(state2[overpassLayer.id].type).toBe(overpassSource.type);
+    expect(state2).not.toBe(state);
+  });
+
+  it('Should be able to edit a layer', () => {
+    const state = reducer(initialState, addLayer(overpassLayer));
+
+    const newData = {
+      name: 'newName',
+      description: 'newDescription',
+      isVisible: 'newIsVisible',
+      representationType: 'newRepresentationType'
+    };
+
+    const state2 = reducer(state, editLayerById(overpassLayer.id, newData));
+
+    const editedLayer = state2[overpassLayer.id];
+
+    expect(state2).toMatchSnapshot();
+    Object.keys(newData).forEach(key =>
+      expect(editedLayer[key]).toBe(newData[key])
+    );
     expect(state2).not.toBe(state);
   });
 
@@ -85,6 +110,28 @@ describe('Layers reducer', () => {
     const addSource = () =>
       reducer(state, addSourceToLayerById('Unknown_ID', overpassSource));
 
-    expect(addSource).toThrow(LayerNotFoundException);
+    expect(addSource).toThrow(LayerException);
+  });
+
+  it('Should throw an exception when adding a source to a layer of different type', () => {
+    const state = reducer(initialState, addLayer(overpassLayer));
+    const state2 = reducer(
+      state,
+      addSourceToLayerById(overpassLayer.id, overpassSource)
+    );
+
+    const addSource = () => {
+      reducer(state2, addSourceToLayerById(overpassLayer.id, osmoseSource));
+    };
+
+    expect(addSource).toThrow(LayerException);
+  });
+
+  it('Should throw an exception when editing a blacklisted item in a layer', () => {
+    const state = reducer(initialState, addLayer(overpassLayer));
+    const editLayer = () =>
+      reducer(state, editLayerById(overpassLayer.id, { id: 2 }));
+
+    expect(editLayer).toThrow(LayerException);
   });
 });

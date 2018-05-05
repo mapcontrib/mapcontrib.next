@@ -1,41 +1,33 @@
 export const ADD_LAYER = 'ADD_LAYER';
 export const ADD_SOURCE_TO_LAYER = 'ADD_SOURCE_TO_LAYER';
+export const EDIT_LAYER = 'EDIT_LAYER';
 export const REMOVE_LAYER = 'REMOVE_LAYER';
 
 export const addLayer = layer => ({
   type: ADD_LAYER,
-  layer: {
-    id: layer.id,
-    name: layer.name,
-    description: layer.description,
-    visible: layer.visible,
-    leafletLayer: layer.leafletLayer,
-    sources: {}
-  }
+  layer
 });
 
 export const addSourceToLayer = (layer, source) =>
-  addSourceToLayerById(layer.get('id'), source);
+  addSourceToLayerById(layer.id, source);
 
-export const addSourceToLayerById = (layerId, source) => ({
+export const addSourceToLayerById = (id, source) => ({
   type: ADD_SOURCE_TO_LAYER,
-  layerId,
-  source: {
-    id: source.id,
-    type: source.type,
-    name: source.name,
-    description: source.description,
-    visible: source.visible,
-    contentDisplay: source.contentDisplay,
-    content: source.content,
-    leafletLayer: source.leafletLayer,
-    points: source.points || []
-  }
+  id,
+  source
 });
 
-export const removeLayer = layer => removeLayerById(layer.get('id'));
+export const editLayer = (layer, data) => editLayerById(layer.id, data);
 
-export const removeLayerById = layerId => ({
+export const editLayerById = (id, data) => ({
+  type: EDIT_LAYER,
+  id,
+  data
+});
+
+export const removeLayer = layer => removeLayerById(layer.id);
+
+export const removeLayerById = id => ({
   type: REMOVE_LAYER,
-  layerId
+  id
 });
