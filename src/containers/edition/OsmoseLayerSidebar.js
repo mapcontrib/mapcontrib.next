@@ -7,7 +7,7 @@ import {
   removeLayerById,
   addSourceToLayerById
 } from 'actions/layers';
-import { addFeaturesToSourceById } from 'actions/sources';
+import { addSource, addFeaturesToSourceById } from 'actions/sources';
 import OsmoseLayerSidebar from 'components/edition/OsmoseLayerSidebar';
 
 const mapStateToProps = ({ layers, osmose }) => ({
@@ -18,6 +18,7 @@ const mapStateToProps = ({ layers, osmose }) => ({
 const mapDispatchToProps = {
   fetchOsmoseCategories,
   addLayer,
+  addSource,
   removeLayerById,
   addSourceToLayerById,
   addFeaturesToSourceById
@@ -26,6 +27,7 @@ const mapDispatchToProps = {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
     addLayer,
+    addSource,
     addSourceToLayerById,
     addFeaturesToSourceById
   } = dispatchProps;
@@ -36,15 +38,17 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     fetchOsmoseCategories: dispatchProps.fetchOsmoseCategories,
     removeLayerById: dispatchProps.removeLayerById,
     addOsmoseLayer: id => {
-      addLayer({ id: id });
-
-      addSourceToLayerById(id, {
+      const source = {
         id: id,
         type: sourceTypes.OSMOSE,
         leafletLayer: nectarivore.createOsmose(id, features =>
           addFeaturesToSourceById(id, features)
         )
-      });
+      };
+
+      addSource(source);
+      addLayer({ id: id });
+      addSourceToLayerById(id, source);
     }
   };
 };

@@ -22,17 +22,14 @@ class LayerManager extends OsmUIMap.LayerGroup {
     this.state = {
       leafletLayers: []
     };
-
-    this.renderLayer = this.renderLayer.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     // This logic will be removed when Nectarivore includes React component exports
     const { leafletLayers: current } = this.state;
-    const future = Object.keys(nextProps.layers).reduce((future, index) => {
-      const sources = nextProps.layers[index].sources;
-      future.push(...Object.keys(sources).map(i => sources[i].leafletLayer));
-      return future;
+    const future = Object.values(nextProps.sources).reduce((acc, source) => {
+      acc.push(source.leafletLayer);
+      return acc;
     }, []);
 
     current.forEach(layer => {
@@ -52,43 +49,51 @@ class LayerManager extends OsmUIMap.LayerGroup {
     });
   }
 
-  renderLayer(layerIndex) {
-    if (!this.props.sources[layerIndex]) {
-      return null;
-    }
+  getMarkers = source => {
+    return (
+      source.features &&
+      source.features.map((point, i) => {
+        const wasSubmitted = this.props.submittedErrors.includes(
+          parseInt(point.error_id, 10)
+        );
 
-    const source = this.props.layers[layerIndex].sources[layerIndex];
-    const markers = this.props.sources[layerIndex].map((point, i) => {
-      const wasSubmitted = this.props.submittedErrors.includes(
-        parseInt(point.error_id, 10)
-      );
+        return (
+          <OsmUIMap.Marker
+            position={[parseFloat(point.lat), parseFloat(point.lon)]}
+            theme={wasSubmitted ? 'green' : 'red'}
+            shape="pointerClassic"
+            icon="times"
+            onClick={
+              wasSubmitted
+                ? null
+                : () => {
+                    if (source.type === sourceTypes.OSMOSE)
+                      this.props.openOsmose(point.error_id);
+                  }
+            }
+            key={i}
+          />
+        );
+      })
+    );
+  };
 
-      return (
-        <OsmUIMap.Marker
-          position={[parseFloat(point.lat), parseFloat(point.lon)]}
-          theme={wasSubmitted ? 'green' : 'red'}
-          shape="pointerClassic"
-          icon="times"
-          onClick={
-            wasSubmitted
-              ? null
-              : () => {
-                  if (source.type === sourceTypes.OSMOSE)
-                    this.props.openOsmose(point.error_id);
-                }
-          }
-          key={i}
-        />
-      );
-    });
+  renderLayer = layer => {
+    const { sources } = this.props;
 
-    return <OsmUIMap.LayerGroup key={source.id}>{markers}</OsmUIMap.LayerGroup>;
-  }
+    const markers =
+      layer.sources &&
+      layer.sources.reduce((acc, sourceId) => {
+        return acc.concat(this.getMarkers(sources[sourceId]));
+      }, []);
+
+    return <OsmUIMap.LayerGroup key={layer.id}>{markers}</OsmUIMap.LayerGroup>;
+  };
 
   render() {
     return (
       <OsmUIMap.LayerGroup>
-        {Object.keys(this.props.layers).map(this.renderLayer)}
+        {Object.values(this.props.layers).map(this.renderLayer)}
       </OsmUIMap.LayerGroup>
     );
   }
@@ -195,8 +200,8 @@ MapComponent.propTypes = {
 };
 
 MapComponent.defaultProps = {
-  layers: null,
-  sources: null
+  layers: [],
+  sources: []
 };
 
 MapComponent.displayName = 'Map';

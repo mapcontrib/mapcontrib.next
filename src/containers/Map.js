@@ -4,7 +4,7 @@ import { sourceTypes } from 'const/layers';
 import { nectarivore } from 'helpers/requests';
 import { setMapZoom } from 'actions/map';
 import { addLayer, addSourceToLayerById } from 'actions/layers';
-import { addFeaturesToSourceById } from 'actions/sources';
+import { addSource, addFeaturesToSourceById } from 'actions/sources';
 import { findTileSourcesFromConfigId } from 'helpers/map';
 
 const mapStateToProps = (state, { match, history }) => ({
@@ -21,6 +21,7 @@ const mapStateToProps = (state, { match, history }) => ({
 const mapDispatchToProps = {
   setMapZoom,
   addLayer,
+  addSource,
   addSourceToLayerById,
   addFeaturesToSourceById
 };
@@ -28,6 +29,7 @@ const mapDispatchToProps = {
 const mergeProps = (stateProps, dispatchProps) => {
   const {
     addLayer,
+    addSource,
     addSourceToLayerById,
     addFeaturesToSourceById
   } = dispatchProps;
@@ -36,15 +38,17 @@ const mergeProps = (stateProps, dispatchProps) => {
     ...stateProps,
     setMapZoom: dispatchProps.setMapZoom,
     addOsmoseLayer: id => {
-      addLayer({ id: id });
-
-      addSourceToLayerById(id, {
+      const source = {
         id: id,
         type: sourceTypes.OSMOSE,
         leafletLayer: nectarivore.createOsmose(id, features =>
           addFeaturesToSourceById(id, features)
         )
-      });
+      };
+
+      addSource(source);
+      addLayer({ id: id });
+      addSourceToLayerById(id, source);
     }
   };
 };
