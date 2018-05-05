@@ -64,6 +64,7 @@ describe('Sources reducer', () => {
     );
 
     expect(state2).toMatchSnapshot();
+    expect(state2.UUID_OVERPASS.features).toHaveLength(1);
     expect(state2).not.toBe(state);
   });
 

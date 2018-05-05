@@ -21,13 +21,15 @@ export default function sources(state = initialState, action = { type: null }) {
         throw new SourceException(`Source not found (ID: ${action.id})`);
       }
 
-      let sources = new Set(state[action.features]);
+      const source = { ...state[action.id] };
+      let features = new Set(source.features);
 
-      action.features.forEach(feature => sources.add(feature));
+      action.features.forEach(feature => features.add(feature));
+      source.features = Array.from(features);
 
       return {
         ...state,
-        [action.id]: Array.from(sources)
+        [action.id]: source
       };
 
     case REMOVE_SOURCE:

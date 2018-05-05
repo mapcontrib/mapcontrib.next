@@ -35,7 +35,9 @@ export default function layers(state = initialState, action = { type: null }) {
 
       if (!layer.type) layer.type = source.type;
 
-      layer.sources.push(source.id);
+      layer.sources = layers.sources
+        ? layers.sources.push(source.id)
+        : [source.id];
 
       return {
         ...state,

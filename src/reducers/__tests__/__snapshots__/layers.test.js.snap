@@ -58,9 +58,7 @@ Object {
     "isVisible": "newIsVisible",
     "name": "newName",
     "representationType": "newRepresentationType",
-    "sources": Array [
-      "UUID_OVERPASS_SOURCE",
-    ],
+    "sources": Array [],
   },
 }
 `;
