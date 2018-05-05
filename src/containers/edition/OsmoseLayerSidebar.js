@@ -7,7 +7,7 @@ import {
   removeLayerById,
   addSourceToLayerById
 } from 'actions/layers';
-import { addFeaturesToSourceById } from 'actions/layerSourceFeatures';
+import { addFeaturesToSourceById } from 'actions/sources';
 import OsmoseLayerSidebar from 'components/edition/OsmoseLayerSidebar';
 
 const mapStateToProps = ({ layers, osmose }) => ({

@@ -53,36 +53,34 @@ class LayerManager extends OsmUIMap.LayerGroup {
   }
 
   renderLayer(layerIndex) {
-    if (!this.props.layerSourceFeatures[layerIndex]) {
+    if (!this.props.sources[layerIndex]) {
       return null;
     }
 
     const source = this.props.layers[layerIndex].sources[layerIndex];
-    const markers = this.props.layerSourceFeatures[layerIndex].map(
-      (point, i) => {
-        const wasSubmitted = this.props.submittedErrors.includes(
-          parseInt(point.error_id, 10)
-        );
+    const markers = this.props.sources[layerIndex].map((point, i) => {
+      const wasSubmitted = this.props.submittedErrors.includes(
+        parseInt(point.error_id, 10)
+      );
 
-        return (
-          <OsmUIMap.Marker
-            position={[parseFloat(point.lat), parseFloat(point.lon)]}
-            theme={wasSubmitted ? 'green' : 'red'}
-            shape="pointerClassic"
-            icon="times"
-            onClick={
-              wasSubmitted
-                ? null
-                : () => {
-                    if (source.type === sourceTypes.OSMOSE)
-                      this.props.openOsmose(point.error_id);
-                  }
-            }
-            key={i}
-          />
-        );
-      }
-    );
+      return (
+        <OsmUIMap.Marker
+          position={[parseFloat(point.lat), parseFloat(point.lon)]}
+          theme={wasSubmitted ? 'green' : 'red'}
+          shape="pointerClassic"
+          icon="times"
+          onClick={
+            wasSubmitted
+              ? null
+              : () => {
+                  if (source.type === sourceTypes.OSMOSE)
+                    this.props.openOsmose(point.error_id);
+                }
+          }
+          key={i}
+        />
+      );
+    });
 
     return <OsmUIMap.LayerGroup key={source.id}>{markers}</OsmUIMap.LayerGroup>;
   }
@@ -98,13 +96,13 @@ class LayerManager extends OsmUIMap.LayerGroup {
 
 LayerManager.propTypes = {
   layers: PropTypes.object,
-  layerSourceFeatures: PropTypes.object,
+  sources: PropTypes.object,
   submittedErrors: PropTypes.array
 };
 
 LayerManager.defaultProps = {
   layers: {},
-  layerSourceFeatures: {},
+  sources: {},
   submittedErrors: []
 };
 
@@ -144,7 +142,7 @@ class MapComponent extends React.PureComponent {
       tileSources,
       layers,
       submittedErrors,
-      layerSourceFeatures,
+      sources,
       openOsmose,
       ...props
     } = this.props;
@@ -174,7 +172,7 @@ class MapComponent extends React.PureComponent {
         <OsmUIMap.ScaleControl position="bottomleft" />
         <LayerManager
           layers={layers}
-          layerSourceFeatures={layerSourceFeatures}
+          sources={sources}
           openOsmose={openOsmose}
           submittedErrors={submittedErrors}
         />
@@ -192,13 +190,13 @@ MapComponent.propTypes = {
   setMapZoom: PropTypes.func.isRequired,
   addOsmoseLayer: PropTypes.func.isRequired,
   layers: PropTypes.object,
-  layerSourceFeatures: PropTypes.object,
+  sources: PropTypes.object,
   submittedErrors: PropTypes.array
 };
 
 MapComponent.defaultProps = {
   layers: null,
-  layerSourceFeatures: null
+  sources: null
 };
 
 MapComponent.displayName = 'Map';

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sources reducer Should be able to add a feature to a source 1`] = `
+Object {
+  "UUID_OVERPASS": Array [
+    Object {
+      "id": 123,
+      "type": "node",
+    },
+  ],
+}
+`;
+
+exports[`Sources reducer Should be able to add a source 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "features": Array [],
+    "id": "UUID_OVERPASS",
+    "name": "name",
+    "origin": "origin",
+  },
+}
+`;
+
+exports[`Sources reducer Should be able to add a source 2`] = `
+Object {
+  "UUID_OSMOSE": Object {
+    "features": Array [],
+    "id": "UUID_OSMOSE",
+    "name": "name",
+    "origin": "origin",
+  },
+  "UUID_OVERPASS": Object {
+    "features": Array [],
+    "id": "UUID_OVERPASS",
+    "name": "name",
+    "origin": "origin",
+  },
+}
+`;
+
+exports[`Sources reducer Should be able to remove a source 1`] = `
+Object {
+  "UUID_OSMOSE": Object {
+    "features": Array [],
+    "id": "UUID_OSMOSE",
+    "name": "name",
+    "origin": "origin",
+  },
+}
+`;

@@ -4,7 +4,7 @@ import { sourceTypes } from 'const/layers';
 import { nectarivore } from 'helpers/requests';
 import { setMapZoom } from 'actions/map';
 import { addLayer, addSourceToLayerById } from 'actions/layers';
-import { addFeaturesToSourceById } from 'actions/layerSourceFeatures';
+import { addFeaturesToSourceById } from 'actions/sources';
 import { findTileSourcesFromConfigId } from 'helpers/map';
 
 const mapStateToProps = (state, { match, history }) => ({
@@ -13,7 +13,7 @@ const mapStateToProps = (state, { match, history }) => ({
   maxZoom: state.map.maxZoom,
   tileSources: findTileSourcesFromConfigId(state.map.tileConfigId),
   layers: state.layers,
-  layerSourceFeatures: state.layerSourceFeatures,
+  sources: state.sources,
   submittedErrors: state.osmose.submitted,
   openOsmose: id => history.push(`${match.url}/edition/osmose/${id}`)
 });
