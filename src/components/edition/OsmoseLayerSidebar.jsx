@@ -6,13 +6,11 @@ class OsmoseLayerSidebar extends React.Component {
   constructor(props) {
     super(props);
 
-    // FIXME - To remove
-    const selectedItems = JSON.parse(
-      window.localStorage.getItem('osmoseSelectedItems') || '{}'
-    );
+    // FIX ME: for now, one osmose layer has only one source, and the layer id is the osmose item
+    const items = props.layers.map(layer => layer.id);
 
     this.state = {
-      selectedItems: selectedItems
+      selectedItems: this.storeItemsByCategory(items)
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,11 +21,27 @@ class OsmoseLayerSidebar extends React.Component {
     if (this.props.categories.length === 0) this.props.fetchOsmoseCategories();
   }
 
+  storeItemsByCategory(items) {
+    const storedItems = {};
+
+    items.forEach(selectedItem =>
+      this.props.categories.forEach(category => {
+        const found = category.items.find(item => item.id === selectedItem);
+        if (found) {
+          if (!storedItems[category.id]) storedItems[category.id] = [found];
+          else storedItems[category.id].push(found);
+        }
+      })
+    );
+
+    return storedItems;
+  }
+
   updateOsmoseLayers() {
     const { selectedItems } = this.state;
     const { layers, addOsmoseLayer, removeLayerById } = this.props;
 
-    const existingLayerIds = Object.keys(layers).map(id => parseInt(id, 10));
+    const existingLayerIds = layers.map(layer => parseInt(layer.id, 10));
 
     const selectedIds = Object.keys(selectedItems).reduce(
       (acc, id) => [...acc, ...selectedItems[id]],
@@ -58,21 +72,15 @@ class OsmoseLayerSidebar extends React.Component {
       {
         selectedItems: nextSelectedItems
       },
-      () => {
-        this.updateOsmoseLayers();
-
-        // FIXME - To remove
-        window.localStorage.setItem(
-          'osmoseSelectedItems',
-          JSON.stringify(nextSelectedItems)
-        );
-      }
+      () => this.updateOsmoseLayers()
     );
   }
 
   render() {
     const { selectedItems } = this.state;
     const { categories, history, match, themePath } = this.props;
+
+    console.log('Selected Items', selectedItems);
 
     return (
       <RedTheme>
@@ -113,7 +121,7 @@ class OsmoseLayerSidebar extends React.Component {
 
 OsmoseLayerSidebar.propTypes = {
   categories: PropTypes.array.isRequired,
-  layers: PropTypes.object.isRequired,
+  layers: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   themePath: PropTypes.string.isRequired,
   fetchOsmoseCategories: PropTypes.func.isRequired,

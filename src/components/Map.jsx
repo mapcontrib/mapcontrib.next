@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Map as OsmUIMap } from 'osm-ui-react';
+import { nectarivore } from 'helpers/requests';
+import { computeId } from 'helpers/osm';
 import { sourceTypes } from 'const/layers';
-// import { updateOsmoseLayers } from 'helpers/map';
 
 const StyledMap = styled(OsmUIMap)`
   position: absolute;
@@ -20,72 +21,132 @@ class LayerManager extends OsmUIMap.LayerGroup {
     super(props);
 
     this.state = {
-      leafletLayers: []
+      layers: {
+        /* sourceId : layer */
+      },
+      features: {
+        /* sourceId : featureId => feature */
+      }
     };
   }
 
+  updateFeatures = (sourceId, featuresToAdd) => {
+    const features = { ...this.state.features };
+
+    const sourceFeatures = features[sourceId] ? features[sourceId] : new Map();
+
+    featuresToAdd.forEach(feature => {
+      const { error_id, id, type } = feature;
+
+      if (error_id) sourceFeatures.set(error_id, feature);
+      else sourceFeatures.set(computeId(type, id), feature);
+    });
+
+    features[sourceId] = sourceFeatures;
+
+    console.log(`Source ${sourceId}: ${sourceFeatures.size} features`);
+
+    this.setState({
+      features: features
+    });
+  };
+
+  createLeafletLayer = source => {
+    console.log('CREATING LEAFLET LAYER', source.origin);
+
+    if (source.type === sourceTypes.OVERPASS) {
+      return nectarivore.createOverpass(source.origin, result => {
+        this.updateFeatures(source.id, result.elements);
+      });
+    } else if (source.type === sourceTypes.OSMOSE) {
+      return nectarivore.createOsmose(source.origin, features => {
+        this.updateFeatures(source.id, features);
+      });
+    }
+  };
+
   componentWillReceiveProps(nextProps) {
     // This logic will be removed when Nectarivore includes React component exports
-    const { leafletLayers: current } = this.state;
-    const future = Object.values(nextProps.sources).reduce((acc, source) => {
-      acc.push(source.leafletLayer);
-      return acc;
-    }, []);
 
-    current.forEach(layer => {
-      if (!future.find(futLayer => layer.id === futLayer.id)) {
-        this.context.map.removeLayer(layer);
+    const layers = { ...this.state.layers };
+    const features = { ...this.state.features };
+
+    const currentSources = new Set(Object.keys(layers));
+    const futureSources = new Set(
+      nextProps.layers
+        .reduce((acc, layer) => {
+          return acc.concat(layer.sources);
+        }, [])
+        .map(id => String(id))
+    );
+
+    currentSources.forEach(sourceId => {
+      if (!futureSources.has(sourceId)) {
+        this.context.map.removeLayer(this.state.layers[sourceId]);
+        delete layers[sourceId];
+        delete features[sourceId];
       }
     });
 
-    future.forEach(layer => {
-      if (!current.find(curLayer => layer.id === curLayer.id)) {
-        this.context.map.addLayer(layer);
+    futureSources.forEach(sourceId => {
+      if (!currentSources.has(sourceId)) {
+        const leafletLayer = this.createLeafletLayer(
+          nextProps.sources[sourceId]
+        );
+        this.context.map.addLayer(leafletLayer);
+
+        layers[sourceId] = leafletLayer;
       }
     });
 
     this.setState({
-      leafletLayers: future
+      layers: layers,
+      features: features
     });
   }
 
-  getMarkers = source => {
-    return (
-      source.features &&
-      source.features.map((point, i) => {
-        const wasSubmitted = this.props.submittedErrors.includes(
-          parseInt(point.error_id, 10)
-        );
+  getMarkers = sourceId => {
+    if (!this.state.features[sourceId]) return null;
 
-        return (
-          <OsmUIMap.Marker
-            position={[parseFloat(point.lat), parseFloat(point.lon)]}
-            theme={wasSubmitted ? 'green' : 'red'}
-            shape="pointerClassic"
-            icon="times"
-            onClick={
-              wasSubmitted
-                ? null
-                : () => {
-                    if (source.type === sourceTypes.OSMOSE)
-                      this.props.openOsmose(point.error_id);
-                  }
-            }
-            key={i}
-          />
-        );
-      })
-    );
+    const source = this.props.sources[sourceId];
+    const features = Array.from(this.state.features[sourceId].values());
+
+    return features.map((point, i) => {
+      const wasSubmitted = this.props.submittedErrors.includes(
+        parseInt(point.error_id, 10)
+      );
+
+      const color =
+        source.type === sourceTypes.OVERPASS
+          ? 'purple'
+          : wasSubmitted ? 'green' : 'red';
+
+      const icon = source.type === sourceTypes.OVERPASS ? 'info' : 'times';
+
+      return (
+        <OsmUIMap.Marker
+          position={[parseFloat(point.lat), parseFloat(point.lon)]}
+          theme={color}
+          shape="pointerClassic"
+          icon={icon}
+          onClick={
+            wasSubmitted
+              ? null
+              : () => {
+                  if (source.type === sourceTypes.OSMOSE)
+                    this.props.openOsmose(point.error_id);
+                }
+          }
+          key={i}
+        />
+      );
+    });
   };
 
   renderLayer = layer => {
-    const { sources } = this.props;
-
-    const markers =
-      layer.sources &&
-      layer.sources.reduce((acc, sourceId) => {
-        return acc.concat(this.getMarkers(sources[sourceId]));
-      }, []);
+    const markers = layer.sources.reduce((acc, id) => {
+      return acc.concat(this.getMarkers(id));
+    }, []);
 
     return <OsmUIMap.LayerGroup key={layer.id}>{markers}</OsmUIMap.LayerGroup>;
   };
@@ -93,46 +154,35 @@ class LayerManager extends OsmUIMap.LayerGroup {
   render() {
     return (
       <OsmUIMap.LayerGroup>
-        {Object.values(this.props.layers).map(this.renderLayer)}
+        {this.props.layers.map(this.renderLayer)}
       </OsmUIMap.LayerGroup>
     );
   }
 }
 
 LayerManager.propTypes = {
-  layers: PropTypes.object,
+  layers: PropTypes.array,
   sources: PropTypes.object,
   submittedErrors: PropTypes.array
 };
 
 LayerManager.defaultProps = {
-  layers: {},
+  layers: [],
   sources: {},
   submittedErrors: []
 };
 
-class MapComponent extends React.PureComponent {
-  updateOsmoseLayers = () => {
-    // FIXME - To remove
-    const { addOsmoseLayer } = this.props;
-
-    const selectedItems = JSON.parse(
-      window.localStorage.getItem('osmoseSelectedItems') || '{}'
-    );
-
-    if (Object.keys(selectedItems).length > 0) {
-      const selectedIds = Object.keys(selectedItems).reduce(
-        (acc, id) => [...acc, ...selectedItems[id]],
-        []
-      );
-
-      selectedIds.forEach(addOsmoseLayer);
-    }
-  };
-
+class MapComponent extends React.Component {
   _handleZoomend(e) {
     this.props.setMapZoom(e.target._zoom);
   }
+
+  // shouldComponentUpdate(nextProps) {
+  //   if (nextProps.history !== this.props.history) return false;
+  //   if (nextProps.match !== this.props.match) return false;
+
+  //   return true;
+  // }
 
   componentDidMount() {
     this.props.setMapZoom(this.props.zoom + 1);
@@ -161,7 +211,7 @@ class MapComponent extends React.PureComponent {
         onZoomend={e => this._handleZoomend(e)}
         attributionControl={false}
         zoomControl={false}
-        whenReady={this.updateOsmoseLayers}
+        whenReady={this.updateLayers}
         {...props}
       >
         {tileSources.map(tileSource => (
@@ -193,15 +243,15 @@ MapComponent.propTypes = {
   tileSources: PropTypes.array.isRequired,
   openOsmose: PropTypes.func.isRequired,
   setMapZoom: PropTypes.func.isRequired,
-  addOsmoseLayer: PropTypes.func.isRequired,
-  layers: PropTypes.object,
+  layers: PropTypes.array,
   sources: PropTypes.object,
   submittedErrors: PropTypes.array
 };
 
 MapComponent.defaultProps = {
   layers: [],
-  sources: []
+  sources: {},
+  submittedErrors: []
 };
 
 MapComponent.displayName = 'Map';

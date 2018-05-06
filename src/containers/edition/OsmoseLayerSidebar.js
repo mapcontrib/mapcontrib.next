@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
 import { sourceTypes } from 'const/layers';
-import { nectarivore } from 'helpers/requests';
 import { fetchOsmoseCategories } from 'actions/async';
 import {
   addLayer,
   removeLayerById,
   addSourceToLayerById
 } from 'actions/layers';
-import { addSource, addFeaturesToSourceById } from 'actions/sources';
+import { addSource } from 'actions/sources';
 import OsmoseLayerSidebar from 'components/edition/OsmoseLayerSidebar';
 
 const mapStateToProps = ({ layers, osmose }) => ({
-  layers,
+  layers: Object.values(layers).filter(
+    layer => layer.type === sourceTypes.OSMOSE
+  ),
   categories: osmose.categories
 });
 
@@ -20,17 +21,11 @@ const mapDispatchToProps = {
   addLayer,
   addSource,
   removeLayerById,
-  addSourceToLayerById,
-  addFeaturesToSourceById
+  addSourceToLayerById
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const {
-    addLayer,
-    addSource,
-    addSourceToLayerById,
-    addFeaturesToSourceById
-  } = dispatchProps;
+  const { addLayer, addSource, addSourceToLayerById } = dispatchProps;
 
   return {
     ...stateProps,
@@ -41,9 +36,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       const source = {
         id: id,
         type: sourceTypes.OSMOSE,
-        leafletLayer: nectarivore.createOsmose(id, features =>
-          addFeaturesToSourceById(id, features)
-        )
+        origin: id
       };
 
       addSource(source);

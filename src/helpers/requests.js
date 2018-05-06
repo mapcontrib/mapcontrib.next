@@ -7,6 +7,7 @@ import { getTokensFromLocalStorage } from './osm';
 
 import {
   OSMOSE_PROD_URL,
+  OVERPASS_PROD_URL,
   OSM_PROD_URL,
   OAUTH_SECRET,
   OAUTH_CONSUMER_KEY
@@ -19,12 +20,23 @@ const nectarivoreOsmoseOptions = {
   status: 'open'
 };
 
+const nectarivoreOverpassOptions = {
+  minZoom: 14,
+  endpoint: OVERPASS_PROD_URL
+};
+
 export const nectarivore = {
   createOsmose: (item, onSuccess) =>
     Nectarivore.osmose({
       ...nectarivoreOsmoseOptions,
       onSuccess,
       item
+    }),
+  createOverpass: (query, onSuccess) =>
+    Nectarivore.overpass({
+      ...nectarivoreOverpassOptions,
+      onSuccess,
+      query
     })
 };
 

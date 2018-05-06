@@ -6,6 +6,7 @@ import DataLayersSidebar from 'components/edition/DataLayersSidebar';
 import EditionSidebar from 'containers/edition/EditionSidebar';
 import OsmoseSidebar from 'containers/edition/OsmoseSidebar';
 import OsmoseLayerSidebar from 'containers/edition/OsmoseLayerSidebar';
+import OverpassLayerSidebar from 'containers/edition/OverpassLayerSidebar';
 
 const EditionRoutes = ({ themePath }) => (
   <Fragment>
@@ -24,6 +25,13 @@ const EditionRoutes = ({ themePath }) => (
       path="/t/:fragment/:title?/edition/temp-layers/osmose-layer"
       children={props => (
         <OsmoseLayerSidebar themePath={themePath} {...props} />
+      )}
+    />
+    <Route
+      exact
+      path="/t/:fragment/:title?/edition/temp-layers/overpass-layer"
+      children={props => (
+        <OverpassLayerSidebar themePath={themePath} {...props} />
       )}
     />
     <Route

@@ -12,6 +12,8 @@ const blackList = ['id', 'type', 'sources'];
 export default function layers(state = initialState, action = { type: null }) {
   switch (action.type) {
     case ADD_LAYER:
+      action.layer.isVisible = true;
+
       const newState = {
         ...state,
         [action.layer.id]: action.layer

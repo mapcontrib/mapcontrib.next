@@ -15,6 +15,11 @@ const DataLayersSidebar = ({ history, match, themePath, ...props }) => (
       <Sidebar.Nav>
         <ul>
           <li>
+            <Link to={`${match && match.url}/overpass-layer`}>
+              Add an Overpass Layer
+            </Link>
+          </li>
+          <li>
             <Link to={`${match && match.url}/osmose-layer`}>
               Add an Osmose Layer
             </Link>
