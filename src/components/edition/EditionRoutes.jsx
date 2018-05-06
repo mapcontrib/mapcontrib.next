@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import EditionSidebar from 'components/edition/EditionSidebar';
 import DataLayersSidebar from 'components/edition/DataLayersSidebar';
+import EditionSidebar from 'containers/edition/EditionSidebar';
 import OsmoseSidebar from 'containers/edition/OsmoseSidebar';
 import OsmoseLayerSidebar from 'containers/edition/OsmoseLayerSidebar';
 

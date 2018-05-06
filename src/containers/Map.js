@@ -47,7 +47,7 @@ const mergeProps = (stateProps, dispatchProps) => {
       };
 
       addSource(source);
-      addLayer({ id: id });
+      addLayer({ id: id, name: `osmose-layer-${id}` });
       addSourceToLayerById(id, source);
     }
   };
