@@ -14,6 +14,6 @@ services:
     volumes:
       - ./:/data
     working_dir: /data
-    command: node .
+    command: npx nodemon .
     depends_on:
       - mongo
