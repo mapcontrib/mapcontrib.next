@@ -3,8 +3,13 @@ node_js:
   - "8"
 cache:
   directories:
-    - node_modules
+    - server/node_modules
+    - web/node_modules
+install:
+  - (cd server; npm install)
+  - (cd web; npm install)
 script:
+  - cd web
   - npm run lint
   - npm run test-prettier
   - npm run test-ci && cat ./coverage/lcov.info | npx coveralls
