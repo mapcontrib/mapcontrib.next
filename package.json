@@ -1,0 +1,26 @@
+{
+  "name": "mapcontrib.next",
+  "version": "2.0.0-alpha.2",
+  "private": true,
+  "devDependencies": {
+    "husky": "^0.14.1",
+    "lerna": "^2.11.0"
+  },
+  "scripts": {
+    "start": "cross-env NODE_PATH=src react-scripts start",
+    "build": "cross-env NODE_PATH=src react-scripts build",
+    "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
+    "test-ci": "npm test -- --ci --coverage",
+    "test-watch": "npm run test -- --coverage --watch",
+    "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'",
+    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "eject": "react-scripts eject",
+    "preversion": "npm run test-ci && npm run build",
+    "postversion": "git push && git push --tags"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run pre-commit"
+    }
+  }
+}
