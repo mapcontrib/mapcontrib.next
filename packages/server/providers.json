@@ -1,0 +1,16 @@
+{
+  "openstreetmap": {
+    "provider": "openstreetmap",
+    "authScheme": "oauth",
+    "module": "passport-openstreetmap",
+    "callbackURL": "http://localhost:3000/auth/openstreetmap/callback",
+    "authPath": "/auth/openstreetmap",
+    "callbackPath": "/auth/openstreetmap/callback",
+    "successRedirect": "/auth/redirect",
+    "failureRedirect": "/auth/fail",
+    "consumerKey": "Please fill that information into a .env.production file with the name: OSM_CONSUMER_KEY",
+    "consumerSecret": "Please fill that information into a .env.production file with the name: OSM_CONSUMER_SECRET",
+    "scope": ["id", "displayName"],
+    "link": false
+  }
+}
