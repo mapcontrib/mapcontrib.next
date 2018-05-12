@@ -9,5 +9,5 @@ cache:
 install:
   - make install
 script:
-  - make ci-server
-  - make ci-web
+  - make server-ci
+  - make web-ci
