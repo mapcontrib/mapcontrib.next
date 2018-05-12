@@ -5,21 +5,21 @@ install:
 	@npx lerna bootstrap
 
 
-.PHONY: start-server
-start-server:
+.PHONY: server-start
+server-start:
 	@cd packages/server && docker-compose up
 
-.PHONY: start-web
-start-web:
+.PHONY: web-start
+web-start:
 	@cd packages/web && npm start
 
 
-.PHONY: ci-server
-ci-server:
+.PHONY: server-ci
+server-ci:
 	@cd packages/server && npm run lint
 
-.PHONY: ci-web
-ci-web:
+.PHONY: web-ci
+web-ci:
 	@cd packages/web && npm run lint
 	@cd packages/web && npm run test-prettier
 	@cd packages/web && npm run test-ci && (cat ./coverage/lcov.info | npx coveralls)
