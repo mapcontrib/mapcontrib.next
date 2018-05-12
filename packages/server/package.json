@@ -1,14 +1,15 @@
 {
   "name": "mapcontrib-server",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha.2",
   "main": "server/server.js",
   "engines": {
     "node": ">=4"
   },
   "scripts": {
-    "lint": "eslint **/*.js",
     "start": "node .",
-    "posttest": "npm run lint && nsp check"
+    "lint": "eslint **/*.js",
+    "nsp": "nsp check",
+    "posttest": "npm run lint && npm run nsp"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -30,11 +31,5 @@
     "eslint": "^3.17.1",
     "eslint-config-loopback": "^8.0.0",
     "nsp": "^2.1.0"
-  },
-  "repository": {
-    "type": "",
-    "url": ""
-  },
-  "license": "UNLICENSED",
-  "description": "mapcontrib-server"
+  }
 }
