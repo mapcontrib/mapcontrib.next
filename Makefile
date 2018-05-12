@@ -9,6 +9,10 @@ install:
 start-server:
 	@cd packages/server && docker-compose up
 
+.PHONY: start-web
+start-web:
+	@cd packages/web && npm start
+
 
 .PHONY: ci-server
 ci-server:
