@@ -29,10 +29,6 @@ app.start = function() {
 function configurePassport() {
   var PassportConfigurator = require('loopback-component-passport').PassportConfigurator;
   var passportConfigurator = new PassportConfigurator(app);
-  var config = require('../providers.json');
-
-  config.openstreetmap.consumerKey = process.env.OSM_CONSUMER_KEY;
-  config.openstreetmap.consumerSecret = process.env.OSM_CONSUMER_SECRET;
 
   passportConfigurator.init();
 
@@ -42,11 +38,20 @@ function configurePassport() {
     userCredentialModel: app.models.userCredential,
   });
 
-  for (var s in config) {
-    var c = config[s];
-    c.session = c.session !== false;
-    passportConfigurator.configureProvider(s, c);
-  }
+  passportConfigurator.configureProvider('openstreetmap', {
+    provider: 'openstreetmap',
+    authScheme: 'oauth',
+    module: 'passport-openstreetmap',
+    callbackURL: `${process.env.SERVER_URL}/auth/openstreetmap/callback`,
+    authPath: '/auth/openstreetmap',
+    callbackPath: '/auth/openstreetmap/callback',
+    successRedirect: '/auth/redirect',
+    failureRedirect: '/auth/fail',
+    consumerKey: process.env.OSM_CONSUMER_KEY,
+    consumerSecret: process.env.OSM_CONSUMER_SECRET,
+    scope: ['id', 'displayName'],
+    link: false,
+  });
 }
 
 // Bootstrap the application, configure models, datasources and middleware.
