@@ -66,7 +66,7 @@ pre-commit: ##@Other Launch the pre-commit tasks
 .PHONY: server-ci
 server-ci: ##@Server Launch the CI tasks of the server
 	@$(MAKE) --no-print-directory server-lint
-	@$(MAKE) --no-print-directory server-nsp
+	# @$(MAKE) --no-print-directory server-nsp
 
 .PHONY: web-ci
 web-ci: ##@Web Launch the CI tasks of the web client
