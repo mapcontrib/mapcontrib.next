@@ -1,5 +1,15 @@
 # Contribute
 
+
+## Global tools
+
+Some tools are required globally:
+
+* Node.js, NPM
+* Docker
+* Docker Compose
+
+
 ## Makefile
 
 As the whole project is splitted into several parts (server and client so far) and technologies (JavaScript, Docker, etc.), the main commands are handled by a root Makefile.
