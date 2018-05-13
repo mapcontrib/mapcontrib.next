@@ -55,14 +55,22 @@ web-build: ##@Web Create a production build of the web client
 
 
 
+.PHONY: pre-commit
+pre-commit: ##@Other Launch the pre-commit tasks
+	@$(MAKE) --no-print-directory server-lint
+	@$(MAKE) --no-print-directory server-nsp
+	@cd packages/web && npm run pre-commit
+
+
+
 .PHONY: server-ci
 server-ci: ##@Server Launch the CI tasks of the server
-	@make server-lint
-	@make server-nsp
+	@$(MAKE) --no-print-directory server-lint
+	@$(MAKE) --no-print-directory server-nsp
 
 .PHONY: web-ci
 web-ci: ##@Web Launch the CI tasks of the web client
-	@make web-lint
-	@make web-test-format
-	@make web-test-ci && (cd packages/web && cat ./coverage/lcov.info | npx coveralls)
-	@make web-build
+	@$(MAKE) --no-print-directory web-lint
+	@$(MAKE) --no-print-directory web-test-format
+	@$(MAKE) --no-print-directory web-test-ci && (cd packages/web && cat ./coverage/lcov.info | npx coveralls)
+	@$(MAKE) --no-print-directory web-build
