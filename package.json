@@ -2,79 +2,13 @@
   "name": "mapcontrib.next",
   "version": "2.0.0-alpha.2",
   "private": true,
-  "moduleRoots": [
-    "./src"
-  ],
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "diacritic": "^0.0.2",
-    "expose-loader": "^0.7.5",
-    "husky": "^0.14.1",
-    "jquery": "^3.2.1",
-    "leaflet-nectarivore": "^0.1.6",
-    "leaflet-overpass-layer": "^2.7.0",
-    "lodash": "^4.17.5",
-    "osm-auth": "^1.0.2",
-    "osm-request": "^1.0.4",
-    "osm-ui-react": "^0.6.2",
-    "osmose-request": "^1.3.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
-    "react-redux": "^5.0.7",
-    "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1",
-    "react-transition-group": "^2.3.0",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0",
-    "styled-components": "^3.1.6"
-  },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.5.1",
-    "cross-env": "^5.1.4",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "eslint-config-prettier": "^2.9.0",
-    "jest-styled-components": "^5.0.1",
-    "lint-staged": "^7.0.2",
-    "prettier": "^1.11.1",
-    "react-scripts": "^1.1.4"
+    "husky": "^0.14.1",
+    "lerna": "^2.11.0"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
-    "test-ci": "npm test -- --ci --coverage",
-    "test-watch": "npm run test -- --coverage --watch",
-    "test-prettier": "prettier --single-quote --list-different 'src/**/*.{js,jsx,json,css,less}'",
-    "lint": "eslint 'src/**/*.{js,jsx}'",
-    "eject": "react-scripts eject",
-    "precommit": "lint-staged",
+    "precommit": "make pre-commit",
     "preversion": "npm run test-ci && npm run build",
     "postversion": "git push && git push --tags"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!src/helpers/storage.js",
-      "!<rootDir>/node_modules/"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcov"
-    ]
-  },
-  "prettier": {
-    "semi": true,
-    "singleQuote": true
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write",
-      "git add"
-    ],
-    "src/**/*.{js,jsx}": [
-      "eslint",
-      "npm run test-ci -- --findRelatedTests"
-    ]
   }
 }

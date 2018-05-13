@@ -1,21 +1,62 @@
 # Contribute
 
+
+## Global tools
+
+Some tools are required globally:
+
+* Node.js, NPM
+* Docker
+* Docker Compose
+
+
+## Makefile
+
+As the whole project is splitted into several parts (server and client so far) and technologies (JavaScript, Docker, etc.), the main commands are handled by a root Makefile.
+
+You can display the full list of commands by typing:
+
+```
+$ make
+```
+
+Or:
+
+```
+$ make help
+```
+
+
 ## Installation
 
 ```
 $ git clone git@github.com:mapcontrib/mapcontrib.next.git
 $ cd mapcontrib.next
-$ npm install
+$ make install
 ```
 
 
-## Development
+## Server
+
+The server part of MapContrib Next is based on [Loopback](https://loopback.io) and the source files are in the `packages/server` directory.
+
+The related `make` commands are prefixed by `server-`.
+
+
+## Web client
+
+The web client part of MapContrib Next is based on [React](https://reactjs.org) and [OSM UI](https://github.com/osm-ui/react), the source files are in the `packages/web` directory.
+
+The related `make` commands are prefixed by `web-`.
+
 
 ### Tests
 
 ```
-$ npm run test-watch
+$ make test-watch
 ```
+
+Runs all the tests in watch mode and compute the coverage informations in real time. So you can use any coverage display plugin in your code editor in real time too.
 
 
 ## Release
