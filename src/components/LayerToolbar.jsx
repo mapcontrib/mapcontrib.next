@@ -7,8 +7,8 @@ const EditionToolbar = ({ history, match, ...props }) => (
     <Toolbar opened position="right-bottom" {...props}>
       <RedTheme>
         <Toolbar.Item
-          icon="pencil"
-          onClick={() => history.push(`${match.url}/edition`)}
+          icon="clone"
+          onClick={() => history.push(`${match.url}/layers`)}
         />
       </RedTheme>
     </Toolbar>

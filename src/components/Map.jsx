@@ -180,13 +180,6 @@ class MapComponent extends React.Component {
     this.props.setMapZoom(e.target._zoom);
   }
 
-  // shouldComponentUpdate(nextProps) {
-  //   if (nextProps.history !== this.props.history) return false;
-  //   if (nextProps.match !== this.props.match) return false;
-
-  //   return true;
-  // }
-
   componentDidMount() {
     this.props.setMapZoom(this.props.zoom + 1);
     this.props.setMapZoom(this.props.zoom - 1);

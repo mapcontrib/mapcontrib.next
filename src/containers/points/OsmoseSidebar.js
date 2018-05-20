@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addSubmitted } from 'actions/osmose';
-import OsmoseSidebar from 'components/edition/OsmoseSidebar';
+import OsmoseSidebar from 'components/points/OsmoseSidebar';
 
 const mapDispatchToProps = {
   addSubmitted

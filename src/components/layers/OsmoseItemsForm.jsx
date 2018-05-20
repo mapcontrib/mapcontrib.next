@@ -2,15 +2,13 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'osm-ui-react';
 
-class OsmoseEditionForm extends React.Component {
+class OsmoseItemsForm extends React.Component {
   constructor(props) {
     super(props);
 
     // at this point, all sources should be of type OSMOSE
-    const items = props.layer.sources;
-
     this.state = {
-      selectedItems: this.storeItemsByCategory(items)
+      selectedItems: this.storeItemsByCategory(this.props.items)
     };
   }
 
@@ -48,9 +46,7 @@ class OsmoseEditionForm extends React.Component {
       {
         selectedItems: nextSelectedItems
       },
-      () => {
-        this.props.handleSources(allItems);
-      }
+      () => this.props.handleSources(allItems)
     );
   }
 
@@ -59,6 +55,7 @@ class OsmoseEditionForm extends React.Component {
 
     return (
       <Form.Group>
+        <div>Choose Osmose Items</div>
         {this.props.categories.map(category => {
           const selectId = `osmose-select-${category.id}`;
           return (
@@ -86,14 +83,17 @@ class OsmoseEditionForm extends React.Component {
   }
 }
 
-OsmoseEditionForm.propTypes = {
+OsmoseItemsForm.propTypes = {
+  items: PropTypes.array,
   categories: PropTypes.array.isRequired,
   fetchOsmoseCategories: PropTypes.func.isRequired,
   handleSources: PropTypes.func.isRequired
 };
 
-OsmoseEditionForm.defaultProps = {};
+OsmoseItemsForm.defaultProps = {
+  items: []
+};
 
-OsmoseEditionForm.displayName = 'OsmoseEditionForm';
+OsmoseItemsForm.displayName = 'OsmoseItemsForm';
 
-export default OsmoseEditionForm;
+export default OsmoseItemsForm;

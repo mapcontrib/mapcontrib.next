@@ -4,10 +4,9 @@ import { fetchOsmoseCategories } from 'actions/async';
 import { addSourceToLayer, removeSourceFromLayer } from 'actions/layers';
 import { addSource, removeSourceById } from 'actions/sources';
 
-import OsmoseEditionForm from 'components/edition/OsmoseEditionForm';
+import OsmoseItemsForm from 'components/layers/OsmoseItemsForm';
 
-const mapStateToProps = ({ layers, sources, osmose }, { layer }) => ({
-  layer,
+const mapStateToProps = ({ layers, sources, osmose }) => ({
   layers: Object.values(layers),
   sources,
   categories: osmose.categories
@@ -21,17 +20,17 @@ const mapDispatchToProps = {
   removeSourceFromLayer
 };
 
-const mergeProps = (stateProps, dispatchProps) => {
+const mergeProps = (stateProps, dispatchProps, { layer }) => {
   const {
     addSource,
     addSourceToLayer,
     removeSourceFromLayer,
     removeSourceById
   } = dispatchProps;
-  const { layer, layers, sources, categories } = stateProps;
+  const { layers, sources, categories } = stateProps;
 
   return {
-    layer,
+    items: layer.sources,
     categories,
     fetchOsmoseCategories: dispatchProps.fetchOsmoseCategories,
     handleSources: items => {
@@ -48,8 +47,6 @@ const mergeProps = (stateProps, dispatchProps) => {
           const shouldRemoveSource = layers
             .filter(l => l.id !== layer.id)
             .reduce((acc, layer) => acc && !layer.sources.includes(id), true);
-
-          console.log('SHOULD REMOVE', shouldRemoveSource);
 
           if (shouldRemoveSource) removeSourceById(id);
         }
@@ -74,5 +71,5 @@ const mergeProps = (stateProps, dispatchProps) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  OsmoseEditionForm
+  OsmoseItemsForm
 );

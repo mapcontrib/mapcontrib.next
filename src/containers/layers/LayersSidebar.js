@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { addLayer } from 'actions/layers';
 
-import EditionSidebar from 'components/edition/EditionSidebar';
+import LayersSidebar from 'components/layers/LayersSidebar';
 
 const mapStateToProps = ({ layers }) => ({
   layers: Object.values(layers)
@@ -11,4 +11,4 @@ const mapDispatchToProps = {
   addLayer
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditionSidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(LayersSidebar);

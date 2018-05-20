@@ -11,7 +11,7 @@ const mapStateToProps = (state, { match, history }) => ({
   layers: Object.values(state.layers).filter(layer => layer.isVisible),
   sources: state.sources,
   submittedErrors: state.osmose.submitted,
-  openOsmose: id => history.push(`${match.url}/edition/osmose/${id}`)
+  openOsmose: id => history.push(`${match.url}/points/osmose/${id}`)
 });
 
 const mapDispatchToProps = {
