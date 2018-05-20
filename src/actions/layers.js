@@ -1,5 +1,6 @@
 export const ADD_LAYER = 'ADD_LAYER';
 export const ADD_SOURCE_TO_LAYER = 'ADD_SOURCE_TO_LAYER';
+export const REMOVE_SOURCE_FROM_LAYER = 'REMOVE_SOURCE_FROM_LAYER';
 export const EDIT_LAYER = 'EDIT_LAYER';
 export const REMOVE_LAYER = 'REMOVE_LAYER';
 
@@ -13,6 +14,15 @@ export const addSourceToLayer = (layer, source) =>
 
 export const addSourceToLayerById = (id, source) => ({
   type: ADD_SOURCE_TO_LAYER,
+  id,
+  source
+});
+
+export const removeSourceFromLayer = (layer, source) =>
+  removeSourceFromLayerById(layer.id, source);
+
+export const removeSourceFromLayerById = (id, source) => ({
+  type: REMOVE_SOURCE_FROM_LAYER,
   id,
   source
 });

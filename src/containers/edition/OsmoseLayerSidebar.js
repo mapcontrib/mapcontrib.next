@@ -9,7 +9,8 @@ import {
 import { addSource } from 'actions/sources';
 import OsmoseLayerSidebar from 'components/edition/OsmoseLayerSidebar';
 
-const mapStateToProps = ({ layers, osmose }) => ({
+const mapStateToProps = ({ layers, osmose }, ownProps) => ({
+  ownProps,
   layers: Object.values(layers).filter(
     layer => layer.type === sourceTypes.OSMOSE
   ),

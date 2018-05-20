@@ -34,7 +34,7 @@ Object {
 }
 `;
 
-exports[`Layers reducer Should be able to add a source to a layer 1`] = `
+exports[`Layers reducer Should be able to add sources to a layer 1`] = `
 Object {
   "UUID_OVERPASS": Object {
     "description": "description",
@@ -44,6 +44,23 @@ Object {
     "representationType": "marker",
     "sources": Array [
       "UUID_OVERPASS_SOURCE",
+    ],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to add sources to a layer 2`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "marker",
+    "sources": Array [
+      "UUID_OVERPASS_SOURCE",
+      "newSource",
     ],
     "type": "OVERPASS",
   },
@@ -72,6 +89,20 @@ Object {
     "name": "name",
     "representationType": "marker",
     "sources": Array [],
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to remove a source from a layer 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "marker",
+    "sources": Array [],
+    "type": "OVERPASS",
   },
 }
 `;

@@ -1,6 +1,7 @@
 import {
   ADD_LAYER,
   ADD_SOURCE_TO_LAYER,
+  REMOVE_SOURCE_FROM_LAYER,
   EDIT_LAYER,
   REMOVE_LAYER
 } from 'actions/layers';
@@ -13,6 +14,7 @@ export default function layers(state = initialState, action = { type: null }) {
   switch (action.type) {
     case ADD_LAYER:
       action.layer.isVisible = true;
+      action.layer.sources = [];
 
       const newState = {
         ...state,
@@ -37,13 +39,36 @@ export default function layers(state = initialState, action = { type: null }) {
 
       if (!layer.type) layer.type = source.type;
 
-      layer.sources = layers.sources
-        ? layers.sources.push(source.id)
-        : [source.id];
+      let newSources;
+
+      if (layer.sources) {
+        newSources = [...layer.sources];
+        newSources.push(source.id);
+      } else newSources = [source.id];
+
+      layer.sources = newSources;
 
       return {
         ...state,
         [action.id]: layer
+      };
+
+    case REMOVE_SOURCE_FROM_LAYER:
+      if (!state[action.id]) {
+        throw new LayerException(`Layer not found (ID: ${action.id})`);
+      }
+
+      const layerToRemoveFrom = { ...state[action.id] };
+      const sourceToRemove = action.source;
+
+      const sources = new Set(layerToRemoveFrom.sources);
+      sources.delete(sourceToRemove.id);
+
+      layerToRemoveFrom.sources = Array.from(sources);
+
+      return {
+        ...state,
+        [action.id]: layerToRemoveFrom
       };
 
     case EDIT_LAYER:

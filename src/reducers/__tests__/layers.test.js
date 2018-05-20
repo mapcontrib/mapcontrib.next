@@ -7,6 +7,7 @@ import {
   addLayer,
   addSourceToLayerById,
   removeLayerById,
+  removeSourceFromLayerById,
   editLayerById
 } from 'actions/layers';
 import { sourceTypes } from 'const/layers';
@@ -72,7 +73,7 @@ describe('Layers reducer', () => {
     expect(state3).not.toBe(state2);
   });
 
-  it('Should be able to add a source to a layer', () => {
+  it('Should be able to add sources to a layer', () => {
     const state = reducer(initialState, addLayer(overpassLayer));
     const state2 = reducer(
       state,
@@ -81,7 +82,38 @@ describe('Layers reducer', () => {
 
     expect(state2).toMatchSnapshot();
     expect(state2[overpassLayer.id].type).toBe(overpassSource.type);
+    expect(state2[overpassLayer.id].sources).toHaveLength(1);
+    expect(state2[overpassLayer.id].sources[0]).toBe(overpassSource.id);
     expect(state2).not.toBe(state);
+
+    const state3 = reducer(
+      state2,
+      addSourceToLayerById(overpassLayer.id, {
+        id: 'newSource',
+        type: sourceTypes.OVERPASS
+      })
+    );
+
+    expect(state3).toMatchSnapshot();
+    expect(state3[overpassLayer.id].sources).toHaveLength(2);
+    expect(state3[overpassLayer.id].sources[1]).toBe('newSource');
+    expect(state3).not.toBe(state);
+  });
+
+  it('Should be able to remove a source from a layer', () => {
+    const state = reducer(initialState, addLayer(overpassLayer));
+    const state2 = reducer(
+      state,
+      addSourceToLayerById(overpassLayer.id, overpassSource)
+    );
+    const state3 = reducer(
+      state2,
+      removeSourceFromLayerById(overpassLayer.id, overpassSource)
+    );
+
+    expect(state3).toMatchSnapshot();
+    expect(state3[overpassLayer.id].sources).toHaveLength(0);
+    expect(state3).not.toBe(state);
   });
 
   it('Should be able to edit a layer', () => {
@@ -111,6 +143,14 @@ describe('Layers reducer', () => {
       reducer(state, addSourceToLayerById('Unknown_ID', overpassSource));
 
     expect(addSource).toThrow(LayerException);
+  });
+
+  it('Should throw an exception when removing a source from an unknown layer', () => {
+    const state = reducer(initialState, addLayer(overpassLayer));
+    const removeSource = () =>
+      reducer(state, removeSourceFromLayerById('Unknown_ID', overpassSource));
+
+    expect(removeSource).toThrow(LayerException);
   });
 
   it('Should throw an exception when adding a source to a layer of different type', () => {

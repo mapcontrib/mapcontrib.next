@@ -74,6 +74,7 @@ class LayerManager extends OsmUIMap.LayerGroup {
     const currentSources = new Set(Object.keys(layers));
     const futureSources = new Set(
       nextProps.layers
+        .filter(layer => layer.sources && layer.sources.length > 0)
         .reduce((acc, layer) => {
           return acc.concat(layer.sources);
         }, [])
@@ -137,16 +138,18 @@ class LayerManager extends OsmUIMap.LayerGroup {
                     this.props.openOsmose(point.error_id);
                 }
           }
-          key={i}
+          key={`${sourceId}/${i}`}
         />
       );
     });
   };
 
   renderLayer = layer => {
-    const markers = layer.sources.reduce((acc, id) => {
-      return acc.concat(this.getMarkers(id));
-    }, []);
+    const markers =
+      layer.sources &&
+      layer.sources.reduce((acc, id) => {
+        return acc.concat(this.getMarkers(id));
+      }, []);
 
     return <OsmUIMap.LayerGroup key={layer.id}>{markers}</OsmUIMap.LayerGroup>;
   };
