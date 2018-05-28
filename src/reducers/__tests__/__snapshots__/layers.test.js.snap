@@ -5,10 +5,10 @@ Object {
   "UUID_OVERPASS": Object {
     "description": "description",
     "id": "UUID_OVERPASS",
-    "leafletLayer": "leafletLayer",
+    "isVisible": true,
     "name": "name",
-    "sources": Object {},
-    "visible": true,
+    "representationType": "marker",
+    "sources": Array [],
   },
 }
 `;
@@ -18,43 +18,64 @@ Object {
   "UUID_OSMOSE": Object {
     "description": "description",
     "id": "UUID_OSMOSE",
-    "leafletLayer": "leafletLayer",
+    "isVisible": true,
     "name": "name",
-    "sources": Object {},
-    "visible": true,
+    "representationType": "marker",
+    "sources": Array [],
   },
   "UUID_OVERPASS": Object {
     "description": "description",
     "id": "UUID_OVERPASS",
-    "leafletLayer": "leafletLayer",
+    "isVisible": true,
     "name": "name",
-    "sources": Object {},
-    "visible": true,
+    "representationType": "marker",
+    "sources": Array [],
   },
 }
 `;
 
-exports[`Layers reducer Should be able to add a source to a layer 1`] = `
+exports[`Layers reducer Should be able to add sources to a layer 1`] = `
 Object {
   "UUID_OVERPASS": Object {
     "description": "description",
     "id": "UUID_OVERPASS",
-    "leafletLayer": "leafletLayer",
+    "isVisible": true,
     "name": "name",
-    "sources": Object {
-      "id": Object {
-        "content": "content",
-        "contentDisplay": "CONTENT_DISPLAY_SIDEBAR",
-        "description": "description",
-        "id": "id",
-        "leafletLayer": "leafletLayer",
-        "name": "name",
-        "points": Array [],
-        "type": "OVERPASS_SOURCE",
-        "visible": true,
-      },
-    },
-    "visible": true,
+    "representationType": "marker",
+    "sources": Array [
+      "UUID_OVERPASS_SOURCE",
+    ],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to add sources to a layer 2`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "marker",
+    "sources": Array [
+      "UUID_OVERPASS_SOURCE",
+      "newSource",
+    ],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to edit a layer 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "newDescription",
+    "id": "UUID_OVERPASS",
+    "isVisible": "newIsVisible",
+    "name": "newName",
+    "representationType": "newRepresentationType",
+    "sources": Array [],
   },
 }
 `;
@@ -64,10 +85,24 @@ Object {
   "UUID_OSMOSE": Object {
     "description": "description",
     "id": "UUID_OSMOSE",
-    "leafletLayer": "leafletLayer",
+    "isVisible": true,
     "name": "name",
-    "sources": Object {},
-    "visible": true,
+    "representationType": "marker",
+    "sources": Array [],
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to remove a source from a layer 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "marker",
+    "sources": Array [],
+    "type": "OVERPASS",
   },
 }
 `;

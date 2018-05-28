@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
   padding: 5px 10px;
 `;
 
-class EditorModal extends React.Component {
+class TagEditorModal extends React.Component {
   render() {
     const { original, fixed, submit, close } = this.props;
 
@@ -31,15 +31,15 @@ class EditorModal extends React.Component {
   }
 }
 
-EditorModal.propTypes = {
+TagEditorModal.propTypes = {
   original: PropTypes.object,
   fixed: PropTypes.object.isRequired,
   submit: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired
 };
 
-EditorModal.defaultProps = {
+TagEditorModal.defaultProps = {
   original: {}
 };
 
-export default EditorModal;
+export default TagEditorModal;

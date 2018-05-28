@@ -1,5 +1,6 @@
 {
   "OSMOSE_PROD_URL": "https://opendata.osmose.openstreetmap.fr/fr/api/0.2",
+  "OVERPASS_PROD_URL": "https://overpass-api.de/api",
 
   "OSM_PROD_URL": "https://www.openstreetmap.org",
   "OSM_DEV_URL": "https://api06.dev.openstreetmap.org",

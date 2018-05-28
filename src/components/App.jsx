@@ -14,7 +14,8 @@ import SettingsRoutes from 'components/settings/SettingsRoutes';
 import MainRoutes from 'components/main/MainRoutes';
 import UserRoutes from 'components/user/UserRoutes';
 import ShareRoutes from 'components/share/ShareRoutes';
-import EditionRoutes from 'components/edition/EditionRoutes';
+import LayerRoutes from 'components/layers/LayerRoutes';
+import PointRoutes from 'components/points/PointRoutes';
 
 import {
   getMinZoomFromTileConfigId,
@@ -60,7 +61,8 @@ class App extends React.Component {
             <MainRoutes themePath={themePath} themeTitle={themeTitle} />
             <UserRoutes themePath={themePath} />
             <ShareRoutes themePath={themePath} />
-            <EditionRoutes themePath={themePath} />
+            <LayerRoutes themePath={themePath} />
+            <PointRoutes themePath={themePath} />
           </StyledCanvas>
         </WhiteTheme>
       </Router>

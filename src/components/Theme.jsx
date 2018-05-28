@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Map from 'containers/Map';
 import MainToolbar from 'containers/MainToolbar';
 // import UserToolbar from 'components/UserToolbar';
-import EditionToolbar from 'components/EditionToolbar';
+import LayerToolbar from 'components/LayerToolbar';
 
 const TopBorder = styled.div`
   position: fixed;
@@ -34,7 +34,7 @@ class Theme extends React.Component {
         <Map match={match} history={history} themePath={themePath} />
         <MainToolbar match={match} history={history} themePath={themePath} />
         {/* <UserToolbar match={match} history={history} themePath={themePath} /> */}
-        <EditionToolbar match={match} history={history} themePath={themePath} />
+        <LayerToolbar match={match} history={history} themePath={themePath} />
         <TopBorder />
       </div>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { WhiteTheme, Sidebar, Osmose } from 'osm-ui-react';
 
-import EditorModal from './EditorModal';
+import TagEditorModal from './TagEditorModal';
 import { osmose, osm } from 'helpers/requests';
 import { buildChangesetCreatedBy, buildChangesetComment } from 'helpers/osm';
 
@@ -86,7 +86,7 @@ class OsmoseSidebar extends React.Component {
           )}
         </Sidebar>
         {fix && (
-          <EditorModal
+          <TagEditorModal
             fixed={fix}
             original={original}
             submit={this.submitCorrection}

@@ -1,10 +1,6 @@
 import { connect } from 'react-redux';
 import MapComponent from 'components/Map';
-import { OSMOSE_SOURCE } from 'const/layerSource';
-import { nectarivore } from 'helpers/requests';
 import { setMapZoom } from 'actions/map';
-import { addLayer, addSourceToLayerById } from 'actions/layers';
-import { addFeaturesToSourceById } from 'actions/layerSourceFeatures';
 import { findTileSourcesFromConfigId } from 'helpers/map';
 
 const mapStateToProps = (state, { match, history }) => ({
@@ -12,43 +8,14 @@ const mapStateToProps = (state, { match, history }) => ({
   minZoom: state.map.minZoom,
   maxZoom: state.map.maxZoom,
   tileSources: findTileSourcesFromConfigId(state.map.tileConfigId),
-  layers: state.layers,
-  layerSourceFeatures: state.layerSourceFeatures,
+  layers: Object.values(state.layers).filter(layer => layer.isVisible),
+  sources: state.sources,
   submittedErrors: state.osmose.submitted,
-  openOsmose: id => history.push(`${match.url}/edition/osmose/${id}`)
+  openOsmose: id => history.push(`${match.url}/points/osmose/${id}`)
 });
 
 const mapDispatchToProps = {
-  setMapZoom,
-  addLayer,
-  addSourceToLayerById,
-  addFeaturesToSourceById
+  setMapZoom
 };
 
-const mergeProps = (stateProps, dispatchProps) => {
-  const {
-    addLayer,
-    addSourceToLayerById,
-    addFeaturesToSourceById
-  } = dispatchProps;
-
-  return {
-    ...stateProps,
-    setMapZoom: dispatchProps.setMapZoom,
-    addOsmoseLayer: id => {
-      addLayer({ id: id });
-
-      addSourceToLayerById(id, {
-        id: id,
-        type: OSMOSE_SOURCE,
-        leafletLayer: nectarivore.createOsmose(id, features =>
-          addFeaturesToSourceById(id, features)
-        )
-      });
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  MapComponent
-);
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
