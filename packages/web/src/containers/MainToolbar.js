@@ -12,4 +12,7 @@ const mapDispatchToProps = dispatch => ({
   decreaseZoom: zoom => dispatch(decreaseMapZoom(zoom))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainToolbar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainToolbar);

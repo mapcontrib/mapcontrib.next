@@ -1,0 +1,29 @@
+version: '2'
+services:
+  mongo:
+    image: mongo
+    expose:
+      - "27017"
+    volumes:
+      - ./.volumes/mongo:/data/db
+
+  server:
+    image: node:8-alpine
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./packages/server:/data
+    working_dir: /data
+    command: npx nodemon .
+    depends_on:
+      - mongo
+
+  web:
+    container_name: web
+    image: node:8-alpine
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./packages/web:/data
+    working_dir: /data
+    command: npm start

@@ -4,8 +4,10 @@ node_js:
 cache:
   directories:
     - node_modules
+    - server/node_modules
+    - web/node_modules
+install:
+  - make install
 script:
-  - npm run lint
-  - npm run test-prettier
-  - npm run test-ci && cat ./coverage/lcov.info | npx coveralls
-  - npm run build
+  - make server-ci
+  - make web-ci

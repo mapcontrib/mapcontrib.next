@@ -16,4 +16,7 @@ const mapDispatchToProps = dispatch => ({
   setFragment: fragment => dispatch(setFragment(fragment))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

@@ -120,7 +120,9 @@ class LayerManager extends OsmUIMap.LayerGroup {
       const color =
         source.type === sourceTypes.OVERPASS
           ? 'purple'
-          : wasSubmitted ? 'green' : 'red';
+          : wasSubmitted
+            ? 'green'
+            : 'red';
 
       const icon = source.type === sourceTypes.OVERPASS ? 'info' : 'times';
 

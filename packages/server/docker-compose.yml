@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mongo:
+    image: mongo
+    expose:
+      - "27017"
+    volumes:
+      - ../../.volumes/mongo:/data/db
+
+  server:
+    image: node:8-alpine
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./:/data
+    working_dir: /data
+    command: npx nodemon .
+    depends_on:
+      - mongo

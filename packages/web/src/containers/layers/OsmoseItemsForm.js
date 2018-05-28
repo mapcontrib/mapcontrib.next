@@ -70,6 +70,8 @@ const mergeProps = (stateProps, dispatchProps, { layer }) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  OsmoseItemsForm
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(OsmoseItemsForm);

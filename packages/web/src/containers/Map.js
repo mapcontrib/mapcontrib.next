@@ -18,4 +18,7 @@ const mapDispatchToProps = {
   setMapZoom
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MapComponent);
