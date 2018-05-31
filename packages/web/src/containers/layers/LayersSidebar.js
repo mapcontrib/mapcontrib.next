@@ -11,4 +11,7 @@ const mapDispatchToProps = {
   addLayer
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LayersSidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LayersSidebar);

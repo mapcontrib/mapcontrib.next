@@ -50,6 +50,8 @@ const mergeProps = (stateProps, dispatchProps, { layer }) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  OverpassQueryForm
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(OverpassQueryForm);

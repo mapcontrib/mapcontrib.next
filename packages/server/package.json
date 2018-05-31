@@ -1,0 +1,36 @@
+{
+  "name": "mapcontrib-server",
+  "version": "2.0.0-alpha.3",
+  "private": true,
+  "main": "server/server.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "start": "node .",
+    "lint": "eslint **/*.js",
+    "nsp": "nsp check",
+    "posttest": "npm run lint && npm run nsp"
+  },
+  "dependencies": {
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "dotenv": "^5.0.1",
+    "express-session": "^1.15.6",
+    "helmet": "^3.10.0",
+    "loopback": "^3.19.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^6.0.0",
+    "loopback-component-passport": "^3.8.1",
+    "loopback-connector-mongodb": "^3.4.3",
+    "nodemon": "^1.17.4",
+    "passport-openstreetmap": "^0.1.2",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "nsp": "^2.1.0"
+  }
+}

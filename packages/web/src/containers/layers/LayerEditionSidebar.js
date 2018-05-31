@@ -40,6 +40,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  LayerEditionSidebar
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(LayerEditionSidebar);
