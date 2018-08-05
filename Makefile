@@ -9,6 +9,10 @@ install: ##@General Install all the projects dependencies
 	@npm install
 	@npx lerna bootstrap
 
+.PHONY: clean
+clean: ##@General Clean all the projects dependencies
+	@npx lerna clean
+
 
 
 .PHONY: start
