@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layers reducer Should be able to add a layer 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "MARKER",
+    "sources": Array [],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to add a layer 2`] = `
+Object {
+  "UUID_OSMOSE": Object {
+    "description": "description",
+    "id": "UUID_OSMOSE",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "MARKER",
+    "sources": Array [],
+    "type": "OSMOSE",
+  },
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "MARKER",
+    "sources": Array [],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to add sources to a layer 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "MARKER",
+    "sources": Array [
+      "UUID_OVERPASS_SOURCE",
+    ],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to add sources to a layer 2`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "MARKER",
+    "sources": Array [
+      "UUID_OVERPASS_SOURCE",
+      "newSource",
+    ],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to edit a layer 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "newDescription",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "newName",
+    "representationType": "HEATMAP",
+    "sources": Array [],
+    "type": "OVERPASS",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to remove a layer 1`] = `
+Object {
+  "UUID_OSMOSE": Object {
+    "description": "description",
+    "id": "UUID_OSMOSE",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "MARKER",
+    "sources": Array [],
+    "type": "OSMOSE",
+  },
+}
+`;
+
+exports[`Layers reducer Should be able to remove a source from a layer 1`] = `
+Object {
+  "UUID_OVERPASS": Object {
+    "description": "description",
+    "id": "UUID_OVERPASS",
+    "isVisible": true,
+    "name": "name",
+    "representationType": "MARKER",
+    "sources": Array [],
+    "type": "OVERPASS",
+  },
+}
+`;
