@@ -6,25 +6,15 @@
     "./src"
   ],
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
+    "start": "cross-env NODE_PATH=src react-scripts-ts start",
+    "build": "cross-env NODE_PATH=src react-scripts-ts build",
+    "test": "cross-env NODE_PATH=src react-scripts-ts test --env=jsdom",
     "test-ci": "npm test -- --ci --coverage",
     "test-watch": "npm run test -- --coverage --watch",
     "test-format": "prettier --list-different 'src/**/*.{js,jsx,json,css,less}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
-    "eject": "react-scripts eject",
+    "eject": "react-scripts-ts eject",
     "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --write",
-      "git add"
-    ],
-    "src/**/*.{js,jsx}": [
-      "eslint",
-      "npm run test-ci -- --findRelatedTests"
-    ]
   },
   "jest": {
     "collectCoverageFrom": [
@@ -38,11 +28,22 @@
     ]
   },
   "dependencies": {
+    "@types/jest": "^23.3.1",
+    "@types/jquery": "^3.3.5",
+    "@types/lodash": "^4.14.116",
+    "@types/node": "^10.5.8",
+    "@types/react": "^16.4.9",
+    "@types/react-dom": "^16.0.7",
+    "@types/react-redux": "^6.0.6",
+    "@types/react-router-dom": "^4.1.1",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "@types/shortid": "0.0.29",
     "classnames": "^2.2.5",
     "diacritic": "^0.0.2",
     "expose-loader": "^0.7.5",
     "jquery": "^3.2.1",
-    "leaflet-nectarivore": "^0.1.6",
+    "leaflet-nectarivore": "^0.2.0",
     "leaflet-overpass-layer": "^2.7.0",
     "lodash": "^4.17.5",
     "osm-auth": "^1.0.2",
@@ -55,22 +56,25 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^2.3.0",
-    "redux": "^3.6.0",
+    "redux": "^4.0.0",
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.2.0",
     "shortid": "^2.2.8",
-    "styled-components": "^2.4.1"
+    "styled-components": "^3.4.2"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "^5.2.0",
     "babel-plugin-styled-components": "^1.5.1",
     "coveralls": "^3.0.1",
     "cross-env": "^5.1.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-config-prettier": "^2.9.0",
-    "jest-styled-components": "^5.0.1",
-    "lint-staged": "^7.0.2",
+    "jest-styled-components": "^6.0.1",
+    "lint-staged": "^7.1.2",
     "prettier": "^1.11.1",
-    "react-scripts": "^1.1.4"
+    "react-scripts-ts": "2.17.0",
+    "source-map-loader": "^0.2.3",
+    "typescript": "^3.0.1"
   }
 }

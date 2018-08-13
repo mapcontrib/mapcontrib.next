@@ -10,5 +10,6 @@
     "precommit": "make pre-commit",
     "preversion": "npm run test-ci && npm run build",
     "postversion": "git push && git push --tags"
-  }
+  },
+  "dependencies": {}
 }
