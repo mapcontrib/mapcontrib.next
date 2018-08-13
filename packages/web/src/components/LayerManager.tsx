@@ -22,7 +22,7 @@ export interface IProps {
 }
 
 class LayerManager extends OsmUIMap.LayerGroup<IProps> {
-  public static defaultProps: Partial<IProps> = {
+  public static defaultProps = {
     layers: [],
     sources: {},
     submittedErrors: [],

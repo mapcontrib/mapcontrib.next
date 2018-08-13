@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { setMapZoom } from 'actions/map';
-import ThemeMap, { IProps } from 'components/ThemeMap';
+import ThemeMap from 'components/ThemeMap';
 import { findTileSourcesFromConfigId } from 'helpers/map';
 import { IState as ILayersState } from 'reducers/layers';
 import { IState as IMapState } from 'reducers/map';
@@ -15,7 +16,10 @@ interface IState {
   sources: ISourcesState;
 }
 
-const mapStateToProps = (state: IState, { match, history }: IProps) => ({
+const mapStateToProps = (
+  state: IState,
+  { match, history }: RouteComponentProps<any>
+) => ({
   layers: Object.values(state.layers).filter(layer => layer.isVisible),
   maxZoom: state.map.maxZoom,
   minZoom: state.map.minZoom,

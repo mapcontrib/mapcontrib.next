@@ -33,14 +33,15 @@ class Theme extends React.Component<IProps> {
   }
 
   public render() {
-    const { history, match, themePath } = this.props;
+    const { history, location, match, themePath } = this.props;
+    const props = { history, location, match, themePath };
 
     return (
       <div>
-        <ThemeMap match={match} history={history} themePath={themePath} />
-        <MainToolbar match={match} history={history} themePath={themePath} />
-        {/* <UserToolbar match={match} history={history} themePath={themePath} /> */}
-        <LayerToolbar match={match} history={history} themePath={themePath} />
+        <ThemeMap {...props} />
+        <MainToolbar {...props} />
+        {/* <UserToolbar {...props} /> */}
+        <LayerToolbar {...props} />
         <TopBorder />
       </div>
     );
