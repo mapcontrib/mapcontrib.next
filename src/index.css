@@ -1,8 +1,0 @@
-/*
-    TODO: Remove that dirty patch when the following issue is fixed:
-    https://github.com/Leaflet/Leaflet/issues/4578
-*/
-.leaflet-fade-anim .leaflet-tile,
-.leaflet-zoom-anim .leaflet-zoom-animated {
-  will-change: auto;
-}
